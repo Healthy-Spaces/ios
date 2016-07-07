@@ -7,17 +7,20 @@
 //
 
 import Foundation
+import CoreLocation
 
 // MARK: - Strings
 let networkingQueueName = "com.samuellichlyter.networking"
 let fileAccessQueueName = "com.samuellichlyter.fileaccess"
-let authStatusFile      = ".authStatus"
-let authDateFile        = ".authDate"
+let authStatusFile      = "authStatus"
+let authDateFile        = "authDate"
+let locationDataFile    = "locationData"
 
 // MARK: - Variables
-let mainDir = FileManager.default().urlsForDirectory(.documentDirectory, inDomains: .userDomainMask).first!
+let mainDir = FileManager.default.urlsForDirectory(.documentDirectory, inDomains: .userDomainMask).first!
 let networkingQueue = DispatchQueue(label: networkingQueueName)
 let fileAccessQueue = DispatchQueue(label: fileAccessQueueName)
+let location = Location()
 
 // MARK: - Globals
 var authenticated = false

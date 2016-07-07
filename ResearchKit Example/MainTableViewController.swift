@@ -9,6 +9,7 @@
 import UIKit
 import ResearchKit
 import Foundation
+import CoreLocation
 
 class MainTableViewController: UITableViewController, ORKPasscodeDelegate {
     
@@ -118,7 +119,9 @@ class MainTableViewController: UITableViewController, ORKPasscodeDelegate {
     }
 }
 
-extension UITableViewController: ORKTaskViewControllerDelegate {
+extension UIViewController: ORKTaskViewControllerDelegate, LocationDelegate {
+    
+    // MARK: - ORKTaskViewControllerDelegate Methods
     
     public func taskViewController(_ taskViewController: ORKTaskViewController, didFinishWith reason: ORKTaskViewControllerFinishReason, error: NSError?) {
         //Handle results with taskViewController.result
@@ -139,4 +142,34 @@ extension UITableViewController: ORKTaskViewControllerDelegate {
         
         taskViewController.dismiss(animated: true, completion: nil)
     }
+    
+    // MARK: - Location Delegate Methods
+    
+    func presentLocationRestrictedAlert() {
+        let noAuthAlert = UIAlertController(title: "Oops!", message: "It seems you have restricted location access to this app, this could hinder the usefulness of it.", preferredStyle: .alert)
+        let openPrefAction = UIAlertAction(title: "Open Preferences", style: .default) { _ in
+            if let url = URL(string: UIApplicationOpenSettingsURLString) {
+                UIApplication.shared().openURL(url)
+            }
+        }
+        let okayAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        noAuthAlert.addAction(openPrefAction)
+        noAuthAlert.addAction(okayAction)
+        present(noAuthAlert, animated: true, completion: nil)
+    }
+    
+    func presentChangedAuthAlert() {
+        let changedAuthAlert = UIAlertController(title: "Hey!", message: "It looks like you changed your privacy settings for this app, allowing location access will make this app a lot more useful", preferredStyle: .alert)
+        let openPrefAction = UIAlertAction(title: "Open Preferences", style: .default) { (_) in
+            if let url = URL(string: UIApplicationOpenSettingsURLString) {
+                UIApplication.shared().openURL(url)
+            }
+        }
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        changedAuthAlert.addAction(openPrefAction)
+        changedAuthAlert.addAction(cancelAction)
+        present(changedAuthAlert, animated: true, completion: nil)
+    }
+    
+    func reloadLocationData() {}
 }

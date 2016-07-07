@@ -10,13 +10,16 @@ import UIKit
 
 class ProfileTableViewController: UITableViewController, ORKPasscodeDelegate {
     
-    enum PasscodeMethod {
-        case add
-        case edit
-        case remove
+    enum Method {
+        case addPass
+        case editPass
+        case removePass
+        case changePermissions
+        case sharingOptions
+        case locationData
     }
     
-    var profileSections: Dictionary<String, PasscodeMethod> = [:]
+    var profileSections: Dictionary<String, Method> = [:]
     var removePass = false
     
     override func viewDidLoad() {
@@ -36,11 +39,16 @@ class ProfileTableViewController: UITableViewController, ORKPasscodeDelegate {
     func loadData() {
         profileSections.removeAll()
         if ORKPasscodeViewController.isPasscodeStoredInKeychain() {
-            profileSections["Edit Passcode"] = .edit
-            profileSections["Remove Passcode"] = .remove
+            profileSections["Edit Passcode"] = .editPass
+            profileSections["Remove Passcode"] = .removePass
         } else {
-            profileSections["Add Passcode"] = .add
+            profileSections["Add Passcode"] = .addPass
         }
+        
+        profileSections["Permissions"] = .changePermissions
+        profileSections["Sharing Options"] = .sharingOptions
+        profileSections["Location Data"] = .locationData
+        
         self.tableView.reloadData()
     }
     
@@ -49,7 +57,7 @@ class ProfileTableViewController: UITableViewController, ORKPasscodeDelegate {
     func addPasscode() {
         let taskViewController = ORKTaskViewController(task: AddPasscodeTask, taskRun: nil)
         taskViewController.delegate = self
-        taskViewController.outputDirectory = FileManager.default().urlsForDirectory(.documentDirectory, inDomains: .userDomainMask).first!
+        taskViewController.outputDirectory = FileManager.default.urlsForDirectory(.documentDirectory, inDomains: .userDomainMask).first!
         present(taskViewController, animated: true, completion: nil)
     }
     
@@ -84,7 +92,34 @@ class ProfileTableViewController: UITableViewController, ORKPasscodeDelegate {
         print("Canceled")
         dismiss(animated: true, completion: nil)
     }
-
+    
+    // MARK: - Permission Methods
+    
+    func presentPermissionsViewController() {
+        performSegue(withIdentifier: "permissionsSegue", sender: self)
+    }
+    
+    // MARK: - Sharing Methods
+    
+    func presentSharingOptions() {
+        let root = UINavigationController()
+        let stepViewController = ORKQuestionStepViewController(step: SharingOptionsStep)
+        root.addChildViewController(stepViewController)
+        stepViewController.title = "Sharing Options"
+        stepViewController.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Close", style: .done, target: self, action: #selector(dismissRootVC))
+        present(root, animated: true, completion: nil)
+    }
+    
+    func dismissRootVC() {
+        dismiss(animated: true, completion: nil)
+    }
+    
+    // MARK: - Location Methods
+    
+    func presentLocationData() {
+        performSegue(withIdentifier: "locationSegue", sender: self)
+    }
+    
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -110,14 +145,23 @@ class ProfileTableViewController: UITableViewController, ORKPasscodeDelegate {
         let passFunc = Array(profileSections.values)[indexPath.row]
         
         switch passFunc {
-        case .add:
+        case .addPass:
             addPasscode()
             break
-        case .edit:
+        case .editPass:
             editPasscode()
             break
-        case .remove:
+        case .removePass:
             removePasscode()
+            break
+        case .changePermissions:
+            presentPermissionsViewController()
+            break
+        case .sharingOptions:
+            presentSharingOptions()
+            break
+        case .locationData:
+            presentLocationData()
             break
         }
     }

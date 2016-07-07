@@ -10,10 +10,16 @@
 		432CA64E1D19B2EA00EC9961 /* ResearchKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 432CA64B1D19B2D400EC9961 /* ResearchKit.framework */; settings = {ATTRIBUTES = (Required, ); }; };
 		432CA64F1D19B2EA00EC9961 /* ResearchKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 432CA64B1D19B2D400EC9961 /* ResearchKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		435BF9711D1CA022001D4A9F /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 435BF9701D1CA022001D4A9F /* Constants.swift */; };
+		437E2BB01D2C4BED001C7DB3 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 437E2BAF1D2C4BED001C7DB3 /* Location.swift */; };
 		437FEB441D19BC68001DCB29 /* MainTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 437FEB431D19BC68001DCB29 /* MainTableViewController.swift */; };
 		437FEB4A1D19C5D8001DCB29 /* ImageCaptureTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 437FEB491D19C5D8001DCB29 /* ImageCaptureTask.swift */; };
 		437FEB4C1D19CCCF001DCB29 /* SurveyTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 437FEB4B1D19CCCF001DCB29 /* SurveyTask.swift */; };
 		4387236A1D19E63D00AFE2C2 /* ORKESerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 438723691D19E63D00AFE2C2 /* ORKESerialization.m */; };
+		43AD07711D2D7F6400CD1C08 /* SharingOptionsStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43AD07701D2D7F6400CD1C08 /* SharingOptionsStep.swift */; };
+		43AD07751D2DE73B00CD1C08 /* LocationDataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43AD07741D2DE73B00CD1C08 /* LocationDataViewController.swift */; };
+		43B25B2C1D2CAA7600F4230B /* GraphChartDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43B25B2B1D2CAA7600F4230B /* GraphChartDataSource.swift */; };
+		43B25B301D2CABF600F4230B /* GraphChartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43B25B2F1D2CABF600F4230B /* GraphChartViewController.swift */; };
+		43B25B321D2CB48A00F4230B /* PieChartDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43B25B311D2CB48A00F4230B /* PieChartDataSource.swift */; };
 		43B6C5B61D1B286300E9C5E8 /* AddPasscodeTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43B6C5B51D1B286300E9C5E8 /* AddPasscodeTask.swift */; };
 		43B6C5BA1D1B2F4800E9C5E8 /* ProfileTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43B6C5B91D1B2F4800E9C5E8 /* ProfileTableViewController.swift */; };
 		43D194821D18B25300F248C6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43D194811D18B25300F248C6 /* AppDelegate.swift */; };
@@ -22,6 +28,10 @@
 		43D1948C1D18B25300F248C6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 43D1948A1D18B25300F248C6 /* LaunchScreen.storyboard */; };
 		43D194A31D18B3AB00F248C6 /* ConsentDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43D194A21D18B3AB00F248C6 /* ConsentDocument.swift */; };
 		43D194A51D18B7EA00F248C6 /* ConsentTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43D194A41D18B7EA00F248C6 /* ConsentTask.swift */; };
+		43FEE10B1D25BE5A0037E7D2 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43FEE10A1D25BE5A0037E7D2 /* CoreLocation.framework */; };
+		43FEE10E1D26E7740037E7D2 /* PermissionsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43FEE10C1D26E7740037E7D2 /* PermissionsTableViewController.swift */; };
+		43FEE1111D26E9560037E7D2 /* PermissionsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43FEE1101D26E9560037E7D2 /* PermissionsTableViewCell.swift */; };
+		43FEE1151D27206A0037E7D2 /* Permission.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43FEE1141D27206A0037E7D2 /* Permission.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -65,12 +75,18 @@
 /* Begin PBXFileReference section */
 		432CA6441D19B2D300EC9961 /* ResearchKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ResearchKit.xcodeproj; path = ResearchKit/ResearchKit.xcodeproj; sourceTree = "<group>"; };
 		435BF9701D1CA022001D4A9F /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		437E2BAF1D2C4BED001C7DB3 /* Location.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
 		437FEB431D19BC68001DCB29 /* MainTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainTableViewController.swift; sourceTree = "<group>"; };
 		437FEB491D19C5D8001DCB29 /* ImageCaptureTask.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageCaptureTask.swift; sourceTree = "<group>"; };
 		437FEB4B1D19CCCF001DCB29 /* SurveyTask.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SurveyTask.swift; sourceTree = "<group>"; };
 		438723621D19E42900AFE2C2 /* ResearchKit Example-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ResearchKit Example-Bridging-Header.h"; sourceTree = "<group>"; };
 		438723681D19E63D00AFE2C2 /* ORKESerialization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORKESerialization.h; sourceTree = "<group>"; };
 		438723691D19E63D00AFE2C2 /* ORKESerialization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORKESerialization.m; sourceTree = "<group>"; };
+		43AD07701D2D7F6400CD1C08 /* SharingOptionsStep.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SharingOptionsStep.swift; sourceTree = "<group>"; };
+		43AD07741D2DE73B00CD1C08 /* LocationDataViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationDataViewController.swift; sourceTree = "<group>"; };
+		43B25B2B1D2CAA7600F4230B /* GraphChartDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GraphChartDataSource.swift; sourceTree = "<group>"; };
+		43B25B2F1D2CABF600F4230B /* GraphChartViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GraphChartViewController.swift; sourceTree = "<group>"; };
+		43B25B311D2CB48A00F4230B /* PieChartDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PieChartDataSource.swift; sourceTree = "<group>"; };
 		43B6C5B51D1B286300E9C5E8 /* AddPasscodeTask.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddPasscodeTask.swift; sourceTree = "<group>"; };
 		43B6C5B91D1B2F4800E9C5E8 /* ProfileTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileTableViewController.swift; sourceTree = "<group>"; };
 		43D1947E1D18B25300F248C6 /* ResearchKit Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ResearchKit Example.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -81,6 +97,10 @@
 		43D1948D1D18B25300F248C6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		43D194A21D18B3AB00F248C6 /* ConsentDocument.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConsentDocument.swift; sourceTree = "<group>"; };
 		43D194A41D18B7EA00F248C6 /* ConsentTask.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConsentTask.swift; sourceTree = "<group>"; };
+		43FEE10A1D25BE5A0037E7D2 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		43FEE10C1D26E7740037E7D2 /* PermissionsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PermissionsTableViewController.swift; sourceTree = "<group>"; };
+		43FEE1101D26E9560037E7D2 /* PermissionsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PermissionsTableViewCell.swift; sourceTree = "<group>"; };
+		43FEE1141D27206A0037E7D2 /* Permission.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Permission.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -88,6 +108,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				43FEE10B1D25BE5A0037E7D2 /* CoreLocation.framework in Frameworks */,
 				432CA64E1D19B2EA00EC9961 /* ResearchKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -107,6 +128,7 @@
 		4390F2521D1C817B00B0A270 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				43FEE10A1D25BE5A0037E7D2 /* CoreLocation.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -134,12 +156,21 @@
 			children = (
 				43D194811D18B25300F248C6 /* AppDelegate.swift */,
 				437FEB431D19BC68001DCB29 /* MainTableViewController.swift */,
+				43B25B2F1D2CABF600F4230B /* GraphChartViewController.swift */,
 				43B6C5B91D1B2F4800E9C5E8 /* ProfileTableViewController.swift */,
+				43FEE10C1D26E7740037E7D2 /* PermissionsTableViewController.swift */,
+				43FEE1101D26E9560037E7D2 /* PermissionsTableViewCell.swift */,
+				43AD07741D2DE73B00CD1C08 /* LocationDataViewController.swift */,
 				43D194A21D18B3AB00F248C6 /* ConsentDocument.swift */,
 				43D194A41D18B7EA00F248C6 /* ConsentTask.swift */,
 				437FEB491D19C5D8001DCB29 /* ImageCaptureTask.swift */,
-				43B6C5B51D1B286300E9C5E8 /* AddPasscodeTask.swift */,
 				437FEB4B1D19CCCF001DCB29 /* SurveyTask.swift */,
+				43B6C5B51D1B286300E9C5E8 /* AddPasscodeTask.swift */,
+				43AD07701D2D7F6400CD1C08 /* SharingOptionsStep.swift */,
+				43FEE1141D27206A0037E7D2 /* Permission.swift */,
+				437E2BAF1D2C4BED001C7DB3 /* Location.swift */,
+				43B25B2B1D2CAA7600F4230B /* GraphChartDataSource.swift */,
+				43B25B311D2CB48A00F4230B /* PieChartDataSource.swift */,
 				435BF9701D1CA022001D4A9F /* Constants.swift */,
 				43D194851D18B25300F248C6 /* Main.storyboard */,
 				43D1948A1D18B25300F248C6 /* LaunchScreen.storyboard */,
@@ -192,7 +223,7 @@
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
-								enabled = 0;
+								enabled = 1;
 							};
 							com.apple.Maps.iOS = {
 								enabled = 0;
@@ -260,15 +291,24 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				43B25B2C1D2CAA7600F4230B /* GraphChartDataSource.swift in Sources */,
 				43B6C5BA1D1B2F4800E9C5E8 /* ProfileTableViewController.swift in Sources */,
 				43D194A51D18B7EA00F248C6 /* ConsentTask.swift in Sources */,
 				43D194A31D18B3AB00F248C6 /* ConsentDocument.swift in Sources */,
 				437FEB4C1D19CCCF001DCB29 /* SurveyTask.swift in Sources */,
+				43FEE1111D26E9560037E7D2 /* PermissionsTableViewCell.swift in Sources */,
 				437FEB441D19BC68001DCB29 /* MainTableViewController.swift in Sources */,
+				43B25B321D2CB48A00F4230B /* PieChartDataSource.swift in Sources */,
+				437E2BB01D2C4BED001C7DB3 /* Location.swift in Sources */,
+				43FEE1151D27206A0037E7D2 /* Permission.swift in Sources */,
 				435BF9711D1CA022001D4A9F /* Constants.swift in Sources */,
 				43D194821D18B25300F248C6 /* AppDelegate.swift in Sources */,
 				437FEB4A1D19C5D8001DCB29 /* ImageCaptureTask.swift in Sources */,
+				43B25B301D2CABF600F4230B /* GraphChartViewController.swift in Sources */,
 				43B6C5B61D1B286300E9C5E8 /* AddPasscodeTask.swift in Sources */,
+				43AD07711D2D7F6400CD1C08 /* SharingOptionsStep.swift in Sources */,
+				43AD07751D2DE73B00CD1C08 /* LocationDataViewController.swift in Sources */,
+				43FEE10E1D26E7740037E7D2 /* PermissionsTableViewController.swift in Sources */,
 				4387236A1D19E63D00AFE2C2 /* ORKESerialization.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
