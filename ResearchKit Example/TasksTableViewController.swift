@@ -1,5 +1,5 @@
 //
-//  MainTableViewController.swift
+//  TasksTableViewController.swift
 //  ResearchKit Example
 //
 //  Created by Samuel Lichlyter on 6/21/16.
@@ -11,7 +11,7 @@ import ResearchKit
 import Foundation
 import CoreLocation
 
-class MainTableViewController: UITableViewController, ORKPasscodeDelegate {
+class TasksTableViewController: UITableViewController, ORKPasscodeDelegate {
     
     let tableViewRows = ["Consent" : ConsentTask, "Image Capture" : ImageCaptureTask, "Survey" : SurveyTask]
     
@@ -22,6 +22,7 @@ class MainTableViewController: UITableViewController, ORKPasscodeDelegate {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        // Check Authorization Status
         fileAccessQueue.sync {
             do {
                 let authDateString = try String(contentsOf: mainDir.appendingPathComponent(authDateFile), encoding: String.Encoding.utf8)
@@ -40,7 +41,12 @@ class MainTableViewController: UITableViewController, ORKPasscodeDelegate {
                     }
                 }
             } catch let error as NSError {
-                print("Unresolved error \(error), \(error.userInfo)")
+                switch error.code {
+                case 2, 260:
+                    print("File does not exist, do not attempt reading from this file")
+                default:
+                    print("Unresolved Auth Check Error: \(error), \(error.userInfo)")
+                }
             }
         }
         
@@ -69,7 +75,12 @@ class MainTableViewController: UITableViewController, ORKPasscodeDelegate {
                 try authDate.write(to: datePath, atomically: true, encoding: String.Encoding.utf8)
                 authenticated = true
             } catch let error as NSError {
-                print("Unresolved error \(error), \(error.userInfo)")
+                switch error.code {
+                case 2:
+                    print("File does not exist, do not attempt reading from this file")
+                default:
+                    print("Unresolved Passcode Success Error: \(error), \(error.userInfo)")
+                }
             }
         }
         
@@ -85,7 +96,12 @@ class MainTableViewController: UITableViewController, ORKPasscodeDelegate {
                 let path = try mainDir.appendingPathComponent(authStatusFile)
                 try authStatus.write(to: path, atomically: true, encoding: String.Encoding.utf8)
             } catch let error as NSError {
-                print("Unresolved error \(error), \(error.userInfo)")
+                switch error.code {
+                case 2:
+                    print("File does not exist, do not attempt reading from this file")
+                default:
+                    print("Unresolved Passcode Fail Error: \(error), \(error.userInfo)")
+                }
             }
         }
     }
@@ -126,14 +142,25 @@ extension UIViewController: ORKTaskViewControllerDelegate, LocationDelegate {
     public func taskViewController(_ taskViewController: ORKTaskViewController, didFinishWith reason: ORKTaskViewControllerFinishReason, error: NSError?) {
         //Handle results with taskViewController.result
         
+        let result = taskViewController.result
+        
         switch reason {
         case .completed:
-            let result = taskViewController.result
             
-            let jsonData = try! ORKESerializer.jsonData(for: result)
-            if let jsonString = NSString(data: jsonData, encoding: String.Encoding.utf8.rawValue) {
-                print(jsonString)
-            }
+            fileAccessQueue.async(execute: {
+                do {
+                    let jsonData = try ORKESerializer.jsonData(for: result)
+                    if let jsonString = NSString(data: jsonData, encoding: String.Encoding.utf8.rawValue) {
+                        let path = try mainDir.appendingPathComponent(logDataFile)
+                        let fileHandle = try FileHandle(forWritingTo: path)
+                        fileHandle.seekToEndOfFile()
+                        let data = jsonString.data(using: String.Encoding.utf8.rawValue)
+                        fileHandle.write(data!)
+                    }
+                } catch let error as NSError {
+                    print("Unresolved Serialization Writing Error: \(error), \(error.userInfo)")
+                }
+            })
             
             break
         case .saved, .failed, .discarded:
@@ -145,6 +172,7 @@ extension UIViewController: ORKTaskViewControllerDelegate, LocationDelegate {
     
     // MARK: - Location Delegate Methods
     
+    // (CURRENTLY NOT IN USE)
     func presentLocationRestrictedAlert() {
         let noAuthAlert = UIAlertController(title: "Oops!", message: "It seems you have restricted location access to this app, this could hinder the usefulness of it.", preferredStyle: .alert)
         let openPrefAction = UIAlertAction(title: "Open Preferences", style: .default) { _ in
@@ -158,6 +186,7 @@ extension UIViewController: ORKTaskViewControllerDelegate, LocationDelegate {
         present(noAuthAlert, animated: true, completion: nil)
     }
     
+    // (CURRENTLY NOT IN USE)
     func presentChangedAuthAlert() {
         let changedAuthAlert = UIAlertController(title: "Hey!", message: "It looks like you changed your privacy settings for this app, allowing location access will make this app a lot more useful", preferredStyle: .alert)
         let openPrefAction = UIAlertAction(title: "Open Preferences", style: .default) { (_) in

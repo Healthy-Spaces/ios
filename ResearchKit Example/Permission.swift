@@ -28,7 +28,7 @@ class Permission: NSObject {
     
     func enable(_ function: String) {
         switch function {
-        case "location":
+        case "location", "notifications":
             print("enabling location tracking")
             if let url = URL(string: UIApplicationOpenSettingsURLString) {
                 UIApplication.shared().openURL(url)
@@ -47,7 +47,7 @@ class Permission: NSObject {
     
     func disable(_ function: String) {
         switch function {
-        case "location":
+        case "location", "notifications":
             print("disable location tracking")
             if let url = URL(string: UIApplicationOpenSettingsURLString) {
                 UIApplication.shared().openURL(url)

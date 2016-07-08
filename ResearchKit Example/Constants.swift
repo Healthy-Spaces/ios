@@ -15,6 +15,7 @@ let fileAccessQueueName = "com.samuellichlyter.fileaccess"
 let authStatusFile      = "authStatus"
 let authDateFile        = "authDate"
 let locationDataFile    = "locationData"
+let logDataFile         = "logData"
 
 // MARK: - Variables
 let mainDir = FileManager.default.urlsForDirectory(.documentDirectory, inDomains: .userDomainMask).first!

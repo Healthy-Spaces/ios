@@ -19,7 +19,6 @@ class Location: NSObject, CLLocationManagerDelegate {
         let locationAuth = CLLocationManager.authorizationStatus()
         switch locationAuth {
         case .denied, .restricted:
-//            delegate.presentLocationRestrictedAlert()
             return false
         case .notDetermined:
             locationManager = CLLocationManager()
@@ -76,49 +75,48 @@ class Location: NSObject, CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         print("Locations: \(locations)")
         
+        let lat = locations.first?.coordinate.latitude
+        let lon = locations.first?.coordinate.longitude
+        let time = locations.first?.timestamp
+        let locationsString = self.getLocationString(lat: lat!, lon: lon!, time: time!)
+        
         fileAccessQueue.async() {
             do {
-                let locationsString = String(locations)
                 let path = try mainDir.appendingPathComponent(locationDataFile)
-                let fileManager = FileManager.default
-                if fileManager.fileExists(atPath: String(path)) {
-                    try locationsString.write(to: path, atomically: false, encoding: String.Encoding.utf8)
-                } else {
-                    let fileHandle = try FileHandle(forWritingTo: path)
-                    fileHandle.seekToEndOfFile()
-                    let data = locationsString.data(using: String.Encoding.utf8)
-                    fileHandle.write(data!)
-                }
+                let fileHandle = try FileHandle(forWritingTo: path)
+                fileHandle.seekToEndOfFile()
+                let data = locationsString.data(using: String.Encoding.utf8)
+                fileHandle.write(data!)
             } catch let error as NSError {
-                print("Unresolved error \(error), \(error.userInfo)")
+                switch error.code {
+                case 2:
+                    print("Writing to new file")
+                    write(string: locationsString, toNew: locationDataFile)
+                default:
+                    print("Unresolved Location Data Write Error: \(error), \(error.userInfo)")
+                }
             }
         }
         
         delegate.reloadLocationData()
+    }
+    
+    func getLocationString(lat: CLLocationDegrees, lon: CLLocationDegrees, time: NSDate) -> String {
         
-//        let notification = UILocalNotification()
-//        notification.alertTitle = "Updated Location"
-//        notification.alertBody = "\(locations)"
-//        notification.alertAction = "Yay!"
-//        notification.soundName = UILocalNotificationDefaultSoundName
-//        UIApplication.shared().presentLocalNotificationNow(notification)
+        var locationsString = ""
+        
+        locationsString += String(lat)
+        locationsString += ", "
+        locationsString += String(lon)
+        locationsString += " @ "
+        locationsString += String(time)
+        locationsString += "\n"
+        
+        return locationsString
     }
     
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         print("Auth Changed")
-        let locationAuth = CLLocationManager.authorizationStatus()
-        switch locationAuth {
-        case .denied, .restricted:
-//            delegate.presentLocationRestrictedAlert()
-            return
-        case .notDetermined:
-            locationManager = CLLocationManager()
-            locationManager?.delegate = self
-            locationManager?.requestAlwaysAuthorization()
-            break
-        default:
-            break
-        }
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: NSError) {
@@ -126,11 +124,12 @@ class Location: NSObject, CLLocationManagerDelegate {
     }
     
     func locationManager(_ manager: CLLocationManager, didFinishDeferredUpdatesWithError error: NSError?) {
-        print("Location Deferred Error: \(error!), \((error?.userInfo)!)")
-        
+        // CLError.deferredFailed
         if error?.code == 11 {
-            print("trying to defer again")
+            print("Defer error, trying to defer again")
             _ = self.moveToDeferredUpdates()
+        } else {
+            print("Unresolved Location Deferred Error: \(error), \(error?.userInfo)")
         }
     }
 }

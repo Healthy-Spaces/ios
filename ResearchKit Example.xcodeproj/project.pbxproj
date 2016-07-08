@@ -9,9 +9,14 @@
 /* Begin PBXBuildFile section */
 		432CA64E1D19B2EA00EC9961 /* ResearchKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 432CA64B1D19B2D400EC9961 /* ResearchKit.framework */; settings = {ATTRIBUTES = (Required, ); }; };
 		432CA64F1D19B2EA00EC9961 /* ResearchKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 432CA64B1D19B2D400EC9961 /* ResearchKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		4346B2AF1D30251D009E33FC /* SurveyContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4346B2AE1D30251D009E33FC /* SurveyContent.swift */; };
+		4346B2B31D302BED009E33FC /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4346B2B21D302BED009E33FC /* Util.swift */; };
+		4346B2B51D303408009E33FC /* LogDataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4346B2B41D303408009E33FC /* LogDataViewController.swift */; };
 		435BF9711D1CA022001D4A9F /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 435BF9701D1CA022001D4A9F /* Constants.swift */; };
+		435F70641D2ED4C60098BA31 /* ConsentDocumentContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 435F70631D2ED4C60098BA31 /* ConsentDocumentContent.swift */; };
+		435F70661D2ED9BC0098BA31 /* LastImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 435F70651D2ED9BC0098BA31 /* LastImageViewController.swift */; };
 		437E2BB01D2C4BED001C7DB3 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 437E2BAF1D2C4BED001C7DB3 /* Location.swift */; };
-		437FEB441D19BC68001DCB29 /* MainTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 437FEB431D19BC68001DCB29 /* MainTableViewController.swift */; };
+		437FEB441D19BC68001DCB29 /* TasksTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 437FEB431D19BC68001DCB29 /* TasksTableViewController.swift */; };
 		437FEB4A1D19C5D8001DCB29 /* ImageCaptureTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 437FEB491D19C5D8001DCB29 /* ImageCaptureTask.swift */; };
 		437FEB4C1D19CCCF001DCB29 /* SurveyTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 437FEB4B1D19CCCF001DCB29 /* SurveyTask.swift */; };
 		4387236A1D19E63D00AFE2C2 /* ORKESerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 438723691D19E63D00AFE2C2 /* ORKESerialization.m */; };
@@ -74,9 +79,14 @@
 
 /* Begin PBXFileReference section */
 		432CA6441D19B2D300EC9961 /* ResearchKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ResearchKit.xcodeproj; path = ResearchKit/ResearchKit.xcodeproj; sourceTree = "<group>"; };
+		4346B2AE1D30251D009E33FC /* SurveyContent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SurveyContent.swift; sourceTree = "<group>"; };
+		4346B2B21D302BED009E33FC /* Util.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Util.swift; sourceTree = "<group>"; };
+		4346B2B41D303408009E33FC /* LogDataViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogDataViewController.swift; sourceTree = "<group>"; };
 		435BF9701D1CA022001D4A9F /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		435F70631D2ED4C60098BA31 /* ConsentDocumentContent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConsentDocumentContent.swift; sourceTree = "<group>"; };
+		435F70651D2ED9BC0098BA31 /* LastImageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LastImageViewController.swift; sourceTree = "<group>"; };
 		437E2BAF1D2C4BED001C7DB3 /* Location.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
-		437FEB431D19BC68001DCB29 /* MainTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainTableViewController.swift; sourceTree = "<group>"; };
+		437FEB431D19BC68001DCB29 /* TasksTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TasksTableViewController.swift; sourceTree = "<group>"; };
 		437FEB491D19C5D8001DCB29 /* ImageCaptureTask.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageCaptureTask.swift; sourceTree = "<group>"; };
 		437FEB4B1D19CCCF001DCB29 /* SurveyTask.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SurveyTask.swift; sourceTree = "<group>"; };
 		438723621D19E42900AFE2C2 /* ResearchKit Example-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ResearchKit Example-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -155,12 +165,14 @@
 			isa = PBXGroup;
 			children = (
 				43D194811D18B25300F248C6 /* AppDelegate.swift */,
-				437FEB431D19BC68001DCB29 /* MainTableViewController.swift */,
+				437FEB431D19BC68001DCB29 /* TasksTableViewController.swift */,
 				43B25B2F1D2CABF600F4230B /* GraphChartViewController.swift */,
 				43B6C5B91D1B2F4800E9C5E8 /* ProfileTableViewController.swift */,
 				43FEE10C1D26E7740037E7D2 /* PermissionsTableViewController.swift */,
 				43FEE1101D26E9560037E7D2 /* PermissionsTableViewCell.swift */,
 				43AD07741D2DE73B00CD1C08 /* LocationDataViewController.swift */,
+				4346B2B41D303408009E33FC /* LogDataViewController.swift */,
+				435F70651D2ED9BC0098BA31 /* LastImageViewController.swift */,
 				43D194A21D18B3AB00F248C6 /* ConsentDocument.swift */,
 				43D194A41D18B7EA00F248C6 /* ConsentTask.swift */,
 				437FEB491D19C5D8001DCB29 /* ImageCaptureTask.swift */,
@@ -171,7 +183,10 @@
 				437E2BAF1D2C4BED001C7DB3 /* Location.swift */,
 				43B25B2B1D2CAA7600F4230B /* GraphChartDataSource.swift */,
 				43B25B311D2CB48A00F4230B /* PieChartDataSource.swift */,
+				4346B2B21D302BED009E33FC /* Util.swift */,
 				435BF9701D1CA022001D4A9F /* Constants.swift */,
+				4346B2AE1D30251D009E33FC /* SurveyContent.swift */,
+				435F70631D2ED4C60098BA31 /* ConsentDocumentContent.swift */,
 				43D194851D18B25300F248C6 /* Main.storyboard */,
 				43D1948A1D18B25300F248C6 /* LaunchScreen.storyboard */,
 				43D194881D18B25300F248C6 /* Assets.xcassets */,
@@ -293,23 +308,28 @@
 			files = (
 				43B25B2C1D2CAA7600F4230B /* GraphChartDataSource.swift in Sources */,
 				43B6C5BA1D1B2F4800E9C5E8 /* ProfileTableViewController.swift in Sources */,
+				435F70661D2ED9BC0098BA31 /* LastImageViewController.swift in Sources */,
 				43D194A51D18B7EA00F248C6 /* ConsentTask.swift in Sources */,
 				43D194A31D18B3AB00F248C6 /* ConsentDocument.swift in Sources */,
 				437FEB4C1D19CCCF001DCB29 /* SurveyTask.swift in Sources */,
 				43FEE1111D26E9560037E7D2 /* PermissionsTableViewCell.swift in Sources */,
-				437FEB441D19BC68001DCB29 /* MainTableViewController.swift in Sources */,
+				437FEB441D19BC68001DCB29 /* TasksTableViewController.swift in Sources */,
 				43B25B321D2CB48A00F4230B /* PieChartDataSource.swift in Sources */,
 				437E2BB01D2C4BED001C7DB3 /* Location.swift in Sources */,
 				43FEE1151D27206A0037E7D2 /* Permission.swift in Sources */,
+				4346B2AF1D30251D009E33FC /* SurveyContent.swift in Sources */,
 				435BF9711D1CA022001D4A9F /* Constants.swift in Sources */,
 				43D194821D18B25300F248C6 /* AppDelegate.swift in Sources */,
+				4346B2B31D302BED009E33FC /* Util.swift in Sources */,
 				437FEB4A1D19C5D8001DCB29 /* ImageCaptureTask.swift in Sources */,
 				43B25B301D2CABF600F4230B /* GraphChartViewController.swift in Sources */,
+				4346B2B51D303408009E33FC /* LogDataViewController.swift in Sources */,
 				43B6C5B61D1B286300E9C5E8 /* AddPasscodeTask.swift in Sources */,
 				43AD07711D2D7F6400CD1C08 /* SharingOptionsStep.swift in Sources */,
 				43AD07751D2DE73B00CD1C08 /* LocationDataViewController.swift in Sources */,
 				43FEE10E1D26E7740037E7D2 /* PermissionsTableViewController.swift in Sources */,
 				4387236A1D19E63D00AFE2C2 /* ORKESerialization.m in Sources */,
+				435F70641D2ED4C60098BA31 /* ConsentDocumentContent.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

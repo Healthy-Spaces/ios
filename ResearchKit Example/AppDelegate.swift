@@ -21,6 +21,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Set tint to Oregon State University Orange
         window?.tintColor = UIColor(red:0.76, green:0.27, blue:0.00, alpha:1.0)
         
+        if !UserDefaults.standard.bool(forKey: "HasLaunchedOnce") {
+            
+            fileAccessQueue.async(execute: { 
+                let requiredFiles = [logDataFile, locationDataFile]
+                for file in requiredFiles {
+                    do {
+                        let path = try mainDir.appendingPathComponent(file)
+                        let emptyString = ""
+                        try emptyString.write(to: path, atomically: true, encoding: String.Encoding.utf8)
+                    } catch let error as NSError {
+                        print("Unresolved First Launch Error: \(error), \(error.userInfo)")
+                    }
+                }
+            })
+            
+            UserDefaults.standard.setValue(true, forKey: "HasLaunchedOnce")
+            UserDefaults.standard.synchronize()
+        }
+        
         return true
     }
     
@@ -30,6 +49,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         alert.addAction(okayAction)
         window?.rootViewController?.present(alert, animated: true, completion: nil)
     }
+    
+    
 
     func applicationWillResignActive(_ application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.

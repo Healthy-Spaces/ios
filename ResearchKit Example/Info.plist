@@ -24,8 +24,6 @@
 	<true/>
 	<key>NSLocationAlwaysUsageDescription</key>
 	<string>Requesting permission for Always Authorization</string>
-	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Requesting permission for When In Use Authorization</string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>location</string>
@@ -41,8 +39,6 @@
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
-		<string>UIInterfaceOrientationLandscapeLeft</string>
-		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
 </dict>
 </plist>

@@ -17,6 +17,8 @@ class ProfileTableViewController: UITableViewController, ORKPasscodeDelegate {
         case changePermissions
         case sharingOptions
         case locationData
+        case lastImageTaken
+        case logData
     }
     
     var profileSections: Dictionary<String, Method> = [:]
@@ -48,6 +50,8 @@ class ProfileTableViewController: UITableViewController, ORKPasscodeDelegate {
         profileSections["Permissions"] = .changePermissions
         profileSections["Sharing Options"] = .sharingOptions
         profileSections["Location Data"] = .locationData
+        profileSections["Log Data"] = .logData
+        profileSections["Last Image Taken"] = .lastImageTaken
         
         self.tableView.reloadData()
     }
@@ -120,6 +124,18 @@ class ProfileTableViewController: UITableViewController, ORKPasscodeDelegate {
         performSegue(withIdentifier: "locationSegue", sender: self)
     }
     
+    // MARK: - Image Methods
+    
+    func presentImageVC() {
+        performSegue(withIdentifier: "lastImageSegue", sender: self)
+    }
+    
+    // MARK: - Log Data Methods
+    
+    func presentLogData() {
+        performSegue(withIdentifier: "logDataSegue", sender: self)
+    }
+    
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -162,6 +178,12 @@ class ProfileTableViewController: UITableViewController, ORKPasscodeDelegate {
             break
         case .locationData:
             presentLocationData()
+            break
+        case .lastImageTaken:
+            presentImageVC()
+            break
+        case .logData:
+            presentLogData()
             break
         }
     }

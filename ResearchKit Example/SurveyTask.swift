@@ -9,32 +9,20 @@
 import Foundation
 import ResearchKit
 
-// MARK: Titles
-let enjoyingTitle           =  "Are you enjoying this app?"
-let enjoymentTitle          = "How would you rate your enjoyment?"
-let enjoymentVerticleTitle  = "How would you rate your enjoyment now that the scale is vertical?"
-let locationTitle           = "Where is your favorite university?"
-let summaryTitle            = "Thanks!"
-
-// MARK: Descriptions
-let maxEnjoymentDesc    = "I love this app!"
-let minEnjoymentDesc    = "This is the worst app I've ever used"
-let summaryDesc         = "Thank you for participating in this self-serving survey!"
-
 public var SurveyTask: ORKOrderedTask {
     var steps = [ORKStep]()
 
     // Boolean Step
-    let booleanStep = ORKQuestionStep(identifier: "boolean", title: enjoyingTitle, answer: ORKBooleanAnswerFormat())
+    let booleanStep = ORKQuestionStep(identifier: "boolean", title: booleanTitle, answer: ORKBooleanAnswerFormat())
     booleanStep.isOptional = false
     steps += [booleanStep]
     
     // Horizontal Scale Step
-    let horizontalScaleStep = ORKQuestionStep(identifier: "horizontalScale", title: enjoymentTitle, answer: ORKScaleAnswerFormat(maximumValue: 10, minimumValue: 0, defaultValue: -1, step: 1, vertical: false, maximumValueDescription: maxEnjoymentDesc, minimumValueDescription: minEnjoymentDesc))
+    let horizontalScaleStep = ORKQuestionStep(identifier: "horizontalScale", title: horizontalSliderTitle, answer: ORKScaleAnswerFormat(maximumValue: 10, minimumValue: 0, defaultValue: -1, step: 1, vertical: false, maximumValueDescription: maxEnjoymentDesc, minimumValueDescription: minEnjoymentDesc))
     steps += [horizontalScaleStep]
     
     // Vertical Scale Step
-    let verticalScaleStep = ORKQuestionStep(identifier: "verticalScale", title: enjoymentVerticleTitle, answer: ORKScaleAnswerFormat(maximumValue: 10, minimumValue: 0, defaultValue: -1, step: 1, vertical: true, maximumValueDescription: maxEnjoymentDesc, minimumValueDescription: minEnjoymentDesc))
+    let verticalScaleStep = ORKQuestionStep(identifier: "verticalScale", title: verticalSliderTitle, answer: ORKScaleAnswerFormat(maximumValue: 10, minimumValue: 0, defaultValue: -1, step: 1, vertical: true, maximumValueDescription: maxEnjoymentDesc, minimumValueDescription: minEnjoymentDesc))
     steps += [verticalScaleStep]
     
     // Location Step

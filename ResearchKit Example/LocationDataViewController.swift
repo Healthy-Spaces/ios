@@ -25,13 +25,12 @@ class LocationDataViewController: UIViewController {
         fileAccessQueue.async {
             do {
                 let locationString = try String.init(contentsOf: mainDir.appendingPathComponent(locationDataFile), encoding: String.Encoding.utf8)
-                
                 DispatchQueue.main.async(execute: {
                     self.textView.text = locationString
                 })
                 
             } catch let error as NSError {
-                print("Unresolved error \(error), \(error.userInfo)")
+                print("Location Data Read Error: \(error), \(error.userInfo)")
             }
         }
     }

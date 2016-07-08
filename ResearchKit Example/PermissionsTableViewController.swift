@@ -25,7 +25,18 @@ class PermissionsTableViewController: UITableViewController {
         }
         permissions.append(locationPermission)
         
-        let notificationPermission = Permission(title: "Notifications", desc: "Allowing notifications enables the app to show you reminders", enabled: false)
+        let notificationPermission = Permission(title: "Notifications", desc: "Allowing notifications enables the app to show you reminders", enabled: nil)
+        let notificationSettings = UIApplication.shared().currentUserNotificationSettings()
+        print(notificationSettings?.types)
+        if notificationSettings?.types.rawValue == 0 {
+            print("no notification settings")
+            notificationPermission.buttonTitle = "Enable"
+            notificationPermission.enabled = false
+        } else {
+            print("some notification settings")
+            notificationPermission.buttonTitle = "Disable"
+            notificationPermission.enabled = true
+        }
         permissions.append(notificationPermission)
         
         let surveyPermission = Permission(title: "Survey Data", desc: "With this disabled, we will not collect your survey data", enabled: true)
