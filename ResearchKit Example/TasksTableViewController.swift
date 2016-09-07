@@ -13,10 +13,13 @@ import CoreLocation
 
 class TasksTableViewController: UITableViewController, ORKPasscodeDelegate {
     
-    let tableViewRows = ["Consent" : ConsentTask, "Image Capture" : ImageCaptureTask, "Survey" : SurveyTask]
+    let tableViewRows = ["Consent" : ConsentTask, "Image Capture" : ImageCaptureTask, "Survey" : SurveyTask, "Location Task" : LocationTask]
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // TODO: TEMP FOR DONE BUTTON
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(goToOnboarding))
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -29,11 +32,11 @@ class TasksTableViewController: UITableViewController, ORKPasscodeDelegate {
                 let dateFormatter = DateFormatter()
                 dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss Z"
                 let authDate = dateFormatter.date(from: authDateString)
-                if authDate != nil && authDate?.timeIntervalSinceNow > -1000 {
+                if authDate != nil && (authDate?.timeIntervalSinceNow)! > Double(-1000) {
                     let authString = try String.init(contentsOf: mainDir.appendingPathComponent(authStatusFile), encoding: String.Encoding.utf8)
                     if authString == "true" {
-                        let newAuthDateStr = String(Date())
-                        let datePath = try mainDir.appendingPathComponent(authDateFile)
+                        let newAuthDateStr = String(describing: Date())
+                        let datePath = mainDir.appendingPathComponent(authDateFile)
                         try newAuthDateStr.write(to: datePath, atomically: true, encoding: String.Encoding.utf8)
                         authenticated = true
                     } else {
@@ -56,8 +59,12 @@ class TasksTableViewController: UITableViewController, ORKPasscodeDelegate {
         }
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
+    // TODO: TEMP FOR DONE BUTTON
+    @objc func goToOnboarding() {
+        let sb = UIStoryboard(name: "OnBoarding", bundle: nil)
+        let vc = sb.instantiateInitialViewController()
+        vc?.modalTransitionStyle = .flipHorizontal
+        present(vc!, animated: true, completion: nil)
     }
     
     // MARK: - Passcode Delegate Methods
@@ -67,10 +74,10 @@ class TasksTableViewController: UITableViewController, ORKPasscodeDelegate {
         
         fileAccessQueue.async() {
             let authStatus = "true"
-            let authDate = String(Date())
+            let authDate = String(describing: Date())
             do {
-                let statusPath = try mainDir.appendingPathComponent(authStatusFile)
-                let datePath = try mainDir.appendingPathComponent(authDateFile)
+                let statusPath = mainDir.appendingPathComponent(authStatusFile)
+                let datePath = mainDir.appendingPathComponent(authDateFile)
                 try authStatus.write(to: statusPath, atomically: true, encoding: String.Encoding.utf8)
                 try authDate.write(to: datePath, atomically: true, encoding: String.Encoding.utf8)
                 authenticated = true
@@ -93,7 +100,7 @@ class TasksTableViewController: UITableViewController, ORKPasscodeDelegate {
         fileAccessQueue.async() {
             let authStatus = "false"
             do {
-                let path = try mainDir.appendingPathComponent(authStatusFile)
+                let path = mainDir.appendingPathComponent(authStatusFile)
                 try authStatus.write(to: path, atomically: true, encoding: String.Encoding.utf8)
             } catch let error as NSError {
                 switch error.code {
@@ -133,72 +140,4 @@ class TasksTableViewController: UITableViewController, ORKPasscodeDelegate {
         taskViewController.outputDirectory = mainDir
         present(taskViewController, animated: true, completion: nil)
     }
-}
-
-extension UIViewController: ORKTaskViewControllerDelegate, LocationDelegate {
-    
-    // MARK: - ORKTaskViewControllerDelegate Methods
-    
-    public func taskViewController(_ taskViewController: ORKTaskViewController, didFinishWith reason: ORKTaskViewControllerFinishReason, error: NSError?) {
-        //Handle results with taskViewController.result
-        
-        let result = taskViewController.result
-        
-        switch reason {
-        case .completed:
-            
-            fileAccessQueue.async(execute: {
-                do {
-                    let jsonData = try ORKESerializer.jsonData(for: result)
-                    if let jsonString = NSString(data: jsonData, encoding: String.Encoding.utf8.rawValue) {
-                        let path = try mainDir.appendingPathComponent(logDataFile)
-                        let fileHandle = try FileHandle(forWritingTo: path)
-                        fileHandle.seekToEndOfFile()
-                        let data = jsonString.data(using: String.Encoding.utf8.rawValue)
-                        fileHandle.write(data!)
-                    }
-                } catch let error as NSError {
-                    print("Unresolved Serialization Writing Error: \(error), \(error.userInfo)")
-                }
-            })
-            
-            break
-        case .saved, .failed, .discarded:
-            break
-        }
-        
-        taskViewController.dismiss(animated: true, completion: nil)
-    }
-    
-    // MARK: - Location Delegate Methods
-    
-    // (CURRENTLY NOT IN USE)
-    func presentLocationRestrictedAlert() {
-        let noAuthAlert = UIAlertController(title: "Oops!", message: "It seems you have restricted location access to this app, this could hinder the usefulness of it.", preferredStyle: .alert)
-        let openPrefAction = UIAlertAction(title: "Open Preferences", style: .default) { _ in
-            if let url = URL(string: UIApplicationOpenSettingsURLString) {
-                UIApplication.shared().openURL(url)
-            }
-        }
-        let okayAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-        noAuthAlert.addAction(openPrefAction)
-        noAuthAlert.addAction(okayAction)
-        present(noAuthAlert, animated: true, completion: nil)
-    }
-    
-    // (CURRENTLY NOT IN USE)
-    func presentChangedAuthAlert() {
-        let changedAuthAlert = UIAlertController(title: "Hey!", message: "It looks like you changed your privacy settings for this app, allowing location access will make this app a lot more useful", preferredStyle: .alert)
-        let openPrefAction = UIAlertAction(title: "Open Preferences", style: .default) { (_) in
-            if let url = URL(string: UIApplicationOpenSettingsURLString) {
-                UIApplication.shared().openURL(url)
-            }
-        }
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-        changedAuthAlert.addAction(openPrefAction)
-        changedAuthAlert.addAction(cancelAction)
-        present(changedAuthAlert, animated: true, completion: nil)
-    }
-    
-    func reloadLocationData() {}
 }

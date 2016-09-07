@@ -10,26 +10,29 @@ import UIKit
 
 class GraphChartDataSource: NSObject, ORKGraphChartViewDataSource {
     
-    var plotPoints = [
-            [
-                ORKRangedPoint(value: 200),
-                ORKRangedPoint(value: 450),
-                ORKRangedPoint(value: 500),
-                ORKRangedPoint(value: 250),
-                ORKRangedPoint(value: 300),
-                ORKRangedPoint(value: 600),
-                ORKRangedPoint(value: 300),
-            ], [
-                ORKRangedPoint(value: 100),
-                ORKRangedPoint(value: 350),
-                ORKRangedPoint(value: 400),
-                ORKRangedPoint(value: 150),
-                ORKRangedPoint(value: 200),
-                ORKRangedPoint(value: 500),
-                ORKRangedPoint(value: 400),
-            ]
-    ]
+    var plotPoints = Array<Array<ORKRangedPoint>>()
     
+    override init() {
+        super.init()
+        
+        // turn greenspace JSON into plotPoints
+        do {
+            let path = Bundle.main.url(forResource: "greenspace", withExtension: "json")
+            let jsonData = try Data(contentsOf: path!)
+            let jsonResult = try JSONSerialization.jsonObject(with: jsonData, options: .mutableContainers)
+            let greenspace = jsonResult["greenspace"] as? Array<Array<Int>>
+            for plot in greenspace! {
+                var nums = Array<ORKRangedPoint>()
+                for num in plot {
+                    let point = ORKRangedPoint(value: CGFloat(num))
+                    nums.append(point)
+                }
+                plotPoints.append(nums)
+            }
+        } catch let error {
+            print("Unresolved Greenspace JSON Serialization Error: \(error)")
+        }
+    }
     
     // Required Methods
     func graphChartView(_ graphChartView: ORKGraphChartView, numberOfPointsForPlotIndex plotIndex: Int) -> Int {
@@ -46,7 +49,17 @@ class GraphChartDataSource: NSObject, ORKGraphChartViewDataSource {
     }
     
     func maximumValue(for graphChartView: ORKGraphChartView) -> CGFloat {
-        return 1000
+        var largestNode: CGFloat! = 0
+        for plot in plotPoints {
+            for node in plot {
+                if node.maximumValue > largestNode {
+                    largestNode = node.maximumValue
+                    print("Largest: \(largestNode)")
+                }
+            }
+        }
+        
+        return largestNode + largestNode * 0.35
     }
     
     func minimumValue(for graphChartView: ORKGraphChartView) -> CGFloat {
@@ -76,9 +89,9 @@ class GraphChartDataSource: NSObject, ORKGraphChartViewDataSource {
     
     func graphChartView(_ graphChartView: ORKGraphChartView, colorForPlotIndex plotIndex: Int) -> UIColor {
         if plotIndex == 0 {
-            return UIColor.purple()
+            return UIColor(traditionalRed: 53, green: 158, blue: 30, alpha: 1.0) // These two…
         } else {
-            return UIColor.blue()
+            return UIColor(traditionalRed: 0x35, green: 0x9E, blue: 0x1E, alpha: 0.5) // …are the same color with different transparency
         }
     }
 }

@@ -1,16 +1,26 @@
 //
-//  ConsentTask.swift
+//  RegistrationTask.swift
 //  ResearchKit Example
 //
-//  Created by Samuel Lichlyter on 6/20/16.
+//  Created by Samuel Lichlyter on 8/29/16.
 //  Copyright © 2016 Samuel Lichlyter. All rights reserved.
 //
 
+import Foundation
 import ResearchKit
 
-public var ConsentTask: ORKOrderedTask {
+public var RegistrationTask: ORKOrderedTask {
     var steps = [ORKStep]()
     
+    // Eligibility Step
+    
+    
+    // Registration Step
+    let registrationStep = ORKRegistrationStep(identifier: "registrationStep", title: "Account Registration", text: "Please register to join the study", options: [.includeGivenName, .includeFamilyName, .includeDOB, .includeGender])
+    steps += [registrationStep]
+    
+    
+    // Consent Step
     // Visual Consent Step
     let consentDocument = ConsentDocument
     let visualConsentStep = ORKVisualConsentStep(identifier: "VisualConsentStep", document: consentDocument)
@@ -31,5 +41,13 @@ public var ConsentTask: ORKOrderedTask {
     reviewConsentStep.reasonForConsent = reasonForConsent
     steps += [reviewConsentStep]
     
-    return ORKOrderedTask(identifier: "ConsentTask", steps: steps)
+    return ORKOrderedTask(identifier: "registrationTask", steps: steps)
+}
+
+var readDataTypes: Set<HKQuantityType> {
+    let stepCount = HKObjectType.quantityType(forIdentifier: .stepCount)
+    let distanceWalkingRunning = HKObjectType.quantityType(forIdentifier: .distanceWalkingRunning)
+    let distanceCycling = HKObjectType.quantityType(forIdentifier: .distanceCycling)
+    
+    return Set(arrayLiteral: stepCount!, distanceWalkingRunning!, distanceCycling!)
 }

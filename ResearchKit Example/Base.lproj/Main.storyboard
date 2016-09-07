@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11163.2" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="ndO-LU-brw">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="ndO-LU-brw">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11133"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <capability name="Alignment constraints to the first baseline" minToolsVersion="6.0"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -16,7 +17,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="mainCell" textLabel="7kD-e0-tfP" style="IBUITableViewCellStyleDefault" id="eQ1-Zl-Zie">
-                                <frame key="frameInset" minY="92" width="375" height="44"/>
+                                <rect key="frame" x="0.0" y="92" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="eQ1-Zl-Zie" id="eae-oP-j1W">
                                     <frame key="frameInset" width="375" height="43.5"/>
@@ -156,34 +157,45 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2kp-CR-K7i" customClass="ORKLineGraphChartView">
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dEE-Va-eZn" customClass="ORKPieChartView">
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IMZ-Kh-hYv" customClass="ORKDiscreteGraphChartView">
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Green Space Exposure" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OCm-z8-SnZ">
+                                <fontDescription key="fontDescription" type="system" pointSize="29"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Last Week" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fvq-iW-5ww">
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.20784313730000001" green="0.61960784310000006" blue="0.1176470588" alpha="0.5" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="This Week" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="95C-Bd-f3z">
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="96" id="FH2-ZN-Meq"/>
+                                    <constraint firstAttribute="height" constant="40" id="yYD-R3-oZi"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.10120601060227678" green="0.50196081400000003" blue="0.091903910672789316" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="Yf3-iP-kMt" firstAttribute="top" secondItem="IMZ-Kh-hYv" secondAttribute="bottom" constant="34" id="00L-am-trz"/>
-                            <constraint firstItem="IMZ-Kh-hYv" firstAttribute="top" secondItem="dEE-Va-eZn" secondAttribute="bottom" constant="8" symbolic="YES" id="3WP-zk-V3H"/>
-                            <constraint firstItem="2kp-CR-K7i" firstAttribute="top" secondItem="dIY-7W-3GE" secondAttribute="bottom" constant="8" symbolic="YES" id="4ik-H9-cMf"/>
-                            <constraint firstItem="2kp-CR-K7i" firstAttribute="leading" secondItem="BW6-6Q-fuj" secondAttribute="leadingMargin" id="DvR-mi-Z81"/>
-                            <constraint firstItem="2kp-CR-K7i" firstAttribute="leading" secondItem="dEE-Va-eZn" secondAttribute="leading" id="Ra9-6s-TeG"/>
-                            <constraint firstItem="dEE-Va-eZn" firstAttribute="trailing" secondItem="IMZ-Kh-hYv" secondAttribute="trailing" id="SPF-7b-oRz"/>
-                            <constraint firstItem="dEE-Va-eZn" firstAttribute="top" secondItem="BW6-6Q-fuj" secondAttribute="top" constant="216" id="WRk-wu-l2t"/>
-                            <constraint firstItem="2kp-CR-K7i" firstAttribute="trailing" secondItem="dEE-Va-eZn" secondAttribute="trailing" id="Xqr-Ae-S3n"/>
-                            <constraint firstItem="2kp-CR-K7i" firstAttribute="trailing" secondItem="BW6-6Q-fuj" secondAttribute="trailingMargin" id="aUi-kb-mJf"/>
-                            <constraint firstItem="dEE-Va-eZn" firstAttribute="leading" secondItem="IMZ-Kh-hYv" secondAttribute="leading" id="iVf-a4-ndC"/>
-                            <constraint firstItem="dEE-Va-eZn" firstAttribute="top" secondItem="2kp-CR-K7i" secondAttribute="bottom" constant="8" symbolic="YES" id="s7w-Gf-9Ct"/>
-                            <constraint firstItem="IMZ-Kh-hYv" firstAttribute="top" secondItem="BW6-6Q-fuj" secondAttribute="top" constant="404" id="sNQ-kr-EY0"/>
+                            <constraint firstItem="Fvq-iW-5ww" firstAttribute="leading" secondItem="95C-Bd-f3z" secondAttribute="trailing" constant="99" id="Au9-fz-5Ie"/>
+                            <constraint firstItem="OCm-z8-SnZ" firstAttribute="centerX" secondItem="2kp-CR-K7i" secondAttribute="centerX" id="DPb-9w-Kve"/>
+                            <constraint firstItem="OCm-z8-SnZ" firstAttribute="leading" secondItem="95C-Bd-f3z" secondAttribute="leading" id="MpG-7s-yGw"/>
+                            <constraint firstItem="Yf3-iP-kMt" firstAttribute="top" secondItem="95C-Bd-f3z" secondAttribute="bottom" constant="117" id="byX-PR-Wzu"/>
+                            <constraint firstItem="2kp-CR-K7i" firstAttribute="leading" secondItem="BW6-6Q-fuj" secondAttribute="leadingMargin" id="grm-s6-9Yf"/>
+                            <constraint firstItem="95C-Bd-f3z" firstAttribute="baseline" secondItem="Fvq-iW-5ww" secondAttribute="baseline" id="hv5-Ao-2ms"/>
+                            <constraint firstItem="OCm-z8-SnZ" firstAttribute="top" secondItem="dIY-7W-3GE" secondAttribute="bottom" constant="43" id="i9K-YC-GBb"/>
+                            <constraint firstItem="95C-Bd-f3z" firstAttribute="top" secondItem="2kp-CR-K7i" secondAttribute="bottom" constant="21" id="juX-zN-jO7"/>
+                            <constraint firstItem="95C-Bd-f3z" firstAttribute="firstBaseline" secondItem="Fvq-iW-5ww" secondAttribute="firstBaseline" id="sha-AI-HvI"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Fvq-iW-5ww" secondAttribute="trailing" constant="26" id="uum-fO-ssd"/>
+                            <constraint firstItem="2kp-CR-K7i" firstAttribute="trailing" secondItem="BW6-6Q-fuj" secondAttribute="trailingMargin" id="wmO-f5-4ou"/>
+                            <constraint firstItem="2kp-CR-K7i" firstAttribute="top" secondItem="OCm-z8-SnZ" secondAttribute="bottom" constant="8" symbolic="YES" id="y1l-rf-Bbq"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Graphs" image="graphs_icon" selectedImage="graphs_icon_selected" id="9FW-QD-2mG"/>
                     <connections>
-                        <outlet property="discreteGraphView" destination="IMZ-Kh-hYv" id="q5I-xh-crF"/>
                         <outlet property="lineGraphView" destination="2kp-CR-K7i" id="zCl-Bb-fQV"/>
-                        <outlet property="pieGraphView" destination="dEE-Va-eZn" id="hKB-GW-HqB"/>
                         <outlet property="view" destination="BW6-6Q-fuj" id="opA-qE-ell"/>
                     </connections>
                 </viewController>
@@ -220,7 +232,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="profileCell" textLabel="ZtJ-JR-bHz" style="IBUITableViewCellStyleDefault" id="68d-EP-941">
-                                <frame key="frameInset" minY="92" width="375" height="44"/>
+                                <rect key="frame" x="0.0" y="92" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="68d-EP-941" id="waa-mj-BOZ">
                                     <frame key="frameInset" width="375" height="43.5"/>
@@ -264,10 +276,10 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="permissionsCell" rowHeight="187" id="yFz-KP-fro" customClass="PermissionsTableViewCell" customModule="ResearchKit_Example" customModuleProvider="target">
-                                <frame key="frameInset" minY="92" width="375" height="187"/>
+                                <rect key="frame" x="0.0" y="92" width="375" height="187"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="yFz-KP-fro" id="vbH-pz-Z8Y">
-                                    <frame key="frameInset" width="375" height="186.5"/>
+                                    <frame key="frameInset" width="375" height="187"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9ef-6V-Kdz">
@@ -325,6 +337,7 @@
                 <tabBarController title="Graphs" automaticallyAdjustsScrollViewInsets="NO" id="ndO-LU-brw" sceneMemberID="viewController">
                     <toolbarItems/>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="UFE-4w-2yA">
+                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </tabBar>

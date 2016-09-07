@@ -7,27 +7,116 @@
 //
 
 import UIKit
+import UserNotifications
+import HealthKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+    var healthStore: HKHealthStore?
+    //let tintColor = UIColor(red:0.76, green:0.27, blue:0.00, alpha:1.0) // Oregon State Orange
+    let tintColor = UIColor(traditionalRed: 0x4E, green: 0x73, blue: 0x00, alpha: 1.0) // Oregon State Green
 
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-        
-        // Setup Notifications
-        application.registerUserNotificationSettings(UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil))
-        
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey : Any]? = nil) -> Bool {
         // Set tint to Oregon State University Orange
-        window?.tintColor = UIColor(red:0.76, green:0.27, blue:0.00, alpha:1.0)
+        window?.tintColor = tintColor
         
+        // Set up HealthKit Health Store
+        if HKHealthStore.isHealthDataAvailable() {
+            healthStore = HKHealthStore()
+        }
+        
+        //FIXME: clear notifications on iOS 9
+        //        application.cancelAllLocalNotifications()
+        
+        // Setup Daily Notifications
+        if application.scheduledLocalNotifications?.count == 0 || !UserDefaults.standard.bool(forKey: "DailyNotifications") {
+            
+            // setup notification
+            if #available(iOS 10.0, *) {
+                print("iOS10")
+                // For iOS10 and above
+                
+                // get calendar unit for 5pm everyday
+                let now = Date()
+                let calendar = Calendar(identifier: .gregorian)
+                let todayAtFive = calendar.date(bySettingHour: 17, minute: 0, second: 0, of: now)
+                let unitFlags: Set<Calendar.Component> = [.second, .minute, .hour, .day, .month, .year]
+                let todayAtFiveComponents = Calendar.current.dateComponents(unitFlags, from: todayAtFive!)
+                
+                // request authorization
+                let center = UNUserNotificationCenter.current()
+                center.delegate = nil
+                center.requestAuthorization(options: [.alert, .sound, .badge], completionHandler: { (granted, error) in
+                    if !granted {
+                        print("Unresolved UNNotificationCenter Request Error: \(error)")
+                    }
+                })
+                
+                // define content of notification
+                let content = UNMutableNotificationContent()
+                content.title = dailyNotificationTitle
+                content.body = dailyNotificationBody
+                content.sound = UNNotificationSound.default()
+                
+                //FIXME: define action of notification
+                //let notificationAction = UNNotificationAction(identifier: "viewSurvey", title: dailyNotificationAction, options: .foreground)
+                
+                
+                // deliver notification at 5pm daily
+                let trigger = UNCalendarNotificationTrigger(dateMatching: todayAtFiveComponents, repeats: true)
+                //let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
+                let request = UNNotificationRequest(identifier: "dailyNotification", content: content, trigger: trigger)
+                
+                // request notification
+                center.add(request, withCompletionHandler: { (error) in
+                    if (error != nil) {
+                        print("Unresolved UNNotificationCenter add request error: \(error)")
+                    }
+                })
+            } else {
+                print("iOS9")
+                // Fallback on earlier versions
+                
+                // get calendar unit for 5pm everyday
+                let now = NSDate()
+                let calendar = NSCalendar(identifier: .gregorian)
+                let todayAtFive = calendar?.date(bySettingHour: 17, minute: 0, second: 0, of: now as Date, options: NSCalendar.Options())
+                
+                
+                // request authorization
+                application.registerUserNotificationSettings(UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil))
+                
+                // define content of notification
+                let notification = UILocalNotification()
+                notification.alertTitle = dailyNotificationTitle
+                notification.alertBody = dailyNotificationBody
+                notification.alertAction = dailyNotificationAction
+                notification.soundName = UILocalNotificationDefaultSoundName
+                
+                // deliver notification at 5pm daily
+                notification.fireDate = todayAtFive
+                notification.repeatInterval = .day
+                
+                // request notification
+                application.scheduleLocalNotification(notification)
+            }
+            
+            UserDefaults.standard.setValue(true, forKey: "DailyNotifications")
+            UserDefaults.standard.synchronize()
+            
+            print("Notification Scheduled")
+        }
+        
+        // If this is first launch, create necessary files
         if !UserDefaults.standard.bool(forKey: "HasLaunchedOnce") {
             
-            fileAccessQueue.async(execute: { 
+            fileAccessQueue.async(execute: {
                 let requiredFiles = [logDataFile, locationDataFile]
                 for file in requiredFiles {
                     do {
-                        let path = try mainDir.appendingPathComponent(file)
+                        let path = mainDir.appendingPathComponent(file)
                         let emptyString = ""
                         try emptyString.write(to: path, atomically: true, encoding: String.Encoding.utf8)
                     } catch let error as NSError {
@@ -40,18 +129,37 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             UserDefaults.standard.synchronize()
         }
         
+        //FIXME: Show OnBoarding
+        if true {
+            let storyboard = UIStoryboard(name: "OnBoarding", bundle: nil)
+            let vc = storyboard.instantiateInitialViewController()
+            self.window = UIWindow(frame: UIScreen.main.bounds)
+            self.window?.rootViewController = vc
+            self.window?.makeKeyAndVisible()
+            
+            // Set tint to Oregon State University Orange
+            window?.tintColor = tintColor
+        }
+        
         return true
     }
     
     func application(_ application: UIApplication, didReceive notification: UILocalNotification) {
+        
+        var okayAction: UIAlertAction? = nil
+        
         let alert = UIAlertController(title: notification.alertTitle, message: notification.alertBody, preferredStyle: .alert)
-        let okayAction = UIAlertAction(title: notification.alertAction, style: .default, handler: nil)
-        alert.addAction(okayAction)
+        if notification.alertAction == nil {
+            okayAction = UIAlertAction(title: dailyNotificationAction, style: .default, handler: nil)
+        } else {
+            okayAction = UIAlertAction(title: notification.alertAction, style: .default, handler: nil)
+        }
+        let cancelAction = UIAlertAction(title: "No", style: .cancel, handler: nil)
+        alert.addAction(okayAction!)
+        alert.addAction(cancelAction)
         window?.rootViewController?.present(alert, animated: true, completion: nil)
     }
     
-    
-
     func applicationWillResignActive(_ application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
         // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
@@ -62,7 +170,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
         
         if location.moveToDeferredUpdates() {
-            print("Deferring updates")
+            print("Deferring updates (from App Delegate)")
         }
     }
 

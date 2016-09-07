@@ -12,6 +12,7 @@ import Foundation
 let booleanTitle            = "Yes/No Question"
 let horizontalSliderTitle   = "Horizontal Slider Question"
 let verticalSliderTitle     = "Vertical Slider Question"
+let numPlacesLivedTitle     = "How many places have you lived in the past 10 years?"
 let locationTitle           = "Location Question"
 let summaryTitle            = "Summary"
 

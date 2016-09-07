@@ -61,7 +61,7 @@ class ProfileTableViewController: UITableViewController, ORKPasscodeDelegate {
     func addPasscode() {
         let taskViewController = ORKTaskViewController(task: AddPasscodeTask, taskRun: nil)
         taskViewController.delegate = self
-        taskViewController.outputDirectory = FileManager.default.urlsForDirectory(.documentDirectory, inDomains: .userDomainMask).first!
+        taskViewController.outputDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
         present(taskViewController, animated: true, completion: nil)
     }
     

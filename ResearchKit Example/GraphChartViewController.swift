@@ -7,16 +7,13 @@
 //
 
 import UIKit
+import CoreGraphics
 
 class GraphChartViewController: UIViewController {
 
     @IBOutlet weak var lineGraphView: ORKLineGraphChartView!
-    @IBOutlet weak var pieGraphView: ORKPieChartView!
-    @IBOutlet weak var discreteGraphView: ORKDiscreteGraphChartView!
     
     let graphChartDataSource = GraphChartDataSource()
-    let pieChartDataSource = PieChartDataSource()
-    let discreteChartDataSource = GraphChartDataSource()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,36 +22,11 @@ class GraphChartViewController: UIViewController {
         lineGraphView.dataSource = graphChartDataSource
         
         // Line View Optional
-        lineGraphView.showsHorizontalReferenceLines = true
-        lineGraphView.showsVerticalReferenceLines = true
-        lineGraphView.axisColor = UIColor.white()
-        lineGraphView.verticalAxisTitleColor = UIColor.orange()
-        lineGraphView.showsHorizontalReferenceLines = true
-        lineGraphView.showsVerticalReferenceLines = true
-        lineGraphView.scrubberLineColor = UIColor.red()
-        
-        
-        // Pie Chart Required
-        pieGraphView.dataSource = pieChartDataSource
-        
-        // Pie Chart Optional
-        pieGraphView.showsTitleAboveChart = false
-        pieGraphView.showsPercentageLabels = true
-        pieGraphView.drawsClockwise = true
-        pieGraphView.titleColor = UIColor.purple()
-        pieGraphView.textColor = UIColor.purple()
-        pieGraphView.title = "Weekly"
-        pieGraphView.text = "Report"
-        pieGraphView.lineWidth = 10
-        pieGraphView.showsPercentageLabels = true
-        
-        
-        // Discrete Graph Required
-        discreteGraphView.dataSource = discreteChartDataSource
-        
-        // Discrete Graph Optional
-        discreteGraphView.showsVerticalReferenceLines = true
-        discreteGraphView.drawsConnectedRanges = true
+        lineGraphView.showsHorizontalReferenceLines = false
+        lineGraphView.showsVerticalReferenceLines = false
+        lineGraphView.axisColor = UIColor(traditionalRed: 0xAF, green: 0x29, blue: 0x2E, alpha: 1.0)
+        lineGraphView.verticalAxisTitleColor = UIColor(traditionalRed: 0xAF, green: 0x29, blue: 0x2E, alpha: 1.0)
+        lineGraphView.scrubberLineColor = UIColor(traditionalRed: 0xAF, green: 0x29, blue: 0x2E, alpha: 1.0)
     }
 
     override func didReceiveMemoryWarning() {

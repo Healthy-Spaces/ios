@@ -17,11 +17,17 @@ let authDateFile        = "authDate"
 let locationDataFile    = "locationData"
 let logDataFile         = "logData"
 
+// MARK: - Customizable Strings (Probably need to be localized)
+let dailyNotificationTitle = "Want to fill out a survey?"
+let dailyNotificationBody = "You should!"
+let dailyNotificationAction = "Take me there!"
+
 // MARK: - Variables
-let mainDir = FileManager.default.urlsForDirectory(.documentDirectory, inDomains: .userDomainMask).first!
+let mainDir = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
 let networkingQueue = DispatchQueue(label: networkingQueueName)
 let fileAccessQueue = DispatchQueue(label: fileAccessQueueName)
 let location = Location()
 
 // MARK: - Globals
 var authenticated = false
+var completedRegistration = false

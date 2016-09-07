@@ -31,7 +31,7 @@ class Permission: NSObject {
         case "location", "notifications":
             print("enabling location tracking")
             if let url = URL(string: UIApplicationOpenSettingsURLString) {
-                UIApplication.shared().openURL(url)
+                UIApplication.shared.openURL(url)
             } else {
                 print("couldn't open preferences")
             }
@@ -50,7 +50,7 @@ class Permission: NSObject {
         case "location", "notifications":
             print("disable location tracking")
             if let url = URL(string: UIApplicationOpenSettingsURLString) {
-                UIApplication.shared().openURL(url)
+                UIApplication.shared.openURL(url)
             } else {
                 print("couldn't open preferences")
             }

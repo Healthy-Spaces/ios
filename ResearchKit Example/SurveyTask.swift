@@ -11,6 +11,12 @@ import ResearchKit
 
 public var SurveyTask: ORKOrderedTask {
     var steps = [ORKStep]()
+    
+    // Instruction Step
+    let instructionStep = ORKInstructionStep(identifier: "instructionStep")
+    instructionStep.title = "Generic Study"
+    instructionStep.text = "This is a basic example of some of the tasks included in ResearchKit"
+    steps += [instructionStep]
 
     // Boolean Step
     let booleanStep = ORKQuestionStep(identifier: "boolean", title: booleanTitle, answer: ORKBooleanAnswerFormat())
@@ -25,15 +31,16 @@ public var SurveyTask: ORKOrderedTask {
     let verticalScaleStep = ORKQuestionStep(identifier: "verticalScale", title: verticalSliderTitle, answer: ORKScaleAnswerFormat(maximumValue: 10, minimumValue: 0, defaultValue: -1, step: 1, vertical: true, maximumValueDescription: maxEnjoymentDesc, minimumValueDescription: minEnjoymentDesc))
     steps += [verticalScaleStep]
     
+    // Number of places lived step
+    let placesLivedFormat = ORKNumericAnswerFormat.integerAnswerFormat(withUnit: "places lived")
+    placesLivedFormat.minimum = 0
+    placesLivedFormat.maximum = 10
+    let numPlacesLivedStep = ORKQuestionStep(identifier: "numLocationsLived", title: numPlacesLivedTitle, answer: placesLivedFormat)
+    steps += [numPlacesLivedStep]
+    
     // Location Step
     let locationStep = ORKQuestionStep(identifier: "location", title: locationTitle, answer: ORKLocationAnswerFormat())
     steps += [locationStep]
-    
-    // Summary Step
-    let summaryStep = ORKInstructionStep(identifier: "summary")
-    summaryStep.title = summaryTitle
-    summaryStep.text  = summaryDesc
-    steps += [summaryStep]
 
     return ORKOrderedTask(identifier: "SurveyTask", steps: steps)
 }

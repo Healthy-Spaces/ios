@@ -37,7 +37,7 @@ class LogDataViewController: UIViewController {
         fileAccessQueue.async() {
             do {
                 let emptyString = ""
-                let path = try mainDir.appendingPathComponent(logDataFile)
+                let path = mainDir.appendingPathComponent(logDataFile)
                 try emptyString.write(to: path, atomically: false, encoding: String.Encoding.utf8)
             } catch let error as NSError {
                 print("Unresolved error \(error), \(error.userInfo)")

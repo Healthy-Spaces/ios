@@ -13,6 +13,11 @@ class Location: NSObject, CLLocationManagerDelegate {
     var locationManager: CLLocationManager? = nil
     var delegate: LocationDelegate!
     
+    // MARK: - Configurable Variables
+    let distanceFilter: Double = 25 //meters
+    let deferredDistance: Double = 25 //meters
+    let deferredTimeout: Double = 60 //seconds
+    
     // MARK: - Location Helper Methods
     
     func checkLocationAuth() -> Bool {
@@ -20,7 +25,7 @@ class Location: NSObject, CLLocationManagerDelegate {
         switch locationAuth {
         case .denied, .restricted:
             return false
-        case .notDetermined:
+        case .notDetermined, .authorizedWhenInUse:
             locationManager = CLLocationManager()
             locationManager?.delegate = self
             locationManager?.requestAlwaysAuthorization()
@@ -43,16 +48,16 @@ class Location: NSObject, CLLocationManagerDelegate {
     
     func startMonitoringLocation() {
         locationManager?.desiredAccuracy = kCLLocationAccuracyHundredMeters
-        locationManager?.distanceFilter = 10
+        locationManager?.distanceFilter = distanceFilter
         locationManager?.startUpdatingLocation()
     }
     
     func moveToDeferredUpdates() -> Bool {
-        
         if CLLocationManager.significantLocationChangeMonitoringAvailable() {
+            print("deferring location updates")
             locationManager?.desiredAccuracy = kCLLocationAccuracyBest
             locationManager?.distanceFilter = kCLDistanceFilterNone
-            locationManager?.allowDeferredLocationUpdates(untilTraveled: 100, timeout: 300)
+            locationManager?.allowDeferredLocationUpdates(untilTraveled: deferredDistance, timeout: deferredTimeout)
             return true
         } else {
             return false
@@ -61,7 +66,7 @@ class Location: NSObject, CLLocationManagerDelegate {
     
     func getLatestLocation() {
         print(locationManager?.location?.timestamp.timeIntervalSinceNow)
-        if locationManager?.location?.timestamp.timeIntervalSinceNow < -1800 {
+        if (locationManager?.location?.timestamp.timeIntervalSinceNow)! < Double(-1800) {
             locationManager?.desiredAccuracy = kCLLocationAccuracyKilometer
             locationManager?.distanceFilter = 10
             locationManager?.requestLocation()
@@ -70,19 +75,40 @@ class Location: NSObject, CLLocationManagerDelegate {
         }
     }
     
+    func getLocationString(location: CLLocation) -> String {
+        
+        let lat = location.coordinate.latitude
+        let lon = location.coordinate.longitude
+        let time = location.timestamp
+        let horizontalAccuracy = location.horizontalAccuracy
+        
+        let formatter = DateFormatter()
+        formatter.dateFormat = "MM-dd h:mm:ss"
+        
+        var locationsString = ""
+        
+        locationsString += String(lat)
+        locationsString += ", "
+        locationsString += String(lon)
+        locationsString += " (+/- "
+        locationsString += String(horizontalAccuracy)
+        locationsString += "m) @ "
+        locationsString += formatter.string(from: time)
+        locationsString += "\n"
+        
+        return locationsString
+    }
+    
     // MARK: - CLLocationManager Delegate Methods
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         print("Locations: \(locations)")
         
-        let lat = locations.first?.coordinate.latitude
-        let lon = locations.first?.coordinate.longitude
-        let time = locations.first?.timestamp
-        let locationsString = self.getLocationString(lat: lat!, lon: lon!, time: time!)
+        let locationsString = self.getLocationString(location: locations.first!)
         
         fileAccessQueue.async() {
             do {
-                let path = try mainDir.appendingPathComponent(locationDataFile)
+                let path = mainDir.appendingPathComponent(locationDataFile)
                 let fileHandle = try FileHandle(forWritingTo: path)
                 fileHandle.seekToEndOfFile()
                 let data = locationsString.data(using: String.Encoding.utf8)
@@ -96,40 +122,29 @@ class Location: NSObject, CLLocationManagerDelegate {
                     print("Unresolved Location Data Write Error: \(error), \(error.userInfo)")
                 }
             }
+            
+            DispatchQueue.main.async {
+                self.delegate.reloadLocationData()
+            }
         }
-        
-        delegate.reloadLocationData()
-    }
-    
-    func getLocationString(lat: CLLocationDegrees, lon: CLLocationDegrees, time: NSDate) -> String {
-        
-        var locationsString = ""
-        
-        locationsString += String(lat)
-        locationsString += ", "
-        locationsString += String(lon)
-        locationsString += " @ "
-        locationsString += String(time)
-        locationsString += "\n"
-        
-        return locationsString
     }
     
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         print("Auth Changed")
     }
     
-    func locationManager(_ manager: CLLocationManager, didFailWithError error: NSError) {
-        print("Location Error: \(error), \(error.userInfo)")
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        print("Location Error: \(error)")
     }
     
-    func locationManager(_ manager: CLLocationManager, didFinishDeferredUpdatesWithError error: NSError?) {
+    func locationManager(_ manager: CLLocationManager, didFinishDeferredUpdatesWithError error: Error?) {
         // CLError.deferredFailed
-        if error?.code == 11 {
+        let clError = error as! CLError
+        if clError.code.rawValue == 11 {
             print("Defer error, trying to defer again")
             _ = self.moveToDeferredUpdates()
         } else {
-            print("Unresolved Location Deferred Error: \(error), \(error?.userInfo)")
+            print("Unresolved Location Deferred Error: \(error)")
         }
     }
 }

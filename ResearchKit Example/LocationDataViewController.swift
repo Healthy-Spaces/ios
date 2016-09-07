@@ -39,7 +39,7 @@ class LocationDataViewController: UIViewController {
         fileAccessQueue.async() {
             do {
                 let emptyString = ""
-                let path = try mainDir.appendingPathComponent(locationDataFile)
+                let path = mainDir.appendingPathComponent(locationDataFile)
                 try emptyString.write(to: path, atomically: false, encoding: String.Encoding.utf8)
             } catch let error as NSError {
                 print("Unresolved error \(error), \(error.userInfo)")

@@ -25,7 +25,7 @@ class PermissionsTableViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
         
         // Configure button style
-        button.layer.backgroundColor = UIColor.clear().cgColor
+        button.layer.backgroundColor = UIColor.clear.cgColor
         button.layer.cornerRadius = 5
         button.layer.borderWidth = 1
         button.layer.borderColor = tintColor.cgColor

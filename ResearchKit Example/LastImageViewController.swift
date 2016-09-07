@@ -15,18 +15,13 @@ class LastImageViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        fileAccessQueue.async { 
-            do {
-                let imagePath = try mainDir.appendingPathComponent("imageCaptureStep.jpg")
-                let image = UIImage(contentsOfFile: imagePath.path!)
-                
-                DispatchQueue.main.async(execute: { 
-                    self.imageView.image = image
-                })
-                
-            } catch let error as NSError {
-                print("Image Access Error: \(error), \(error.userInfo)")
-            }
+        fileAccessQueue.async {
+            let imagePath = mainDir.appendingPathComponent("imageCaptureStep.jpg")
+            let image = UIImage(contentsOfFile: imagePath.path)
+            
+            DispatchQueue.main.async(execute: { 
+                self.imageView.image = image
+            })
         }
     }
 

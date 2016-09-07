@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11191" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="UAU-As-4Mz">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11156"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--ResearchKit Example-->
+        <scene sceneID="tes-Nj-RRa">
+            <objects>
+                <pageViewController storyboardIdentifier="PageViewController" autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="c1Q-bE-3Lh" customClass="OnBoardingViewController" customModule="ResearchKit_Example" customModuleProvider="target" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" title="ResearchKit Example" id="cQh-rJ-0KO"/>
+                </pageViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="DSq-zG-TEn" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2128.8000000000002" y="71.514242878560722"/>
+        </scene>
+        <!--On Boarding Content View Controller-->
+        <scene sceneID="Urw-gv-Tkb">
+            <objects>
+                <viewController storyboardIdentifier="ContentViewController" id="G1o-nh-SRP" customClass="OnBoardingContentViewController" customModule="ResearchKit_Example" customModuleProvider="target" sceneMemberID="viewController">
+                    <webView key="view" contentMode="scaleToFill" id="6Wt-mJ-7Wb">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </webView>
+                    <connections>
+                        <outlet property="webView" destination="6Wt-mJ-7Wb" id="tZm-xD-h1q"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="60f-5Y-0tJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2892" y="71.514242878560722"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="mhv-AF-6Yj">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="FI4-GP-y1B" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="UAU-As-4Mz" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="d5N-p1-X8c">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="c1Q-bE-3Lh" kind="relationship" relationship="rootViewController" id="vjV-Fs-Xac"/>
+                    </connections>
+                </navigationController>
+            </objects>
+            <point key="canvasLocation" x="1189.5999999999999" y="71.514242878560722"/>
+        </scene>
+    </scenes>
+</document>

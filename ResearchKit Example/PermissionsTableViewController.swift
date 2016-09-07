@@ -15,7 +15,8 @@ class PermissionsTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let locationPermission = Permission(title: "Location", desc: "This app tracks your location", enabled: nil)
+        // Location Cell
+        let locationPermission = Permission(title: "Location", desc: "Allows the app to send you timely notifications when you are in a high or low green space area", enabled: nil)
         if location.checkLocationAuth() {
             locationPermission.buttonTitle = "Disable"
             locationPermission.enabled = true
@@ -25,8 +26,9 @@ class PermissionsTableViewController: UITableViewController {
         }
         permissions.append(locationPermission)
         
-        let notificationPermission = Permission(title: "Notifications", desc: "Allowing notifications enables the app to show you reminders", enabled: nil)
-        let notificationSettings = UIApplication.shared().currentUserNotificationSettings()
+        // Notification Cell
+        let notificationPermission = Permission(title: "Notifications", desc: "Allowing notifications enables the app to show you reminders and prompts to fill out a survey", enabled: nil)
+        let notificationSettings = UIApplication.shared.currentUserNotificationSettings
         print(notificationSettings?.types)
         if notificationSettings?.types.rawValue == 0 {
             print("no notification settings")
@@ -39,6 +41,7 @@ class PermissionsTableViewController: UITableViewController {
         }
         permissions.append(notificationPermission)
         
+        // Survey Cell
         let surveyPermission = Permission(title: "Survey Data", desc: "With this disabled, we will not collect your survey data", enabled: true)
         permissions.append(surveyPermission)
     }
