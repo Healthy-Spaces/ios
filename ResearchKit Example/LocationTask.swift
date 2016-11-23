@@ -12,9 +12,9 @@ import ResearchKit
 public var LocationTask: ORKOrderedTask {
     var steps = [ORKStep]()
     
-    let locationAnswerFormat = ORKLocationAnswerFormat()
-    locationAnswerFormat.useCurrentLocation = false
-    let locationStep = ORKQuestionStep(identifier: "location", title: locationTitle, answer: locationAnswerFormat)
+//    let locationAnswerFormat = ORKLocationAnswerFormat()
+//    locationAnswerFormat.useCurrentLocation = false
+    let locationStep = ORKQuestionStep(identifier: "location", title: locationTitle, answer: ORKLocationAnswerFormat())
     steps += [locationStep]
     
     return ORKOrderedTask(identifier: "LocationTask", steps: steps)
