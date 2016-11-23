@@ -20,7 +20,7 @@ class OnBoardingViewController: UIViewController, UIPageViewControllerDelegate {
         super.viewDidLoad()
         
         //FIXME: TEMPORARY DONE BUTTON
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(goToTasks))
+//        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(goToTasks))
         
         // Set background color to tint color
         self.view.backgroundColor = UIApplication.shared.keyWindow?.tintColor

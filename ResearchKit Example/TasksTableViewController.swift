@@ -19,7 +19,7 @@ class TasksTableViewController: UITableViewController, ORKPasscodeDelegate {
         super.viewDidLoad()
         
         // TODO: TEMP FOR DONE BUTTON
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(goToOnboarding))
+//        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(goToOnboarding))
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -58,7 +58,7 @@ class TasksTableViewController: UITableViewController, ORKPasscodeDelegate {
             present(passcodeViewController, animated: true, completion: nil)
         }
         
-        // Check for required files (tasksCompleted)
+        // Check for required files (tasksCompleted) && check location auth
         fileAccessQueue.sync {
             do {
                 let _ = try String(contentsOf: mainDir.appendingPathComponent(tasksCompletedFile))
@@ -76,6 +76,10 @@ class TasksTableViewController: UITableViewController, ORKPasscodeDelegate {
                             tasksCompletedContent += "0\n"
                         }
                         write(string: tasksCompletedContent, toNew: tasksCompletedFile)
+                        
+                        // this is also a good time to check location auth, right?
+                        let _ = location.checkLocationAuth()
+                        
                         break
                     default:
                         print("Unresolved creation of required files initializer, \(error)")

@@ -125,8 +125,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             UserDefaults.standard.synchronize()
         }
         
-        //FIXME: Show OnBoarding
-        if true {
+        // Check if registered, if not show registration
+        if !UserDefaults.standard.bool(forKey: "hasRegistered") {
             let storyboard = UIStoryboard(name: "OnBoarding", bundle: nil)
             let vc = storyboard.instantiateInitialViewController()
             self.window = UIWindow(frame: UIScreen.main.bounds)
@@ -166,6 +166,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
         
         // Setup Location
+        print("Checking location delegate")
         location.delegate = window?.rootViewController
         if location.checkLocationAuth() {
             location.startMonitoringLocation()
