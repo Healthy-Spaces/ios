@@ -17,6 +17,6 @@ let locationTitle           = "Location Question"
 let summaryTitle            = "Summary"
 
 // MARK: Descriptions
-let maxEnjoymentDesc    = "Maxmimum"
-let minEnjoymentDesc    = "Minimum"
-let summaryDesc         = "Summary Description"
+let maxEnjoymentDesc        = "Maxmimum"
+let minEnjoymentDesc        = "Minimum"
+let summaryDesc             = "Summary Description"

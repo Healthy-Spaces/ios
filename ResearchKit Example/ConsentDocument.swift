@@ -73,5 +73,19 @@ public var ConsentDocument: ORKConsentDocument {
     
     consentDocument.addSignature(ORKConsentSignature(forPersonWithTitle: nil, dateFormatString: nil, identifier: "participant"))
     
+    let titles = ["Welcome", "Data Gathering", "Privacy", "Data Use", "Time Commitment", "Study Tasks", "Study Survey", "Withdrawing", "Questions + Contact Info"]
+    let summaries = [overviewSummary, dataGatheringSummary, privacySummary, dataUseSummary, timeCommitmentSummary, studyTasksSummary, studySurveySummary, withdrawingSummary, questionsSummay]
+    let contents = [overviewContent, dataGatheringContent, privacyContent, dataUseContent, timeCommitmentContent, studyTasksContent, studySurveyContent, withdrawingContent, questionsContent]
+    var reviewString = "<html><head><title>Healthy Places</title></head><body>"
+    for (i, _) in titles.enumerated() { // (i, _) because only using i
+        reviewString += ("<h3>" + titles[i]    + "</h3>")
+        reviewString += ("<p>"  + summaries[i] + "</p>")
+        //reviewString += ("<br>")
+        reviewString += ("<p>"  + contents[i]  + "</p>")
+    }
+    reviewString += "</body></html>"
+    
+    consentDocument.htmlReviewContent = reviewString
+    
     return consentDocument
 }

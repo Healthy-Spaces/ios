@@ -28,7 +28,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         //FIXME: clear notifications on iOS 9
-        //        application.cancelAllLocalNotifications()
+//        application.cancelAllLocalNotifications()
         
         // Setup Daily Notifications
         if application.scheduledLocalNotifications?.count == 0 || !UserDefaults.standard.bool(forKey: "DailyNotifications") {
@@ -56,16 +56,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 
                 // define content of notification
                 let content = UNMutableNotificationContent()
-                content.title = dailyNotificationTitle
                 content.body = dailyNotificationBody
                 content.sound = UNNotificationSound.default()
                 
-                //FIXME: define action of notification
-                //let notificationAction = UNNotificationAction(identifier: "viewSurvey", title: dailyNotificationAction, options: .foreground)
-                
-                
                 // deliver notification at 5pm daily
                 let trigger = UNCalendarNotificationTrigger(dateMatching: todayAtFiveComponents, repeats: true)
+//                let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
+                
                 //let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
                 let request = UNNotificationRequest(identifier: "dailyNotification", content: content, trigger: trigger)
                 
@@ -90,14 +87,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 
                 // define content of notification
                 let notification = UILocalNotification()
-                notification.alertTitle = dailyNotificationTitle
                 notification.alertBody = dailyNotificationBody
-                notification.alertAction = dailyNotificationAction
                 notification.soundName = UILocalNotificationDefaultSoundName
                 
                 // deliver notification at 5pm daily
                 notification.fireDate = todayAtFive
                 notification.repeatInterval = .day
+//                notification.fireDate = calendar?.date(byAdding: .second, value: 5, to: now as Date, options: NSCalendar.Options())
                 
                 // request notification
                 application.scheduleLocalNotification(notification)
@@ -146,16 +142,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, didReceive notification: UILocalNotification) {
         
-        var okayAction: UIAlertAction? = nil
-        
         let alert = UIAlertController(title: notification.alertTitle, message: notification.alertBody, preferredStyle: .alert)
-        if notification.alertAction == nil {
-            okayAction = UIAlertAction(title: dailyNotificationAction, style: .default, handler: nil)
-        } else {
-            okayAction = UIAlertAction(title: notification.alertAction, style: .default, handler: nil)
-        }
-        let cancelAction = UIAlertAction(title: "No", style: .cancel, handler: nil)
-        alert.addAction(okayAction!)
+        let cancelAction = UIAlertAction(title: "Okay", style: .cancel, handler: nil)
         alert.addAction(cancelAction)
         window?.rootViewController?.present(alert, animated: true, completion: nil)
     }
@@ -176,10 +164,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationWillEnterForeground(_ application: UIApplication) {
         // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
-    }
-
-    func applicationDidBecomeActive(_ application: UIApplication) {
-        // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
         
         // Setup Location
         location.delegate = window?.rootViewController
@@ -187,6 +171,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             location.startMonitoringLocation()
             location.getLatestLocation()
         }
+    }
+
+    func applicationDidBecomeActive(_ application: UIApplication) {
+        // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
     }
 
     func applicationWillTerminate(_ application: UIApplication) {

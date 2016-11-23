@@ -39,7 +39,9 @@ public var SurveyTask: ORKOrderedTask {
     steps += [numPlacesLivedStep]
     
     // Location Step
-    let locationStep = ORKQuestionStep(identifier: "location", title: locationTitle, answer: ORKLocationAnswerFormat())
+    let locationAnswerFormat = ORKLocationAnswerFormat()
+    locationAnswerFormat.useCurrentLocation = true
+    let locationStep = ORKQuestionStep(identifier: "location", title: locationTitle, answer: locationAnswerFormat)
     steps += [locationStep]
 
     return ORKOrderedTask(identifier: "SurveyTask", steps: steps)

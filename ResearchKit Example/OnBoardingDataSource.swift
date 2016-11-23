@@ -14,8 +14,10 @@ class OnBoardingDataSource: NSObject, UIPageViewControllerDataSource {
     var index: Int = 0
     
     override init() {
-        let localPath = Bundle.main.url(forResource: "index", withExtension: "html")
-        pageData = [(localPath?.absoluteString)!, "http://www.apple.com/", "http://lichlyterinc.com/", "http://research.engr.oregonstate.edu/ift/"]
+        let pageUrls = Bundle.main.urls(forResourcesWithExtension: "html", subdirectory: nil)
+        for page in pageUrls! {
+            pageData.append(page.absoluteString)
+        }
     }
     
     func viewControllerAtIndex(_ index: Int, storyboard: UIStoryboard) -> OnBoardingContentViewController? {

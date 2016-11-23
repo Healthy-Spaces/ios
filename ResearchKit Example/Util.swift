@@ -7,13 +7,39 @@
 //
 
 import Foundation
+import UIKit
+import CoreGraphics
 
 public func write(string: String, toNew file: String) {
     do {
         let path = mainDir.appendingPathComponent(file)
         try string.write(to: path, atomically: true, encoding: String.Encoding.utf8)
-    } catch let error as NSError {
-        print("new string file writing error: \(error), \(error.userInfo)")
+    } catch let error {
+        print("new string new file writing error: \(error)")
+    }
+}
+
+public func defaultCell(withIdentifier identifier: String, title: String, disclosureIndicator: Bool) -> UITableViewCell {
+    let cell = UITableViewCell(style: .default, reuseIdentifier: identifier)
+    cell.textLabel?.text = title
+    if disclosureIndicator {
+        cell.accessoryType = .disclosureIndicator
+    }
+    
+    return cell
+}
+
+public extension UIImage {
+    public convenience init?(withColor color: UIColor, size: CGSize = CGSize(width: 1, height: 1)) {
+        let rect = CGRect(origin: .zero, size: size)
+        UIGraphicsBeginImageContextWithOptions(rect.size, false, 1.0)
+        color.setFill()
+        UIRectFill(rect)
+        let image = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        guard let cgimage = image?.cgImage else { return nil }
+        self.init(cgImage: cgimage)
     }
 }
 
@@ -29,6 +55,35 @@ public func imageWithColor(_ color: UIColor) -> UIImage {
     UIGraphicsEndImageContext()
     
     return image!
+}
+
+public func notStartedTaskImage() -> UIImage {
+    let size = CGSize(width: 45, height: 44)
+    let size2 = CGSize(width: 22, height: 22)
+    UIGraphicsBeginImageContextWithOptions(size, false, 0.0)
+    let context = UIGraphicsGetCurrentContext()
+    let rect = CGRect(origin: CGPoint(x: 1, y: 11), size: size2)
+
+    context?.setFillColor(UIColor.clear.cgColor)
+    context?.setStrokeColor(UIColor.gray.cgColor)
+    context?.setLineWidth(1.0)
+    context?.addEllipse(in: rect)
+    context?.drawPath(using: .fillStroke)
+    
+    let image = UIGraphicsGetImageFromCurrentImageContext()
+    UIGraphicsEndImageContext()
+    
+    return image!
+}
+
+extension UIColor {
+    convenience init(traditionalRed red: Int, green: Int, blue: Int, alpha: CGFloat) {
+        let newRed = CGFloat(red)/255
+        let newGreen = CGFloat(green)/255
+        let newBlue = CGFloat(blue)/255
+        
+        self.init(red: newRed, green: newGreen, blue: newBlue, alpha: alpha)
+    }
 }
 
 extension UIViewController: ORKTaskViewControllerDelegate, LocationDelegate {
@@ -58,6 +113,52 @@ extension UIViewController: ORKTaskViewControllerDelegate, LocationDelegate {
                 completedRegistration = true
             }
             
+            // Check if a main survey, if so update tasksCompletedFile
+            switch result.identifier {
+                case BaselineSurveyTask.identifier, SurveyTask.identifier, LocationTask.identifier:
+                    
+                    // Update tasksCompletedFile
+                    fileAccessQueue.async {
+                        do {
+                            let taskFile = try String(contentsOf: mainDir.appendingPathComponent(tasksCompletedFile))
+                            var lines = taskFile.components(separatedBy: .newlines)
+                            for index in 0...lines.count {
+                                if lines[index] == result.identifier {
+                                    
+                                    // set task status to completed
+                                    lines[index + 1] = String(TaskStatus.finished.rawValue)
+                                    
+                                    // update date
+                                    let dateFormatter = DateFormatter()
+                                    dateFormatter.dateFormat = "yyyy-MM-dd"
+                                    let todayString = dateFormatter.string(from: Date())
+                                    lines[index + 2] = todayString
+                                    
+                                    // generate new string
+                                    var newContent = ""
+                                    for line in lines {
+                                        newContent += "\(line)\n"
+                                    }
+                                    
+                                    // write to file
+                                    write(string: newContent, toNew: tasksCompletedFile)
+                                    
+                                    // break out of this for-loop, we've done our business here
+                                    break
+                                }
+                            }
+                        } catch let error {
+                            print("Unresolved updating \(tasksCompletedFile), \(error)")
+                        }
+                    }
+                    break
+                
+                default:
+                    break
+            }
+            
+            // Write data to file
+            // TODO: encrypt this
             fileAccessQueue.async(execute: {
                 do {
                     let jsonData = try ORKESerializer.jsonData(for: result)
@@ -76,6 +177,8 @@ extension UIViewController: ORKTaskViewControllerDelegate, LocationDelegate {
                 }
             })
             
+            print("Ended \(result.identifier) task")
+            
             break
             
         default:
@@ -83,6 +186,32 @@ extension UIViewController: ORKTaskViewControllerDelegate, LocationDelegate {
         }
         
         taskViewController.dismiss(animated: true, completion: nil)
+    }
+    
+    // MARK: - HealthKit Convenience Methods
+    func readMostRecentSample(sampleType: HKSampleType, completion: ((HKSample?, Error?) -> Void)!) {
+        let past = Date.distantPast
+        let now = Date()
+        let mostRecentPredicate = HKQuery.predicateForSamples(withStart: past, end: now, options: [])
+        
+        let sortDescriptor = NSSortDescriptor(key: HKSampleSortIdentifierStartDate, ascending: false)
+        let limit = 1
+        
+        let sampleQuery = HKSampleQuery(sampleType: sampleType, predicate: mostRecentPredicate, limit: limit, sortDescriptors: [sortDescriptor]) { (sampleQuery, results, error) in
+            if error != nil {
+                completion(nil, error)
+                return
+            }
+            
+            let mostRecentSample = results?.first as? HKQuantitySample
+            
+            if completion != nil {
+                completion(mostRecentSample, nil)
+            }
+        }
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let healthStore = appDelegate.healthStore
+        healthStore?.execute(sampleQuery)
     }
     
     // MARK: - Location Delegate Methods
@@ -116,14 +245,4 @@ extension UIViewController: ORKTaskViewControllerDelegate, LocationDelegate {
     }
     
     func reloadLocationData() {}
-}
-
-extension UIColor {
-    convenience init(traditionalRed red: Int, green: Int, blue: Int, alpha: CGFloat) {
-        let newRed = CGFloat(red)/255
-        let newGreen = CGFloat(green)/255
-        let newBlue = CGFloat(blue)/255
-        
-        self.init(red: newRed, green: newGreen, blue: newBlue, alpha: alpha)
-    }
 }

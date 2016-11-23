@@ -15,7 +15,10 @@ class LoginViewController: ORKLoginStepViewController {
     }
 
     override func forgotPasswordButtonTapped() {
-        print("So sorry to hear that.")
+        let sb = UIStoryboard(name: "OnBoarding", bundle: nil)
+        let vc = sb.instantiateViewController(withIdentifier: "forgotPassNavController")
+        vc.modalTransitionStyle = .coverVertical
+        present(vc, animated: true, completion: nil)
     }
 
 }

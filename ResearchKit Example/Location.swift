@@ -16,7 +16,7 @@ class Location: NSObject, CLLocationManagerDelegate {
     // MARK: - Configurable Variables
     let distanceFilter: Double = 25 //meters
     let deferredDistance: Double = 25 //meters
-    let deferredTimeout: Double = 60 //seconds
+    let deferredTimeout: Double = 5 //seconds
     
     // MARK: - Location Helper Methods
     
@@ -25,12 +25,13 @@ class Location: NSObject, CLLocationManagerDelegate {
         switch locationAuth {
         case .denied, .restricted:
             return false
-        case .notDetermined, .authorizedWhenInUse:
+        case .notDetermined:
             locationManager = CLLocationManager()
             locationManager?.delegate = self
             locationManager?.requestAlwaysAuthorization()
             break
         default:
+            print("Auth Status: \(locationAuth)")
             break
         }
         
@@ -39,7 +40,7 @@ class Location: NSObject, CLLocationManagerDelegate {
             locationManager?.delegate = self
         }
         
-        if CLLocationManager.locationServicesEnabled() {
+        if locationAuth == .authorizedAlways && CLLocationManager.locationServicesEnabled() {
             return true
         } else {
             return false
@@ -47,7 +48,7 @@ class Location: NSObject, CLLocationManagerDelegate {
     }
     
     func startMonitoringLocation() {
-        locationManager?.desiredAccuracy = kCLLocationAccuracyHundredMeters
+        locationManager?.desiredAccuracy = kCLLocationAccuracyBest
         locationManager?.distanceFilter = distanceFilter
         locationManager?.startUpdatingLocation()
     }
@@ -65,13 +66,16 @@ class Location: NSObject, CLLocationManagerDelegate {
     }
     
     func getLatestLocation() {
-        print(locationManager?.location?.timestamp.timeIntervalSinceNow)
-        if (locationManager?.location?.timestamp.timeIntervalSinceNow)! < Double(-1800) {
+        //print(locationManager?.location?.timestamp.timeIntervalSinceNow)
+        if locationManager?.location == nil {
+            print("no location data")
+        } else if (locationManager?.location?.timestamp.timeIntervalSinceNow)! < Double(-1800) {
             locationManager?.desiredAccuracy = kCLLocationAccuracyKilometer
             locationManager?.distanceFilter = 10
             locationManager?.requestLocation()
+            print("Requesting new location: \(locationManager?.location)")
         } else {
-            print(locationManager?.location)
+            print("Using old location: \(locationManager?.location)")
         }
     }
     
@@ -130,7 +134,24 @@ class Location: NSObject, CLLocationManagerDelegate {
     }
     
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
-        print("Auth Changed")
+        
+        switch status {
+        case .notDetermined:
+            print("Auth Changed to notDetermined")
+            break
+        case .restricted:
+            print("Auth Changed to restricted")
+            break
+        case .denied:
+            print("Auth Changed to denied")
+            break
+        case .authorizedAlways:
+            print("Auth Changed to authorizedAlways")
+            break
+        case .authorizedWhenInUse:
+            print("Auth Changed to authorizedWhenInUse")
+            break
+        }
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {

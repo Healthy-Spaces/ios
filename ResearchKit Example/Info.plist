@@ -48,5 +48,7 @@
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
 	</array>
+	<key>NSHealthShareUsageDescription</key>
+	<string>This app uses your activity data to get an idea of how active you are</string>
 </dict>
 </plist>

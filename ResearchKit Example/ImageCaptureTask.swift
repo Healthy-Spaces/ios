@@ -13,7 +13,6 @@ public var ImageCaptureTask: ORKOrderedTask {
     var steps = [ORKStep]()
     
     let imageCaptureStep = ORKImageCaptureStep(identifier: "imageCaptureStep")
-    imageCaptureStep.templateImage = nil
     steps += [imageCaptureStep]
 
     return ORKOrderedTask(identifier: "imageCaptureTask", steps: steps)

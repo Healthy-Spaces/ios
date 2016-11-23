@@ -80,7 +80,9 @@ class OnBoardingViewController: UIViewController, UIPageViewControllerDelegate {
         self.alreadyJoinedButton?.titleLabel?.font = UIFont.systemFont(ofSize: 13.0)
         self.view.addSubview(self.alreadyJoinedButton!)
         
-        //TODO: Align buttons
+        // Align buttons
+        self.joinButton?.center.x = self.view.center.x
+        self.alreadyJoinedButton?.center.x = self.view.center.x
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -102,7 +104,7 @@ class OnBoardingViewController: UIViewController, UIPageViewControllerDelegate {
     var _modelDataSource: OnBoardingDataSource? = nil
     
     //FIXME: TEMP FOR DONE BUTTON
-    @objc func goToTasks() {        
+    @objc func goToTasks() {
         let sb = UIStoryboard(name: "Main", bundle: nil)
         let vc = sb.instantiateInitialViewController()
         vc?.modalTransitionStyle = .flipHorizontal

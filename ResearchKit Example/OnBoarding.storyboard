@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11191" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="UAU-As-4Mz">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="UAU-As-4Mz">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11156"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -32,10 +33,84 @@
             </objects>
             <point key="canvasLocation" x="2892" y="71.514242878560722"/>
         </scene>
+        <!--Forgot Password-->
+        <scene sceneID="KJ0-0v-3E4">
+            <objects>
+                <viewController id="xia-XT-FKt" customClass="ForgotPasswordViewController" customModule="ResearchKit_Example" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="XbU-Dl-G72"/>
+                        <viewControllerLayoutGuide type="bottom" id="Cm8-9j-etn"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Gta-HT-44W">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enter your email address in order to reset your Password" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l2f-lz-sjU">
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <color key="textColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fd8-Xc-EW9">
+                                <items>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="9b7-8V-hdb"/>
+                                    <barButtonItem style="plain" id="ukg-iZ-nQ0">
+                                        <textField key="customView" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" id="XYe-fl-jcn">
+                                            <rect key="frame" x="63" y="7" width="296" height="30"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <nil key="textColor"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="emailAddress" keyboardAppearance="light" returnKeyType="done"/>
+                                        </textField>
+                                    </barButtonItem>
+                                </items>
+                            </toolbar>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Email" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Usk-mH-QUd">
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bkf-p4-XNJ">
+                                <state key="normal" title="Reset Password"/>
+                                <connections>
+                                    <action selector="resetPassButtonPressed:" destination="xia-XT-FKt" eventType="touchUpInside" id="ZND-IS-fEe"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" red="0.90196078431372551" green="0.90196078431372551" blue="0.90196078431372551" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="Cm8-9j-etn" firstAttribute="top" secondItem="Usk-mH-QUd" secondAttribute="bottom" constant="518" id="020-kZ-gpC"/>
+                            <constraint firstItem="l2f-lz-sjU" firstAttribute="centerX" secondItem="fd8-Xc-EW9" secondAttribute="centerX" id="0RS-2l-9k2"/>
+                            <constraint firstItem="bkf-p4-XNJ" firstAttribute="top" secondItem="fd8-Xc-EW9" secondAttribute="bottom" constant="28" id="63Z-6s-Wjh"/>
+                            <constraint firstItem="l2f-lz-sjU" firstAttribute="leading" secondItem="Gta-HT-44W" secondAttribute="leadingMargin" id="STZ-4A-ZDS"/>
+                            <constraint firstItem="Usk-mH-QUd" firstAttribute="top" secondItem="l2f-lz-sjU" secondAttribute="bottom" constant="12" id="Xo2-Ja-ECM"/>
+                            <constraint firstItem="fd8-Xc-EW9" firstAttribute="centerY" secondItem="Usk-mH-QUd" secondAttribute="centerY" id="c7L-Y7-k6a"/>
+                            <constraint firstItem="l2f-lz-sjU" firstAttribute="top" secondItem="XbU-Dl-G72" secondAttribute="bottom" constant="8" symbolic="YES" id="c9v-dr-owE"/>
+                            <constraint firstItem="fd8-Xc-EW9" firstAttribute="top" secondItem="l2f-lz-sjU" secondAttribute="bottom" id="goW-3G-2lQ"/>
+                            <constraint firstItem="fd8-Xc-EW9" firstAttribute="leading" secondItem="Gta-HT-44W" secondAttribute="leading" id="iWL-eQ-YfD"/>
+                            <constraint firstAttribute="trailing" secondItem="fd8-Xc-EW9" secondAttribute="trailing" id="kWi-tx-hzK"/>
+                            <constraint firstItem="fd8-Xc-EW9" firstAttribute="centerX" secondItem="bkf-p4-XNJ" secondAttribute="centerX" id="l2p-7k-RRr"/>
+                            <constraint firstItem="l2f-lz-sjU" firstAttribute="leading" secondItem="Usk-mH-QUd" secondAttribute="leading" id="oIK-Cy-CZf"/>
+                            <constraint firstItem="bkf-p4-XNJ" firstAttribute="leading" secondItem="Gta-HT-44W" secondAttribute="leadingMargin" constant="73" id="t6P-fQ-Jb4"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Forgot Password" id="fRI-Lc-6Pn">
+                        <barButtonItem key="rightBarButtonItem" systemItem="cancel" id="0et-ET-wqG">
+                            <connections>
+                                <action selector="cancelButtonPressed:" destination="xia-XT-FKt" id="gTg-j2-eSh"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="emailTextField" destination="XYe-fl-jcn" id="uB8-Qj-zWL"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="GGI-9h-z5d" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2892" y="719.19040479760122"/>
+        </scene>
         <!--Navigation Controller-->
         <scene sceneID="mhv-AF-6Yj">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="FI4-GP-y1B" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="UAU-As-4Mz" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="d5N-p1-X8c">
@@ -47,8 +122,27 @@
                         <segue destination="c1Q-bE-3Lh" kind="relationship" relationship="rootViewController" id="vjV-Fs-Xac"/>
                     </connections>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="FI4-GP-y1B" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1189.5999999999999" y="71.514242878560722"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="yMd-Cf-mNE">
+            <objects>
+                <navigationController storyboardIdentifier="forgotPassNavController" automaticallyAdjustsScrollViewInsets="NO" id="SXj-E5-cND" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="fGX-l6-LPq">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="xia-XT-FKt" kind="relationship" relationship="rootViewController" id="GB3-Lu-6HV"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="klu-Cp-SBH" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2128.8000000000002" y="719.19040479760122"/>
         </scene>
     </scenes>
 </document>

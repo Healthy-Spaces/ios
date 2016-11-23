@@ -56,6 +56,7 @@ class Permission: NSObject {
             }
             break
         default:
+            // do nothing
             break
         }
         

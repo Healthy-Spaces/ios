@@ -17,9 +17,9 @@ public var ConsentTask: ORKOrderedTask {
     steps += [visualConsentStep]
     
     // Consent Sharing Step
-    let all = ORKTextChoice(text: "Share my data with Oregon State University and qualified researchers worldwide", value: "all")
-    let onlyOSU = ORKTextChoice(text: "Only share my data with Oregon State University", value: "onlyOSU")
-    let onlyOnDevice = ORKTextChoice(text: "Do not share my data with anyone, keep my data on my device", value: "onlyOnDevice")
+    let all = ORKTextChoice(text: "Share my data with Oregon State University and qualified researchers worldwide", value: "all" as NSCoding & NSCopying & NSObjectProtocol)
+    let onlyOSU = ORKTextChoice(text: "Only share my data with Oregon State University", value: "onlyOSU" as NSCoding & NSCopying & NSObjectProtocol)
+    let onlyOnDevice = ORKTextChoice(text: "Do not share my data with anyone, keep my data on my device", value: "onlyOnDevice" as NSCoding & NSCopying & NSObjectProtocol)
     let answers = ORKTextChoiceAnswerFormat(style: .singleChoice, textChoices: [all, onlyOSU, onlyOnDevice])
     let sharingStep = ORKConsentSharingStep(identifier: "sharingStep", title: "Who would you like to share your information with?", answer: answers)
     sharingStep.isOptional = false

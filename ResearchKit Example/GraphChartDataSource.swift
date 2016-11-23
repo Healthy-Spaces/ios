@@ -8,9 +8,9 @@
 
 import UIKit
 
-class GraphChartDataSource: NSObject, ORKGraphChartViewDataSource {
+class GraphChartDataSource: NSObject, ORKValueRangeGraphChartViewDataSource {
     
-    var plotPoints = Array<Array<ORKRangedPoint>>()
+    var plotPoints = Array<Array<Double>>()
     
     override init() {
         super.init()
@@ -19,12 +19,12 @@ class GraphChartDataSource: NSObject, ORKGraphChartViewDataSource {
         do {
             let path = Bundle.main.url(forResource: "greenspace", withExtension: "json")
             let jsonData = try Data(contentsOf: path!)
-            let jsonResult = try JSONSerialization.jsonObject(with: jsonData, options: .mutableContainers)
-            let greenspace = jsonResult["greenspace"] as? Array<Array<Int>>
-            for plot in greenspace! {
-                var nums = Array<ORKRangedPoint>()
+            let jsonResult = try JSONSerialization.jsonObject(with: jsonData, options: .mutableContainers) as! Dictionary<String, Array<Array<Double>>>
+            let greenspace = jsonResult["greenspace"]!
+            for plot in greenspace {
+                var nums = Array<Double>()
                 for num in plot {
-                    let point = ORKRangedPoint(value: CGFloat(num))
+                    let point = num
                     nums.append(point)
                 }
                 plotPoints.append(nums)
@@ -35,34 +35,46 @@ class GraphChartDataSource: NSObject, ORKGraphChartViewDataSource {
     }
     
     // Required Methods
-    func graphChartView(_ graphChartView: ORKGraphChartView, numberOfPointsForPlotIndex plotIndex: Int) -> Int {
+    
+    func graphChartView(_ graphChartView: ORKGraphChartView, dataPointForPointIndex pointIndex: Int, plotIndex: Int) -> ORKValueRange {
+        let plotPoint = plotPoints[plotIndex][pointIndex]
+        let valueRangePlotPoint = ORKValueRange()
+        valueRangePlotPoint.minimumValue = plotPoint
+        valueRangePlotPoint.maximumValue = plotPoint
+        
+        return valueRangePlotPoint
+    }
+    
+    func graphChartView(_ graphChartView: ORKGraphChartView, numberOfDataPointsForPlotIndex plotIndex: Int) -> Int {
         return plotPoints[plotIndex].count
     }
     
-    func graphChartView(_ graphChartView: ORKGraphChartView, pointForPointIndex pointIndex: Int, plotIndex: Int) -> ORKRangedPoint {
-        return plotPoints[plotIndex][pointIndex]
-    }
+//    func graphChartView(_ graphChartView: ORKGraphChartView, pointForPointIndex pointIndex: Int, plotIndex: Int) -> Double {
+//        return plotPoints[plotIndex][pointIndex]
+//    }
     
     // Optional Methods
     func numberOfPlots(in graphChartView: ORKGraphChartView) -> Int {
         return plotPoints.count
     }
     
-    func maximumValue(for graphChartView: ORKGraphChartView) -> CGFloat {
-        var largestNode: CGFloat! = 0
+    func maximumValue(for graphChartView: ORKGraphChartView) -> Double {
+        let largestNode = ORKValueRange()
+        largestNode.maximumValue = 0
+        largestNode.minimumValue = 0
         for plot in plotPoints {
             for node in plot {
-                if node.maximumValue > largestNode {
-                    largestNode = node.maximumValue
+                if node > largestNode.maximumValue {
+                    largestNode.maximumValue = node
                     print("Largest: \(largestNode)")
                 }
             }
         }
         
-        return largestNode + largestNode * 0.35
+        return largestNode.maximumValue + largestNode.maximumValue * 0.35
     }
     
-    func minimumValue(for graphChartView: ORKGraphChartView) -> CGFloat {
+    func minimumValue(for graphChartView: ORKGraphChartView) -> Double {
         return 0
     }
     
