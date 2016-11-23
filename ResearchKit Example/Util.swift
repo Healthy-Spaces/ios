@@ -98,23 +98,27 @@ extension UIViewController: ORKTaskViewControllerDelegate, LocationDelegate {
         switch reason {
         case .completed:
             
-            if result.identifier == "registrationTask" {
-                
-                //Data Access Step (from HealthKit)
-                let delegate = UIApplication.shared.delegate as! AppDelegate
-                let healthStore = delegate.healthStore
-                healthStore?.requestAuthorization(toShare: nil, read: readDataTypes, completion: { (success, error) in
-                    if !success {
-                        print("Unexpected HealthKit Initialization Error: \(error)")
-                    }
-                })
-                
-                print("Ended Registration!")
-                completedRegistration = true
-            }
-            
             // Check if a main survey, if so update tasksCompletedFile
             switch result.identifier {
+                
+                // check if just registered
+                case RegistrationTask.identifier:
+                    
+                    //Data Access Step (from HealthKit)
+                    let delegate = UIApplication.shared.delegate as! AppDelegate
+                    let healthStore = delegate.healthStore
+                    healthStore?.requestAuthorization(toShare: nil, read: readDataTypes, completion: { (success, error) in
+                        if !success {
+                            print("Unexpected HealthKit Initialization Error: \(error)")
+                        }
+                    })
+                    
+                    UserDefaults.standard.setValue(true, forKey: "hasRegistered")
+                    print("Ended Registration!")
+                    completedRegistration = true
+                    
+                    break
+                
                 case BaselineSurveyTask.identifier, SurveyTask.identifier, LocationTask.identifier:
                     
                     // Update tasksCompletedFile
