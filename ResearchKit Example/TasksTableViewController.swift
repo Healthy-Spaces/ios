@@ -13,7 +13,7 @@ import CoreLocation
 
 class TasksTableViewController: UITableViewController, ORKPasscodeDelegate {
     
-    let tableViewRows = ["Baseline Survey" : BaselineSurveyTask, "Survey" : SurveyTask, "Location Task" : LocationTask]
+    let tableViewRows = ["Baseline Survey" : BaselineSurveyTask, "Green Space Survey" : GreenspaceSurvey, "Daily Survey" : DailySurvey]
     
     override func viewDidLoad() {
         super.viewDidLoad()
