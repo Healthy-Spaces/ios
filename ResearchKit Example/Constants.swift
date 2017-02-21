@@ -67,11 +67,15 @@ let readDataTypes:Set<HKObjectType> = Set(arrayLiteral:
 
 // MARK: - Data Types
 
+// GENERAL
+
 enum TaskStatus: Int {
     case notStarted
     case started
     case finished
 }
+
+// BASELINE SURVEY
 
 // Ethnicity
 enum Ethnicity: Int {
@@ -148,4 +152,31 @@ enum Commute: Int {
     case publicTransit
     case taxi
     case other
+}
+
+// GREENSPACE SURVEY
+
+enum GreenspaceInfluence: Int {
+    case noInfluence
+    case physicalActivity
+    case airPollution
+    case reducingNoise
+    case reducingHeat
+    case stress
+    case increaseSocialConnections
+}
+
+enum View: Int {
+    case noView
+    case water
+    case greenspace
+    case urban
+}
+
+enum GreenspaceTypes: Int {
+    case parks
+    case streetTrees
+    case otherStreetVegetation
+    case publicLawnsOpenSpaces
+    case yourYard
 }
