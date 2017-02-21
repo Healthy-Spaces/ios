@@ -19,6 +19,15 @@ public func write(string: String, toNew file: String) {
     }
 }
 
+public func upload(data: Data, completion: @escaping (_ result: String, _ code: Int) -> Void) {
+    networkingQueue.async {
+        let uploadSession = NetworkSession()
+        uploadSession.dataRequest(with: data) { (result: String, code: Int) in
+            completion(result, code)
+        }
+    }
+}
+
 public func defaultCell(withIdentifier identifier: String, title: String, disclosureIndicator: Bool) -> UITableViewCell {
     let cell = UITableViewCell(style: .default, reuseIdentifier: identifier)
     cell.textLabel?.text = title
@@ -119,7 +128,7 @@ extension UIViewController: ORKTaskViewControllerDelegate, LocationDelegate {
                     
                     break
                 
-                case BaselineSurveyTask.identifier, SurveyTask.identifier, LocationTask.identifier:
+                case BaselineSurveyTask.identifier, GreenspaceSurvey.identifier, DailySurvey.identifier:
                     
                     // Update tasksCompletedFile
                     fileAccessQueue.async {
@@ -175,6 +184,22 @@ extension UIViewController: ORKTaskViewControllerDelegate, LocationDelegate {
                         fileHandle.write(emptyData!)
                         let data = jsonString.data(using: String.Encoding.utf8.rawValue)
                         fileHandle.write(data!)
+                        
+                        // TODO: encrypt data
+                        
+                        
+                        // upload to server function call
+                        upload(data: data!, completion: { (result, code) in
+                            if code == 0 {
+                                // SUCCESS! DO NOTHING?
+                                print("Success!")
+                            } else {
+                                // TODO: FAILURE! RETRY LATER
+                                print("Failure!")
+                            }
+                            
+                            print(result)
+                        })
                     }
                 } catch let error as NSError {
                     print("Unresolved Serialization Writing Error: \(error), \(error.userInfo)")
