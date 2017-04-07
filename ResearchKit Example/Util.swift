@@ -19,13 +19,71 @@ public func write(string: String, toNew file: String) {
     }
 }
 
-public func upload(data: Data, completion: @escaping (_ result: String, _ code: Int) -> Void) {
+public func upload(data: NSMutableDictionary, completion: @escaping (_ result: String, _ code: Int) -> Void) {
     networkingQueue.async {
-        let uploadSession = NetworkSession()
-        uploadSession.dataRequest(with: data) { (result: String, code: Int) in
-            completion(result, code)
+        do {
+            let jsonData = try ORKESerializer.jsonData(for: data)
+            let uploadSession = NetworkSession()
+            uploadSession.dataRequest(with: jsonData) { (result: String, code: Int) in
+                completion(result, code)
+            }
+        } catch let error as NSError {
+            print("Unexpected Serialization Error in Upload: \(error), \(error.userInfo)")
         }
     }
+}
+
+public func saveJSONData(data: NSMutableDictionary, completion: @escaping (_ success: Bool) -> Void) {
+    fileAccessQueue.async {
+        do {
+            
+            let jsonData = try ORKESerializer.jsonData(for: data);
+            
+            if let jsonString = NSString(data: jsonData, encoding: String.Encoding.utf8.rawValue) {
+                write(string: jsonString as String, toNew: logDataFile)
+                completion(true)
+            } else {
+                completion(false)
+            }
+            
+        } catch let error as NSError {
+            print("Unexpected Serialization Error in SaveJSONData: \(error), \(error.userInfo)")
+            completion(false)
+        }
+    }
+}
+
+func setNameAndEmail() {
+    let json = NSMutableDictionary()
+    json.setObject("getNameAndEmail", forKey: "task" as NSCopying)
+    let uid = UserDefaults.standard.object(forKey: "userID")
+    json.setObject(uid!, forKey: "uid" as NSCopying)
+    
+    upload(data: json) { (response, code) in
+        if code == 0 {
+            let responseDictionary = convertToDictionary(text: response)
+            let email = responseDictionary?["email"] as? String
+            let givenName = responseDictionary?["givenName"] as? String
+            let familyName = responseDictionary?["familyName"] as? String
+            
+            let name = givenName! + " " + familyName!
+            
+            UserDefaults.standard.set(name, forKey: ("name" as NSCopying) as! String)
+            UserDefaults.standard.set(email, forKey: ("email" as NSCopying) as! String)
+            UserDefaults.standard.synchronize()
+        }
+    }
+}
+
+public func convertToDictionary(text: String) -> [String: Any]? {
+    if let data = text.data(using: .utf8) {
+        do {
+            return try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any]
+        } catch {
+            print(error.localizedDescription)
+        }
+    }
+    return nil
 }
 
 public func defaultCell(withIdentifier identifier: String, title: String, disclosureIndicator: Bool) -> UITableViewCell {
@@ -103,6 +161,7 @@ extension UIViewController: ORKTaskViewControllerDelegate, LocationDelegate {
         //Handle results with taskViewController.result
         
         let result = taskViewController.result
+        let json = NSMutableDictionary()
         
         switch reason {
         case .completed:
@@ -123,10 +182,94 @@ extension UIViewController: ORKTaskViewControllerDelegate, LocationDelegate {
                     })
                     
                     UserDefaults.standard.setValue(true, forKey: "hasRegistered")
+                    UserDefaults.standard.synchronize()
                     print("Ended Registration!")
                     completedRegistration = true
                     
+                    // build registration JSON
+                    json.setObject("register", forKey: "task" as NSCopying)
+                    json.setObject(result, forKey: "data" as NSCopying)
+                    
+                    // save JSON
+                    saveJSONData(data: json, completion: { (success) in
+                        if !success {
+                            print("registration save failure")
+                        } else {
+                            print("registration save success")
+                        }
+                    })
+                    
+                    // upload JSON
+                    upload(data: json, completion: { (result, code) in
+                        if code == 0 {
+                            // success
+                            let resultDictionary = convertToDictionary(text: result)
+                            let newID = resultDictionary?["uid"]
+                            
+                            if newID != nil {
+                                print("New ID: \(newID!)")
+                                UserDefaults.standard.setValue(newID!, forKey: "userID")
+                                UserDefaults.standard.synchronize()
+                                
+                                setNameAndEmail()
+                            }
+                        }
+                    })
+                    
                     break
+                
+                case "loginTask": // login task
+                    
+                    json.setObject("login", forKey: "task" as NSCopying)
+                    json.setObject(result, forKey: "data" as NSCopying)
+                    
+                    saveJSONData(data: json, completion: { (success) in
+                        if !success {
+                            print("login save failure")
+                        } else {
+                            print("login save success")
+                        }
+                    })
+                    
+                    upload(data: json, completion: { (result, code) in
+                        if code == 0 {
+                            let resultDictionary = convertToDictionary(text: result)
+                            let newID = resultDictionary?["uid"] as? String
+                            if (newID == nil) {
+                                
+                                // TODO: alert the user
+//                                DispatchQueue.main.async {
+//                                    let alert = UIAlertController(title: "Uh Oh!", message: "Login Failed! Wanna try again?", preferredStyle: .actionSheet)
+//                                    let okayAction = UIAlertAction(title: "Okay", style: .default, handler: nil)
+//                                    alert.addAction(okayAction)
+//                                    self.show(alert, sender: nil)
+//                                }
+                                print("Login Failed")
+                                return
+                            }
+                            
+                            //Data Access Step (from HealthKit)
+                            let delegate = UIApplication.shared.delegate as! AppDelegate
+                            let healthStore = delegate.healthStore
+                            healthStore?.requestAuthorization(toShare: nil, read: readDataTypes, completion: { (success, error) in
+                                if !success {
+                                    print("Unexpected HealthKit Initialization Error: \(error)")
+                                }
+                            })
+                            
+                            let id = Int(newID!)
+                            UserDefaults.standard.setValue(id, forKey: "userID")
+                            UserDefaults.standard.setValue(true, forKey: "hasRegistered")
+                            UserDefaults.standard.synchronize()
+                            
+                            completedRegistration = true
+                            
+                            setNameAndEmail()
+                        }
+                    })
+                    
+                    break
+                
                 
                 case BaselineSurveyTask.identifier, GreenspaceSurvey.identifier, DailySurvey.identifier:
                     
@@ -164,47 +307,44 @@ extension UIViewController: ORKTaskViewControllerDelegate, LocationDelegate {
                             print("Unresolved updating \(tasksCompletedFile), \(error)")
                         }
                     }
+                    
+                    // build task JSON
+                    let id = UserDefaults.standard.value(forKey: "userID")
+                    json.setObject("saveSurvey", forKey: "task" as NSCopying)
+                    json.setObject(id!, forKey: "userID" as NSCopying)
+                    json.setObject(result, forKey: "data" as NSCopying)
+                    
+                    // Save to device
+                    saveJSONData(data: json, completion: { (success) in
+                        if !success {
+                            print("Survey Save Failure")
+                        } else {
+                            print("Survey Save Success")
+                        }
+                    })
+                    
+                    // Upload to server
+                    upload(data: json, completion: { (response, code) in
+                        if code == 0 {
+                            let responseDictionary = convertToDictionary(text: response)
+                            let successString = responseDictionary?["success"] as? String
+                            var success = true
+                            if successString != "true" {
+                                success = false
+                            }
+                            if !success {
+                                // TODO: upload failure, retry later
+                                print("Survey Upload Failure")
+                            } else {
+                                print("Survey Upload Success")
+                            }
+                        }
+                    })
+                    
                     break
                 
-                default:
-                    break
+                default: break
             }
-            
-            // Write data to file
-            // TODO: encrypt this
-            fileAccessQueue.async(execute: {
-                do {
-                    let jsonData = try ORKESerializer.jsonData(for: result)
-                    if let jsonString = NSString(data: jsonData, encoding: String.Encoding.utf8.rawValue) {
-                        let path = mainDir.appendingPathComponent(logDataFile)
-                        let fileHandle = try FileHandle(forWritingTo: path)
-                        fileHandle.seekToEndOfFile()
-                        let emptyLines = "\n\n\n"
-                        let emptyData = emptyLines.data(using: String.Encoding.utf8)
-                        fileHandle.write(emptyData!)
-                        let data = jsonString.data(using: String.Encoding.utf8.rawValue)
-                        fileHandle.write(data!)
-                        
-                        // TODO: encrypt data
-                        
-                        
-                        // upload to server function call
-                        upload(data: data!, completion: { (result, code) in
-                            if code == 0 {
-                                // SUCCESS! DO NOTHING?
-                                print("Success!")
-                            } else {
-                                // TODO: FAILURE! RETRY LATER
-                                print("Failure!")
-                            }
-                            
-                            print(result)
-                        })
-                    }
-                } catch let error as NSError {
-                    print("Unresolved Serialization Writing Error: \(error), \(error.userInfo)")
-                }
-            })
             
             print("Ended \(result.identifier) task")
             

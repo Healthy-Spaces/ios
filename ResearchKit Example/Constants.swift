@@ -75,6 +75,12 @@ enum TaskStatus: Int {
     case finished
 }
 
+enum informationShare: NSNumber {
+    case all
+    case onlyOSU
+    case onlyOnDevice
+}
+
 // BASELINE SURVEY
 
 // Ethnicity

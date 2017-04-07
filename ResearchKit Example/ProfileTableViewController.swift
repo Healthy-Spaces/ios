@@ -196,11 +196,14 @@ class ProfileTableViewController: UITableViewController, ORKPasscodeDelegate, Pr
                 //TODO: Get name and email from registration
                 let cell = tableView.dequeueReusableCell(withIdentifier: "nameCell") as! ProfileNameTableViewCell
                 cell.delegate = self
-                let name = "Samuel Lichlyter"
-                let email = "lichlyts@oregonstate.edu"
                 
-                cell.nameLabel.text = name
-                cell.emailLabel.text = email
+                
+                
+                let name = UserDefaults.standard.object(forKey: "name")
+                let email = UserDefaults.standard.object(forKey: "email")
+                
+                cell.nameLabel.text = name as! String?
+                cell.emailLabel.text = email as! String?
                 
                 cell.selectionStyle = .none
                 return cell

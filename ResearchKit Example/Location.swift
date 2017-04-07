@@ -79,6 +79,31 @@ class Location: NSObject, CLLocationManagerDelegate {
         }
     }
     
+    func buildLocationJSON(location: CLLocation) -> NSMutableDictionary {
+        let json = NSMutableDictionary()
+        
+        let uid = UserDefaults.standard.object(forKey: "userID")
+        
+        let lat = String(location.coordinate.latitude)
+        let lon = String(location.coordinate.longitude)
+        let time = location.timestamp
+        let accuracy = String(location.horizontalAccuracy)
+        
+        let formatter = DateFormatter()
+        formatter.dateFormat = "MM-dd-yyyy h:mm:ss"
+        let timeString = formatter.string(from: time)
+        
+        // build JSON
+        json.setObject("saveLocation", forKey: "task" as NSCopying)
+        json.setObject(uid!, forKey: "userID" as NSCopying)
+        json.setObject(lat, forKey: "lat" as NSCopying)
+        json.setObject(lon, forKey: "lon" as NSCopying)
+        json.setObject(timeString, forKey: "time" as NSCopying)
+        json.setObject(accuracy, forKey: "accuracy" as NSCopying)
+        
+        return json
+    }
+    
     func getLocationString(location: CLLocation) -> String {
         
         let lat = location.coordinate.latitude
@@ -110,6 +135,9 @@ class Location: NSObject, CLLocationManagerDelegate {
         
         let locationsString = self.getLocationString(location: locations.first!)
         
+        //print(locationsString)
+        
+        // save location to file
         fileAccessQueue.async() {
             do {
                 let path = mainDir.appendingPathComponent(locationDataFile)
@@ -129,6 +157,20 @@ class Location: NSObject, CLLocationManagerDelegate {
             
             DispatchQueue.main.async {
                 self.delegate.reloadLocationData()
+            }
+        }
+        
+        // upload location to server
+        let json = buildLocationJSON(location: locations.first!)
+        upload(data: json) { (response, code) in
+            if code == 0 {
+                let responseDictionary = convertToDictionary(text: response)
+                let success = responseDictionary?["success"] as? Bool
+                if success == nil {
+                    print("Location Upload Failure")
+                } else {
+                    print("Location Upload Success")
+                }
             }
         }
     }

@@ -10,9 +10,8 @@ import UIKit
 
 class NetworkSession: URLSession {
     
-    //let requestURLString = "http://172.16.85.155/"
-    //let requestURLString = "http://192.168.0.106/"
-    let requestURLString = "http://10.248.210.179/~samuellichlyter/rkebe/"
+//    let requestURLString = "http://10.248.141.135/~samuellichlyter/healthyplaces/"
+    let requestURLString = "http://10.248.232.38/" // <-- VMWare Server
     
     func dataRequest(with data: Data, completion: @escaping (_ result: String, _ code: Int) -> Void) {
         let url = URL(string: requestURLString)!
