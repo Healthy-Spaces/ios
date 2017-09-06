@@ -148,7 +148,7 @@ class ProfileTableViewController: UITableViewController, ORKPasscodeDelegate, Pr
         performSegue(withIdentifier: "activityRemindersSegue", sender: self)
     }
     
-    func dismissRootVC() {
+    @objc func dismissRootVC() {
         dismiss(animated: true, completion: nil)
     }
     

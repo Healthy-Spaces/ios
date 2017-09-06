@@ -35,7 +35,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             
             // setup notification
             if #available(iOS 10.0, *) {
-                print("iOS10")
+                print("iOS10+")
                 // For iOS10 and above
                 
                 // get calendar unit for 5pm everyday
