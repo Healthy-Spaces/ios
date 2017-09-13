@@ -93,9 +93,19 @@ func setNameAndEmail() {
     }
 }
 
-public func writeToRetry(data: NSMutableDictionary) {
-    
+public func setupHealthKit() {
+    //Data Access Step (from HealthKit)
+    let delegate = UIApplication.shared.delegate as! AppDelegate
+    let healthStore = delegate.healthStore
+    healthStore?.requestAuthorization(toShare: nil, read: readDataTypes, completion: { (success, error) in
+        if !success {
+            print("Unexpected HealthKit Initialization Error: \(String(describing: error))")
+        }
+    })
 }
+
+// TODO: writeToRetry
+public func writeToRetry(data: NSMutableDictionary) {}
 
 public func isRetryEmpty() -> Bool? {
     // get retry data
@@ -216,14 +226,16 @@ extension UIViewController: ORKTaskViewControllerDelegate, LocationDelegate {
                 // check if just registered
                 case RegistrationTask.identifier:
                     
-                    //Data Access Step (from HealthKit)
-                    let delegate = UIApplication.shared.delegate as! AppDelegate
-                    let healthStore = delegate.healthStore
-                    healthStore?.requestAuthorization(toShare: nil, read: readDataTypes, completion: { (success, error) in
-                        if !success {
-                            print("Unexpected HealthKit Initialization Error: \(String(describing: error))")
-                        }
-                    })
+                    setupHealthKit()
+                    
+//                    //Data Access Step (from HealthKit)
+//                    let delegate = UIApplication.shared.delegate as! AppDelegate
+//                    let healthStore = delegate.healthStore
+//                    healthStore?.requestAuthorization(toShare: nil, read: readDataTypes, completion: { (success, error) in
+//                        if !success {
+//                            print("Unexpected HealthKit Initialization Error: \(String(describing: error))")
+//                        }
+//                    })
                     
                     UserDefaults.standard.setValue(true, forKey: "hasRegistered")
                     UserDefaults.standard.synchronize()
@@ -271,7 +283,7 @@ extension UIViewController: ORKTaskViewControllerDelegate, LocationDelegate {
                     
                     json.setObject("login", forKey: "task" as NSCopying)
                     json.setObject(result, forKey: "data" as NSCopying)
-                    
+                                    
                     saveJSONData(data: json, completion: { (success) in
                         if !success {
                             print("login save failure")
@@ -297,15 +309,6 @@ extension UIViewController: ORKTaskViewControllerDelegate, LocationDelegate {
                                 return
                             }
                             
-                            //Data Access Step (from HealthKit)
-                            let delegate = UIApplication.shared.delegate as! AppDelegate
-                            let healthStore = delegate.healthStore
-                            healthStore?.requestAuthorization(toShare: nil, read: readDataTypes, completion: { (success, error) in
-                                if !success {
-                                    print("Unexpected HealthKit Initialization Error: \(String(describing: error))")
-                                }
-                            })
-                            
                             let id = Int(newID!)
                             UserDefaults.standard.setValue(id, forKey: "userID")
                             UserDefaults.standard.setValue(true, forKey: "hasRegistered")
@@ -314,6 +317,7 @@ extension UIViewController: ORKTaskViewControllerDelegate, LocationDelegate {
                             completedRegistration = true
                             
                             setNameAndEmail()
+                            setupHealthKit()
                         }
                     })
                     

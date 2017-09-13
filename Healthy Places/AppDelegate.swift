@@ -41,9 +41,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 // get calendar unit for 5pm everyday
                 let now = Date()
                 let calendar = Calendar(identifier: .gregorian)
-                let todayAtFive = calendar.date(bySettingHour: 17, minute: 0, second: 0, of: now)
+                let todayAtEight = calendar.date(bySettingHour: 20, minute: 0, second: 0, of: now)
                 let unitFlags: Set<Calendar.Component> = [.second, .minute, .hour, .day, .month, .year]
-                let todayAtFiveComponents = Calendar.current.dateComponents(unitFlags, from: todayAtFive!)
+                let todayAtFiveComponents = Calendar.current.dateComponents(unitFlags, from: todayAtEight!)
                 
                 // request authorization
                 let center = UNUserNotificationCenter.current()
@@ -79,7 +79,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 // get calendar unit for 5pm everyday
                 let now = NSDate()
                 let calendar = NSCalendar(identifier: .gregorian)
-                let todayAtFive = calendar?.date(bySettingHour: 17, minute: 0, second: 0, of: now as Date, options: NSCalendar.Options())
+                let todayAtEight = calendar?.date(bySettingHour: 20, minute: 0, second: 0, of: now as Date, options: NSCalendar.Options())
                 
                 
                 // request authorization
@@ -91,7 +91,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 notification.soundName = UILocalNotificationDefaultSoundName
                 
                 // deliver notification at 5pm daily
-                notification.fireDate = todayAtFive
+                notification.fireDate = todayAtEight
                 notification.repeatInterval = .day
 //                notification.fireDate = calendar?.date(byAdding: .second, value: 5, to: now as Date, options: NSCalendar.Options())
                 

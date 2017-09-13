@@ -11,7 +11,8 @@ import UIKit
 class NetworkSession: URLSession {
     
 //    let requestURLString = "http://24.20.231.41/~samuellichlyter/healthyplaces/"
-    let requestURLString = "http://192.168.0.100/" // <-- VMWare Server
+//    let requestURLString = "http://10.0.0.252/~samuellichlyter/healthyplaces/"
+    let requestURLString = "http://192.168.0.108/" // <-- VMWare Server
 //    let requestURLString = "http://10.0.0.78/" // <-- VMWare Server
 
 //    let requestURLString = "http://128.193.11.195/" // <-- HHS Server

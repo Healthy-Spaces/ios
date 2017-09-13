@@ -83,6 +83,23 @@ enum informationShare: NSNumber {
 
 // BASELINE SURVEY
 
+// Sex
+enum Sex: Int {
+    case male
+    case female
+    case other
+}
+
+// Number of Children
+enum Children: Int {
+    case neverHadChildren
+    case one
+    case two
+    case three
+    case fourOrMore
+    case noChildren // children no longer living at home
+}
+
 // Ethnicity
 enum Ethnicity: Int {
     case caucasion
@@ -119,7 +136,20 @@ enum Education: Int {
     case phd
 }
 
-// TODO: Income
+// Income  ** ENUM BASED ON STARTING INCOME FOR THE BRACKET **
+enum Income: Int {
+    case zero
+    case tenThousand
+    case twentyThousand
+    case thirtyThousand
+    case fourtyThousand
+    case fiftyThousand
+    case sixtyThousand
+    case eightyThousand
+    case oneHundredThousand
+    case oneHundredFiftyThousand
+    case preferNotToSay
+}
 
 // Own/Rent Home
 enum HomeOwnership: Int {
@@ -138,20 +168,22 @@ enum HomeDescription: Int {
 
 // Home Influence
 enum HomeInfluence: Int {
-    case housing
-    case proximity
-    case school
-    case entertainment
-    case social
-    case publicTransportation
-    case friends
-    case neighborhood
-    case characterOfHouse
+    case housingPrice
+    case closeToWorkplace
+    case schoolDistrict
+    case closeToEntertainment
+    case closeToCivic
+    case closeToTransportation
+    case closeToFriends
+    case desirableNeighborhood
+    case characteristicsOfHouse
     case other
 }
 
 // Commute 
 enum Commute: Int {
+    case noCommute
+    case walk
     case bike
     case driver
     case passenger

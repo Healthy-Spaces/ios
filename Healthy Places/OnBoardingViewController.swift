@@ -110,7 +110,6 @@ class OnBoardingViewController: UIViewController, UIPageViewControllerDelegate, 
         }
     }
 
-    
     var _modelDataSource: OnBoardingDataSource? = nil
     
     //FIXME: TEMP FOR DONE BUTTON

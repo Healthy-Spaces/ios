@@ -43,15 +43,18 @@ let studyTasksContent       = ""
 let withdrawingSummary      = "You are free to withdraw from the Healthy Places study at any time.  To withdraw from the study, click the withdraw button in the settings menu.  You can also disable data gathering and data sharing temporarily by turing the data sharing options to off in the settings menu.  You can always turn data sharing back on in the future."
 let withdrawingContent      = ""
 
-// Potential Benefits
+// MARK: - Potential Benefits
+let benefitsTitle           = "Potential Benefits"
 let benefitsSummary         = "We will provide information on your environmental exposures back to you. For example, using your GPS location we will estimate exposures (e.g. your daily exposure to air pollution or green space) and provide a comparison of your exposures to others in your city. We will also provide ways in which you can improve your exposures."
 let benefitsContent         = ""
 
-// Potential Harm
+// MARK: - Potential Harm
+let harmTitle               = "Potential Harm"
 let harmSummary             = "We will collect location information that could be used to identify you.  We will encrypt all app data and store the data on secure servers but we cannot guarantee your anonymity."
 let harmContent             = ""
 
 // MARK: - Questions & Contact Info
+let questionsTitle          = "Questions & Contact Info"
 let questionsSummary        = "If you have any questions about this research project, please contact Dr. Perry Hystad at spatial.health.lab@gmail.com.  If you have questions about your rights or welfare as a participant, please contact the Oregon State University Institutional Review Board (IRB) Office, at (541) 737-8008 or by email at IRB@oregonstate.edu"
 let questionsContent        = ""
 
