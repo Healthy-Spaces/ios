@@ -109,7 +109,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if !UserDefaults.standard.bool(forKey: "HasLaunchedOnce") {
             
             fileAccessQueue.async(execute: {
-                let requiredFiles = [logDataFile, locationDataFile]
+                let requiredFiles = [logDataFile, locationDataFile, authStatusFile]
                 for file in requiredFiles {
                     do {
                         let path = mainDir.appendingPathComponent(file)

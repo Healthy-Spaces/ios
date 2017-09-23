@@ -316,15 +316,17 @@ extension UIViewController: ORKTaskViewControllerDelegate, LocationDelegate {
                             
                             completedRegistration = true
                             
-                            setNameAndEmail()
-                            setupHealthKit()
+                            DispatchQueue.main.async {
+                                setNameAndEmail()
+                                setupHealthKit()
+                            }
                         }
                     })
                     
                     break
                 
                 
-                case BaselineSurveyTask.identifier, GreenspaceSurvey.identifier, DailySurvey.identifier:
+                default:
                     
                     // Update tasksCompletedFile
                     fileAccessQueue.async {
@@ -410,7 +412,7 @@ extension UIViewController: ORKTaskViewControllerDelegate, LocationDelegate {
                     
                     break
                 
-                default: break
+//                default: break
             }
             
             print("Ended \(result.identifier) task")

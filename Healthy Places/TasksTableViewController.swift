@@ -13,7 +13,7 @@ import CoreLocation
 
 class TasksTableViewController: UITableViewController, ORKPasscodeDelegate {
     
-    let tableViewRows = ["Baseline Survey" : BaselineSurveyTask, "Green Space Survey" : GreenspaceSurvey, "Daily Survey" : DailySurvey, "Image Capture Task" : ImageCaptureTask]
+    let tableViewRows = ["Baseline Survey" : BaselineSurveyTask, "Green Space and Health Survey" : GreenspaceSurvey, "Daily Survey" : DailySurvey, "Image Capture Task" : ImageCaptureTask, "Hanoi Task" : HanoiTask]
     
     var numberOfSurveys = 0
     
@@ -182,9 +182,10 @@ class TasksTableViewController: UITableViewController, ORKPasscodeDelegate {
                  *  [3] = UUID if started, but not finished
                  */
                 
-                let nameIndex = indexPath.row * 4
-                let statusIndex = (indexPath.row * 4) + 1
-                let dateIndex = (indexPath.row * 4) + 2
+                let numberOfParameters = 4
+                let nameIndex = indexPath.row * numberOfParameters
+                let statusIndex = (indexPath.row * numberOfParameters) + 1
+                let dateIndex = (indexPath.row * numberOfParameters) + 2
 //                let UUIDIndex = (indexPath.row * 4) + 3
                 
                 // check name and update file if different

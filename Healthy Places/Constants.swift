@@ -92,7 +92,7 @@ enum Sex: Int {
 
 // Number of Children
 enum Children: Int {
-    case neverHadChildren
+    case neverHadChildren // 0
     case one
     case two
     case three
@@ -211,10 +211,26 @@ enum View: Int {
     case urban
 }
 
-enum GreenspaceTypes: Int {
+enum GreenspaceType: Int {
     case parks
     case streetTrees
     case otherStreetVegetation
     case publicLawnsOpenSpaces
     case yourYard
+    case other
+}
+
+enum Health: Int {
+    case excellent
+    case veryGood
+    case good
+    case fair
+    case poor
+}
+
+enum Feeling: Int {
+    case fullOfLife
+    case fullOfEnergy
+    case wornOut
+    case tired
 }

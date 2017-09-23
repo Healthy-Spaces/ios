@@ -112,7 +112,7 @@ public var BaselineSurveyTask: ORKNavigableOrderedTask {
     
     // Social Standing
     let communityFormat = ORKScaleAnswerFormat(maximumValue: 10, minimumValue: 1, defaultValue: 0, step: 1, vertical: true)
-    let communityStandingStep = ORKQuestionStep(identifier: "communityStanding", title: "Think of a ladder as representing where people stand in their communities.", text: "People define social standing in different ways; please define it in whatever way is most meaningful to you.  At the top of the scale below (10) are people who have the highest standing in their community.  At the bottom (1) are people who have the lowest standing in their community.  Where would you place yourself on this scale?", answer: communityFormat)
+    let communityStandingStep = ORKQuestionStep(identifier: "communityStanding", title: "People define social standing in different ways; please define it in whatever way is most meaningful to you.  At the top of the scale below (10) are people who have the highest standing in their community.  At the bottom (1) are people who have the lowest standing in their community.  Where would you place yourself on this scale?", answer: communityFormat)
     steps += [communityStandingStep]
     
     // Break
