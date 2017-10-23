@@ -10,11 +10,14 @@ import UIKit
 
 class NetworkSession: URLSession {
     
-//    let requestURLString = "http://24.20.231.41/~samuellichlyter/healthyplaces/"
-//    let requestURLString = "http://192.168.0.108/" // <-- VMWare Server
-    let requestURLString = "http://10.0.0.78/" // <-- VMWare Server
+//    let requestURLString = "http://24.20.231.41/~samuellichlyter/healthyplaces/"                  // <-- localhost (Home)
+//    let requestURLString = "http://10.0.0.252/~samuellichlyter/healthyplaces/"                    // <-- localhost (A)
+//    let requestURLString = "http://10.248.180.15/~samuellichlyter/healthyplaces/"                 // <-- localhost (OSU)
+//    let requestURLString = "http://192.168.0.108/"                                                // <-- VMWare Server (Home)
+//    let requestURLString = "http://10.0.0.78/"                                                    // <-- VMWare Server (A)
+//    let requestURLString = "http://10.248.180.119/"                                               // <-- VMWare Server (OSU)
 
-//    let requestURLString = "http://128.193.11.195/" // <-- HHS Server
+    let requestURLString = "http://128.193.11.195/"                                               // <-- HHS Server
     
     func dataRequest(with data: Data, completion: @escaping (_ result: String, _ code: Int) -> Void) {
         let url = URL(string: requestURLString)!
@@ -25,7 +28,6 @@ class NetworkSession: URLSession {
         request.cachePolicy = .reloadIgnoringCacheData
         
         // Encrypt Data
-        let password = "HGx4a3zsiv7J8qT+/*pyAW6+oG[]mZxA3Z?WUzgRnu#2nEAn9okB8kDA]&v4fxgy"
         let cipherdata = RNCryptor.encrypt(data: data, withPassword: password)
         let cipherString = cipherdata.base64EncodedString()
         let urlString = cipherString.addingPercentEncoding(withAllowedCharacters: .urlPasswordAllowed)

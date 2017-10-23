@@ -33,7 +33,7 @@ class LogDataViewController: UIViewController {
         }
     }
     
-    func clearData() {
+    @objc func clearData() {
         fileAccessQueue.async() {
             do {
                 let emptyString = ""

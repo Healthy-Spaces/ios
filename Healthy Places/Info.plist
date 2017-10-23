@@ -19,7 +19,7 @@
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>5</string>
+	<string>8</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSAppTransportSecurity</key>
@@ -33,7 +33,9 @@
 	<string>This app uses your activity data to get an idea of how active you are and where you interact with greenspace</string>
 	<key>NSHealthUpdateUsageDescription</key>
 	<string>This app uses your activity data to get an idea of how active you are and where you interact with greenspace</string>
-	<key>NSLocationAlwaysUsageDescription</key>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>Allows the app to send you timely notifications when you are in a high or low green space area</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Allows the app to send you timely notifications when you are in a high or low green space area</string>
 	<key>NSMicrophoneUsageDescription</key>
 	<string>Allows the app to perform certain tests using the microphone</string>

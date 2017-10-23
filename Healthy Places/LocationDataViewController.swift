@@ -35,7 +35,7 @@ class LocationDataViewController: UIViewController {
         }
     }
     
-    func clearLocationData() {
+    @objc func clearLocationData() {
         fileAccessQueue.async() {
             do {
                 let emptyString = ""

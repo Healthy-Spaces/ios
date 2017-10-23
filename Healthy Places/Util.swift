@@ -71,6 +71,13 @@ public func saveJSONData(data: NSMutableDictionary, completion: @escaping (_ suc
     }
 }
 
+public func displayUploadError(vc: UIViewController) {
+    let alert = UIAlertController(title: "Uh Oh!", message: "Your survey failed to upload! We'll try again later for you!", preferredStyle: .alert)
+    let okayAction = UIAlertAction(title: "Okay", style: .default, handler: nil)
+    alert.addAction(okayAction)
+    vc.present(alert, animated: true, completion: nil)
+}
+
 func setNameAndEmail() {
     let json = NSMutableDictionary()
     json.setObject("getNameAndEmail", forKey: "task" as NSCopying)
@@ -93,9 +100,19 @@ func setNameAndEmail() {
     }
 }
 
-public func writeToRetry(data: NSMutableDictionary) {
-    
+public func setupHealthKit() {
+    //Data Access Step (from HealthKit)
+    let delegate = UIApplication.shared.delegate as! AppDelegate
+    let healthStore = delegate.healthStore
+    healthStore?.requestAuthorization(toShare: nil, read: readDataTypes, completion: { (success, error) in
+        if !success {
+            print("Unexpected HealthKit Initialization Error: \(String(describing: error))")
+        }
+    })
 }
+
+// TODO: writeToRetry
+public func writeToRetry(data: NSMutableDictionary) {}
 
 public func isRetryEmpty() -> Bool? {
     // get retry data
@@ -216,14 +233,16 @@ extension UIViewController: ORKTaskViewControllerDelegate, LocationDelegate {
                 // check if just registered
                 case RegistrationTask.identifier:
                     
-                    //Data Access Step (from HealthKit)
-                    let delegate = UIApplication.shared.delegate as! AppDelegate
-                    let healthStore = delegate.healthStore
-                    healthStore?.requestAuthorization(toShare: nil, read: readDataTypes, completion: { (success, error) in
-                        if !success {
-                            print("Unexpected HealthKit Initialization Error: \(String(describing: error))")
-                        }
-                    })
+                    setupHealthKit()
+                    
+//                    //Data Access Step (from HealthKit)
+//                    let delegate = UIApplication.shared.delegate as! AppDelegate
+//                    let healthStore = delegate.healthStore
+//                    healthStore?.requestAuthorization(toShare: nil, read: readDataTypes, completion: { (success, error) in
+//                        if !success {
+//                            print("Unexpected HealthKit Initialization Error: \(String(describing: error))")
+//                        }
+//                    })
                     
                     UserDefaults.standard.setValue(true, forKey: "hasRegistered")
                     UserDefaults.standard.synchronize()
@@ -262,6 +281,10 @@ extension UIViewController: ORKTaskViewControllerDelegate, LocationDelegate {
                                 
                                 setNameAndEmail()
                             }
+                        } else {
+                            DispatchQueue.main.async {
+                                displayUploadError(vc: self)
+                            }
                         }
                     })
                     
@@ -271,7 +294,7 @@ extension UIViewController: ORKTaskViewControllerDelegate, LocationDelegate {
                     
                     json.setObject("login", forKey: "task" as NSCopying)
                     json.setObject(result, forKey: "data" as NSCopying)
-                    
+                                    
                     saveJSONData(data: json, completion: { (success) in
                         if !success {
                             print("login save failure")
@@ -297,15 +320,6 @@ extension UIViewController: ORKTaskViewControllerDelegate, LocationDelegate {
                                 return
                             }
                             
-                            //Data Access Step (from HealthKit)
-                            let delegate = UIApplication.shared.delegate as! AppDelegate
-                            let healthStore = delegate.healthStore
-                            healthStore?.requestAuthorization(toShare: nil, read: readDataTypes, completion: { (success, error) in
-                                if !success {
-                                    print("Unexpected HealthKit Initialization Error: \(String(describing: error))")
-                                }
-                            })
-                            
                             let id = Int(newID!)
                             UserDefaults.standard.setValue(id, forKey: "userID")
                             UserDefaults.standard.setValue(true, forKey: "hasRegistered")
@@ -313,14 +327,21 @@ extension UIViewController: ORKTaskViewControllerDelegate, LocationDelegate {
                             
                             completedRegistration = true
                             
-                            setNameAndEmail()
+                            DispatchQueue.main.async {
+                                setNameAndEmail()
+                                setupHealthKit()
+                            }
+                        } else {
+                            DispatchQueue.main.async {
+                                displayUploadError(vc: self)
+                            }
                         }
                     })
                     
                     break
                 
                 
-                case BaselineSurveyTask.identifier, GreenspaceSurvey.identifier, DailySurvey.identifier:
+                default:
                     
                     // Update tasksCompletedFile
                     fileAccessQueue.async {
@@ -392,21 +413,20 @@ extension UIViewController: ORKTaskViewControllerDelegate, LocationDelegate {
                                 
                                 // alert the user of failure
                                 DispatchQueue.main.async {
-                                    let alert = UIAlertController(title: "Uh Oh!", message: "Your survey failed to upload! We'll try again later for you!", preferredStyle: .alert)
-                                    let okayAction = UIAlertAction(title: "Okay", style: .default, handler: nil)
-                                    alert.addAction(okayAction)
-                                    self.present(alert, animated: true, completion: nil)
+                                    displayUploadError(vc: self)
                                 }
                                 print("Survey Upload Failure")
                             } else {
                                 print("Survey Upload Success")
                             }
+                        } else {
+                            displayUploadError(vc: self)
                         }
                     })
                     
                     break
                 
-                default: break
+//                default: break
             }
             
             print("Ended \(result.identifier) task")

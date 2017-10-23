@@ -67,17 +67,17 @@ public var ConsentDocument: ORKConsentDocument {
         case .custom:
             switch customCounter {
             case 0: // Potential Benefits
-                consentSection.title = "Potential Benefits"
+                consentSection.title = benefitsTitle
                 consentSection.summary = benefitsSummary
                 consentSection.content = benefitsContent
                 break
             case 1: // Potential Harm
-                consentSection.title = "Potential Harm"
+                consentSection.title = harmTitle
                 consentSection.summary = harmSummary
                 consentSection.content = harmContent
                 break
             case 2: // Questions & Contact Information
-                consentSection.title = "Questions & Contact Info"
+                consentSection.title = questionsTitle
                 consentSection.summary = questionsSummary
                 consentSection.content = questionsContent
                 break

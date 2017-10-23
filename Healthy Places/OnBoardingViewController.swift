@@ -28,7 +28,7 @@ class OnBoardingViewController: UIViewController, UIPageViewControllerDelegate, 
         // Customize navigation bar
         self.navigationController?.navigationBar.barTintColor = UIApplication.shared.keyWindow?.tintColor
         self.navigationController?.navigationBar.tintColor = UIColor.white
-        self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white]
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.white]
         self.navigationController?.navigationBar.layer.borderColor = UIApplication.shared.keyWindow?.tintColor.cgColor
         self.navigationController?.navigationBar.barStyle = .black
         
@@ -110,7 +110,6 @@ class OnBoardingViewController: UIViewController, UIPageViewControllerDelegate, 
         }
     }
 
-    
     var _modelDataSource: OnBoardingDataSource? = nil
     
     //FIXME: TEMP FOR DONE BUTTON
