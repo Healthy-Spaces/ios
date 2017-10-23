@@ -71,6 +71,13 @@ public func saveJSONData(data: NSMutableDictionary, completion: @escaping (_ suc
     }
 }
 
+public func displayUploadError(vc: UIViewController) {
+    let alert = UIAlertController(title: "Uh Oh!", message: "Your survey failed to upload! We'll try again later for you!", preferredStyle: .alert)
+    let okayAction = UIAlertAction(title: "Okay", style: .default, handler: nil)
+    alert.addAction(okayAction)
+    vc.present(alert, animated: true, completion: nil)
+}
+
 func setNameAndEmail() {
     let json = NSMutableDictionary()
     json.setObject("getNameAndEmail", forKey: "task" as NSCopying)
@@ -274,6 +281,10 @@ extension UIViewController: ORKTaskViewControllerDelegate, LocationDelegate {
                                 
                                 setNameAndEmail()
                             }
+                        } else {
+                            DispatchQueue.main.async {
+                                displayUploadError(vc: self)
+                            }
                         }
                     })
                     
@@ -319,6 +330,10 @@ extension UIViewController: ORKTaskViewControllerDelegate, LocationDelegate {
                             DispatchQueue.main.async {
                                 setNameAndEmail()
                                 setupHealthKit()
+                            }
+                        } else {
+                            DispatchQueue.main.async {
+                                displayUploadError(vc: self)
                             }
                         }
                     })
@@ -398,15 +413,14 @@ extension UIViewController: ORKTaskViewControllerDelegate, LocationDelegate {
                                 
                                 // alert the user of failure
                                 DispatchQueue.main.async {
-                                    let alert = UIAlertController(title: "Uh Oh!", message: "Your survey failed to upload! We'll try again later for you!", preferredStyle: .alert)
-                                    let okayAction = UIAlertAction(title: "Okay", style: .default, handler: nil)
-                                    alert.addAction(okayAction)
-                                    self.present(alert, animated: true, completion: nil)
+                                    displayUploadError(vc: self)
                                 }
                                 print("Survey Upload Failure")
                             } else {
                                 print("Survey Upload Success")
                             }
+                        } else {
+                            displayUploadError(vc: self)
                         }
                     })
                     
