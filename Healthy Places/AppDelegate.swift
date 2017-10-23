@@ -29,6 +29,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         //FIXME: clear notifications on iOS 9
 //        application.cancelAllLocalNotifications()
+//        if #available(iOS 10.0, *) {
+//            UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
+//            print("cleared all notifications")
+//        }
+
+        // list pending notifications
+        if #available(iOS 10.0, *) {
+            UNUserNotificationCenter.current().getPendingNotificationRequests(completionHandler: { (request) in
+                print(request)
+            })
+        }
         
         // Setup Daily Notifications
         if application.scheduledLocalNotifications?.count == 0 || !UserDefaults.standard.bool(forKey: "DailyNotifications") {
@@ -38,12 +49,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 print("iOS10+")
                 // For iOS10 and above
                 
-                // get calendar unit for 5pm everyday
+                // get calendar unit for 8pm everyday
                 let now = Date()
                 let calendar = Calendar(identifier: .gregorian)
                 let todayAtEight = calendar.date(bySettingHour: 20, minute: 0, second: 0, of: now)
-                let unitFlags: Set<Calendar.Component> = [.second, .minute, .hour, .day, .month, .year]
-                let todayAtFiveComponents = Calendar.current.dateComponents(unitFlags, from: todayAtEight!)
+                let unitFlags: Set<Calendar.Component> = [.second, .minute, .hour]
+                let todayAtEightComponents = Calendar.current.dateComponents(unitFlags, from: todayAtEight!)
                 
                 // request authorization
                 let center = UNUserNotificationCenter.current()
@@ -59,11 +70,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 content.body = dailyNotificationBody
                 content.sound = UNNotificationSound.default()
                 
-                // deliver notification at 5pm daily
-                let trigger = UNCalendarNotificationTrigger(dateMatching: todayAtFiveComponents, repeats: true)
-//                let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
-                
-                //let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
+                // deliver notification at 8pm daily
+                let trigger = UNCalendarNotificationTrigger(dateMatching: todayAtEightComponents, repeats: true)
                 let request = UNNotificationRequest(identifier: "dailyNotification", content: content, trigger: trigger)
                 
                 // request notification
@@ -76,7 +84,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 print("iOS9")
                 // Fallback on earlier versions
                 
-                // get calendar unit for 5pm everyday
+                // get calendar unit for 8pm everyday
                 let now = NSDate()
                 let calendar = NSCalendar(identifier: .gregorian)
                 let todayAtEight = calendar?.date(bySettingHour: 20, minute: 0, second: 0, of: now as Date, options: NSCalendar.Options())
