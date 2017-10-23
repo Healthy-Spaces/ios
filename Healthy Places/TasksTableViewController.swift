@@ -13,7 +13,7 @@ import CoreLocation
 
 class TasksTableViewController: UITableViewController, ORKPasscodeDelegate {
     
-    let tableViewRows = ["Baseline Survey" : BaselineSurveyTask, "Green Space and Health Survey" : GreenspaceSurvey, "Daily Survey" : DailySurvey, "Image Capture Task" : ImageCaptureTask, "Hanoi Task" : HanoiTask]
+    let tableViewRows = ["Baseline Survey" : BaselineSurveyTask, "Green Space and Health Survey" : GreenspaceSurvey, "Daily Survey" : DailySurvey]
     
     var numberOfSurveys = 0
     
