@@ -116,9 +116,9 @@ public var GreenspaceSurvey: ORKNavigableOrderedTask {
     steps += [sixteen]
     
     // Break Step
-    let breakStep = ORKInstructionStep(identifier: "breakStep")
-    breakStep.text = "Now we are going to ask some questions and ask you to complete some games that test outcomes that may be associated with green space exposures."
-    steps += [breakStep]
+//    let breakStep = ORKInstructionStep(identifier: "breakStep")
+//    breakStep.text = "Now we are going to ask some questions and ask you to complete some games that test outcomes that may be associated with green space exposures."
+//    steps += [breakStep]
     
     // General Health
     let healthExcellentChoice = ORKTextChoice(text: "Excellent", value: Health.excellent.rawValue as NSCoding & NSCopying & NSObjectProtocol)
@@ -134,20 +134,20 @@ public var GreenspaceSurvey: ORKNavigableOrderedTask {
     // TODO: Last 4 weeks feeling
     
     // Tower of Hanoi
-    let hanoiStep = ORKTowerOfHanoiStep(identifier: "hanoi")
-    steps += [hanoiStep]
-    
-    // Spatial Memory
-    let spatialMemoryStep = ORKSpatialSpanMemoryStep(identifier: "spatialMemory")
-    steps += [spatialMemoryStep]
-    
-    // Paced Serial Addition Test (PSAT)
-    let psatStep = ORKPSATStep(identifier: "psat")
-    steps += [psatStep]
-    
-    // Reaction Time
-    let reactionTimeStep = ORKReactionTimeStep(identifier: "reactionTime")
-    steps += [reactionTimeStep]
+//    let hanoiStep = ORKTowerOfHanoiStep(identifier: "hanoi")
+//    steps += [hanoiStep]
+//
+//    // Spatial Memory
+//    let spatialMemoryStep = ORKSpatialSpanMemoryStep(identifier: "spatialMemory")
+//    steps += [spatialMemoryStep]
+//
+//    // Paced Serial Addition Test (PSAT)
+//    let psatStep = ORKPSATStep(identifier: "psat")
+//    steps += [psatStep]
+//
+//    // Reaction Time
+//    let reactionTimeStep = ORKReactionTimeStep(identifier: "reactionTime")
+//    steps += [reactionTimeStep]
     
     return ORKNavigableOrderedTask(identifier: "greenspaceSurvey", steps: steps)
 }

@@ -111,7 +111,7 @@ public var BaselineSurveyTask: ORKNavigableOrderedTask {
     steps += [ethnicityStep]
     
     // Social Standing
-    let communityFormat = ORKScaleAnswerFormat(maximumValue: 10, minimumValue: 1, defaultValue: 0, step: 1, vertical: true)
+    let communityFormat = ORKScaleAnswerFormat(maximumValue: 10, minimumValue: 1, defaultValue: 1, step: 1, vertical: true)
     let communityStandingStep = ORKQuestionStep(identifier: "communityStanding", title: "People define social standing in different ways; please define it in whatever way is most meaningful to you.  At the top of the scale below (10) are people who have the highest standing in their community.  At the bottom (1) are people who have the lowest standing in their community.  Where would you place yourself on this scale?", answer: communityFormat)
     steps += [communityStandingStep]
     
@@ -125,7 +125,7 @@ public var BaselineSurveyTask: ORKNavigableOrderedTask {
     steps += [currentAddressStep]
     
     // Number of years in current house
-    let numYearsFormat = ORKNumericAnswerFormat(style: .decimal, unit: "years", minimum: 0, maximum: nil)
+    let numYearsFormat = ORKNumericAnswerFormat(style: .integer, unit: "years", minimum: 0, maximum: nil)
     let numYearsStep = ORKQuestionStep(identifier: "numberOfYearsAtCurrentAddress", title: "How many years have you been living at this address?", answer: numYearsFormat)
     steps += [numYearsStep]
     
@@ -171,7 +171,7 @@ public var BaselineSurveyTask: ORKNavigableOrderedTask {
     let housingOtherChoice = ORKTextChoice(text: "Other", value: HomeInfluence.other.rawValue as NSCoding & NSCopying & NSObjectProtocol)
     let influenceChoices = [housingPriceChoice, housingWorkplaceChoice, housingSchoolDistrictChoice, housingEntertainmentChoice, housingCivicChoice, housingTransportationChoice, housingFriendsChoice, housingNeighborhoodChoice, housingCharacterisitcsChoice, housingOtherChoice]
     let influenceFormat = ORKTextChoiceAnswerFormat(style: .multipleChoice, textChoices: influenceChoices)
-    let influenceStep = ORKQuestionStep(identifier: "incluence", title: "What influenced your decision to move to this location?", text: "Select the top 5", answer: influenceFormat)
+    let influenceStep = ORKQuestionStep(identifier: "influence", title: "What influenced your decision to move to this location?", text: "Select the top 5", answer: influenceFormat)
     steps += [influenceStep]
     
     // What is it like?
