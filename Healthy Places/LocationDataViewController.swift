@@ -21,7 +21,7 @@ class LocationDataViewController: UIViewController {
         reloadLocationData()
     }
     
-    override func reloadLocationData() {
+    @objc override func reloadLocationData() {
         fileAccessQueue.async {
             do {
                 let locationString = try String.init(contentsOf: mainDir.appendingPathComponent(locationDataFile), encoding: String.Encoding.utf8)

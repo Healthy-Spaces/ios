@@ -56,9 +56,16 @@ class Location: NSObject, CLLocationManagerDelegate {
     func moveToDeferredUpdates() -> Bool {
         if CLLocationManager.significantLocationChangeMonitoringAvailable() {
             print("deferring location updates")
-            locationManager?.desiredAccuracy = kCLLocationAccuracyHundredMeters
-            locationManager?.distanceFilter = deferredDistance
-            locationManager?.allowDeferredLocationUpdates(untilTraveled: deferredDistance, timeout: deferredTimeout)
+            
+            // stop updating location
+            locationManager?.stopUpdatingLocation()
+//            locationManager?.desiredAccuracy = kCLLocationAccuracyHundredMeters
+//            locationManager?.distanceFilter = deferredDistance
+//            locationManager?.allowDeferredLocationUpdates(untilTraveled: deferredDistance, timeout: deferredTimeout)
+            
+            // start monitoring for signifant location changes
+            locationManager?.startMonitoringSignificantLocationChanges()
+            
             return true
         } else {
             return false
