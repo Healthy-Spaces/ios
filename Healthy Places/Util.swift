@@ -71,6 +71,50 @@ public func saveJSONData(data: NSMutableDictionary, completion: @escaping (_ suc
     }
 }
 
+public func getWeekdays() -> [String] {
+    // get days of the week
+    var calendar = Calendar(identifier: .gregorian)
+    calendar.locale = Locale(identifier: "en_US_POSIX")
+    let days = calendar.weekdaySymbols
+    
+    return days
+}
+
+public func getWeeklyTracker() -> [String: Any]? {
+    do {
+        let weeklyTrackterString = try String(contentsOf: mainDir.appendingPathComponent(dailySurveyTaken))
+        var weeklySurveyDict = convertToDictionary(text: weeklyTrackterString)
+        return weeklySurveyDict
+    } catch let error as NSError {
+        print("Unresolved getWeeklyTracker() Error: \(error), \(error.userInfo)")
+        return nil
+    }
+}
+
+public func weeklyTrackerInit() {
+    // initialize weekly tracker
+    let json = NSMutableDictionary()
+    let formatter = DateFormatter()
+    formatter.dateFormat = "yyyy-dd-mm"
+    json.setObject(formatter.string(from: getSunday()), forKey: "startDate" as NSCopying)
+    
+    let days = getWeekdays()
+    
+    // set all days to false
+    for day in days {
+        json.setObject(false, forKey: day.lowercased() as NSCopying)
+    }
+    
+    // write to file
+    do {
+        let jsonData = try JSONSerialization.data(withJSONObject: json, options: .prettyPrinted)
+        let jsonString = String(data: jsonData, encoding: .utf8)
+        write(string: jsonString!, toNew: dailySurveyTaken)
+    } catch let error as NSError {
+        print("Unresolved Weekly Tracker Initializer Error: \(error), \(error.userInfo)")
+    }
+}
+
 public func displayUploadError(vc: UIViewController) {
     let alert = UIAlertController(title: "Uh Oh!", message: "Your survey failed to upload! We'll try again later for you!", preferredStyle: .alert)
     let okayAction = UIAlertAction(title: "Okay", style: .default, handler: nil)
@@ -132,9 +176,8 @@ public func isRetryEmpty() -> Bool? {
     
 }
 
-public func uploadRetry(data: NSMutableDictionary) {
-    
-}
+// TODO: Upload Retry
+public func uploadRetry(data: NSMutableDictionary) { }
 
 public func convertToDictionary(text: String) -> [String: Any]? {
     if let data = text.data(using: .utf8) {
@@ -145,6 +188,10 @@ public func convertToDictionary(text: String) -> [String: Any]? {
         }
     }
     return nil
+}
+
+public func getSunday() -> Date {
+    return Calendar(identifier: .iso8601).date(from: Calendar(identifier: .iso8601).dateComponents([.yearForWeekOfYear, .weekOfYear], from: Date()))!
 }
 
 public func defaultCell(withIdentifier identifier: String, title: String, disclosureIndicator: Bool) -> UITableViewCell {
@@ -344,6 +391,15 @@ extension UIViewController: ORKTaskViewControllerDelegate, LocationDelegate {
                 default:
                     
                     // Update tasksCompletedFile
+                    /* tasksCompleted File Structure:
+                     For each survey:
+                         [a] = name of survey
+                         [b] = last TaskStatus
+                         [c] = date of last TaskStatus ^^
+                         [d] = UUID if started, but not finished
+                     
+                     Find x, y, z by using two for-loops
+                     */
                     fileAccessQueue.async {
                         do {
                             let taskFile = try String(contentsOf: mainDir.appendingPathComponent(tasksCompletedFile))
@@ -375,6 +431,54 @@ extension UIViewController: ORKTaskViewControllerDelegate, LocationDelegate {
                             }
                         } catch let error {
                             print("Unresolved updating \(tasksCompletedFile), \(error)")
+                        }
+                    }
+                    
+                    // write to weekly tracker
+                    /* Weekly Tracker Format:
+                     {
+                         "startDate": "2017-10-15 23:06:51",
+                         "sunday": true,
+                         "monday": true,
+                         "tuesday": true,
+                         "wednesday": false,
+                         "thursday": true,
+                         "friday": false,
+                         "saturday": false
+                     }
+                    */
+                    fileAccessQueue.async {
+                        do {
+                            // get weekly tracker file
+                            var surveyTrackerDict = getWeeklyTracker()
+                            
+                            // get last Sunday's date
+                            let formatter = DateFormatter()
+                            formatter.dateFormat = "yyyy-dd-mm"
+                            let lastSunday = formatter.string(from: getSunday())
+                            
+                            // check if in this week (if not, set new date)
+                            if lastSunday != surveyTrackerDict!["startDate"] as? String {
+                                // set new date and reset days
+                                surveyTrackerDict!["startDate"] = lastSunday
+                                for (key, _) in surveyTrackerDict! {
+                                    if key != "startDate" {
+                                        surveyTrackerDict![key] = false
+                                    }
+                                }
+                            }
+                            
+                            // set todays day as completed
+                            formatter.dateFormat = "EEEE"
+                            let todaysName = formatter.string(from: Date()).lowercased()
+                            surveyTrackerDict![todaysName] = true
+                            
+                            // write updated file
+                            let newSurveyTrackerData = try JSONSerialization.data(withJSONObject: surveyTrackerDict!, options: .prettyPrinted)
+                            let newSurveyTrackerString = String(data: newSurveyTrackerData, encoding: .utf8)
+                            write(string: newSurveyTrackerString!, toNew: dailySurveyTaken)
+                        } catch let error {
+                            print("Unresolved updating \(dailySurveyTaken), \(error)")
                         }
                     }
                     
@@ -425,8 +529,6 @@ extension UIViewController: ORKTaskViewControllerDelegate, LocationDelegate {
                     })
                     
                     break
-                
-//                default: break
             }
             
             print("Ended \(result.identifier) task")

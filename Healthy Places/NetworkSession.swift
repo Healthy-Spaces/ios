@@ -37,7 +37,6 @@ class NetworkSession: URLSession {
         
         let task = session.dataTask(with: request as URLRequest) { (data, response, error) in
             
-            //print("I'm here!")
             guard let _:NSData = data as NSData?, let _:URLResponse = response, error == nil else {
                 completion("Network upload error: \(String(describing: response)), \(String(describing: error))", 1)
                 return

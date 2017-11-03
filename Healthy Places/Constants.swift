@@ -24,6 +24,7 @@ let tasksCompletedFile  = "tasksCompleted"
  
    Find x, y, z by using two for-loops
  */
+let dailySurveyTaken    = "dailySurveyTaken"
 let remindersTimeFile   = "remindersTime"
 let locationDataFile    = "locationData"
 let logDataFile         = "logData"

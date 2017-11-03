@@ -17,7 +17,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var healthStore: HKHealthStore?
     //let tintColor = UIColor(red:0.76, green:0.27, blue:0.00, alpha:1.0) // Oregon State Orange
     let tintColor = UIColor(traditionalRed: 0x4E, green: 0x73, blue: 0x00, alpha: 1.0) // Oregon State Green
-
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey : Any]? = nil) -> Bool {
         // Set tint to Oregon State University Orange
         window?.tintColor = tintColor
@@ -117,7 +117,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if !UserDefaults.standard.bool(forKey: "HasLaunchedOnce") {
             
             fileAccessQueue.async(execute: {
-                let requiredFiles = [logDataFile, locationDataFile, authStatusFile]
+                let requiredFiles = [logDataFile, locationDataFile, authStatusFile, dailySurveyTaken]
                 for file in requiredFiles {
                     do {
                         let path = mainDir.appendingPathComponent(file)
@@ -126,6 +126,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     } catch let error as NSError {
                         print("Unresolved First Launch Error: \(error), \(error.userInfo)")
                     }
+                }
+                
+                if requiredFiles.contains(dailySurveyTaken) {
+                    weeklyTrackerInit()
                 }
             })
             
