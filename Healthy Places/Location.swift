@@ -50,20 +50,18 @@ class Location: NSObject, CLLocationManagerDelegate {
     func startMonitoringLocation() {
         locationManager?.desiredAccuracy = kCLLocationAccuracyBest
         locationManager?.distanceFilter = distanceFilter
+        locationManager?.allowsBackgroundLocationUpdates = true
         locationManager?.startUpdatingLocation()
     }
     
-    func moveToDeferredUpdates() -> Bool {
+    func moveToSignificantLocationMonitoring() -> Bool {
         if CLLocationManager.significantLocationChangeMonitoringAvailable() {
-            print("deferring location updates")
+            print("Moving to Significant Location Change Monitoring")
             
             // stop updating location
             locationManager?.stopUpdatingLocation()
-//            locationManager?.desiredAccuracy = kCLLocationAccuracyHundredMeters
-//            locationManager?.distanceFilter = deferredDistance
-//            locationManager?.allowDeferredLocationUpdates(untilTraveled: deferredDistance, timeout: deferredTimeout)
             
-            // start monitoring for signifant location changes
+            // start monitoring for significant location changes
             locationManager?.startMonitoringSignificantLocationChanges()
             
             return true
@@ -212,7 +210,7 @@ class Location: NSObject, CLLocationManagerDelegate {
         let clError = error as! CLError
         if clError.code.rawValue == 11 {
             print("Defer error, trying to defer again")
-            _ = self.moveToDeferredUpdates()
+            _ = self.moveToSignificantLocationMonitoring()
         } else {
             print("Unresolved Location Deferred Error: \(String(describing: error))")
         }

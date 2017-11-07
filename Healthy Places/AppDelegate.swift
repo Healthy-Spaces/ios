@@ -149,6 +149,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             window?.tintColor = tintColor
         }
         
+        if launchOptions?[.location] != nil {
+            // launched from location update
+            print("Location updated!")
+
+            if location.moveToSignificantLocationMonitoring() {
+                print("Moving to Significant Location Change Monitoring (from App Delegate Notification)")
+            }
+        }
+        
         return true
     }
     
@@ -169,8 +178,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
         // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
         
-        if location.moveToDeferredUpdates() {
-            print("Deferring updates (from App Delegate)")
+        if location.moveToSignificantLocationMonitoring() {
+            print("Moving to Significant Location Change Monitoring (from App Delegate)")
         }
     }
 
