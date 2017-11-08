@@ -47,23 +47,8 @@ public func upload(data: NSMutableDictionary, completion: @escaping (_ result: S
 public func saveJSONData(data: NSMutableDictionary, completion: @escaping (_ success: Bool) -> Void) {
     fileAccessQueue.async {
         do {
-            
             let jsonData = try ORKESerializer.jsonData(for: data);
-            
-//            if let jsonString = NSString(data: jsonData, encoding: String.Encoding.utf8.rawValue) {
-//                write(string: jsonString as String, toNew: logDataFile)
-//                completion(true)
-//            } else {
-//                completion(false)
-//            }
-            
             append(data: jsonData, toOld: logDataFile)
-            
-//            let path = mainDir.appendingPathComponent(logDataFile)
-//            let fileHandle = try FileHandle(forWritingTo: path)
-//            fileHandle.seekToEndOfFile()
-//            fileHandle.write(jsonData)
-            
         } catch let error as NSError {
             print("Unexpected Serialization Error in SaveJSONData: \(error), \(error.userInfo)")
             completion(false)
@@ -83,7 +68,7 @@ public func getWeekdays() -> [String] {
 public func getWeeklyTracker() -> [String: Any]? {
     do {
         let weeklyTrackterString = try String(contentsOf: mainDir.appendingPathComponent(dailySurveyTaken))
-        var weeklySurveyDict = convertToDictionary(text: weeklyTrackterString)
+        let weeklySurveyDict = convertToDictionary(text: weeklyTrackterString)
         return weeklySurveyDict
     } catch let error as NSError {
         print("Unresolved getWeeklyTracker() Error: \(error), \(error.userInfo)")
@@ -95,7 +80,7 @@ public func weeklyTrackerInit() {
     // initialize weekly tracker
     let json = NSMutableDictionary()
     let formatter = DateFormatter()
-    formatter.dateFormat = "yyyy-dd-mm"
+    formatter.dateFormat = "yyyy-mm-dd"
     json.setObject(formatter.string(from: getSunday()), forKey: "startDate" as NSCopying)
     
     let days = getWeekdays()
@@ -281,16 +266,7 @@ extension UIViewController: ORKTaskViewControllerDelegate, LocationDelegate {
                 case RegistrationTask.identifier:
                     
                     setupHealthKit()
-                    
-//                    //Data Access Step (from HealthKit)
-//                    let delegate = UIApplication.shared.delegate as! AppDelegate
-//                    let healthStore = delegate.healthStore
-//                    healthStore?.requestAuthorization(toShare: nil, read: readDataTypes, completion: { (success, error) in
-//                        if !success {
-//                            print("Unexpected HealthKit Initialization Error: \(String(describing: error))")
-//                        }
-//                    })
-                    
+
                     UserDefaults.standard.setValue(true, forKey: "hasRegistered")
                     UserDefaults.standard.synchronize()
                     print("Ended Registration!")
@@ -437,7 +413,7 @@ extension UIViewController: ORKTaskViewControllerDelegate, LocationDelegate {
                     // write to weekly tracker
                     /* Weekly Tracker Format:
                      {
-                         "startDate": "2017-10-15 23:06:51",
+                         "startDate": "2017-15-10",
                          "sunday": true,
                          "monday": true,
                          "tuesday": true,
@@ -454,7 +430,7 @@ extension UIViewController: ORKTaskViewControllerDelegate, LocationDelegate {
                             
                             // get last Sunday's date
                             let formatter = DateFormatter()
-                            formatter.dateFormat = "yyyy-dd-mm"
+                            formatter.dateFormat = "yyyy-mm-dd"
                             let lastSunday = formatter.string(from: getSunday())
                             
                             // check if in this week (if not, set new date)
