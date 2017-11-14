@@ -24,7 +24,7 @@ let privacySummary          = "Any data you chose to share with us will be store
 let privacyContent          = ""
 
 // MARK: - Data Use
-let dataUseSummary          = "IIn the settings menu, you can choose to share data with Oregon State University, with Oregon State University and our research partners, or not share your data.  Any data you share with us will only be available for non-profit research purposes.  Our inention is to use the collected data in research to better understand the relationship between environmental exposures and human health."
+let dataUseSummary          = "In the settings menu, you can choose to share data with Oregon State University, with Oregon State University and our research partners, or not share your data.  Any data you share with us will only be available for non-profit research purposes.  Our inention is to use the collected data in research to better understand the relationship between environmental exposures and human health."
 let dataUseContent          = ""
 
 // MARK: - Time Commitment

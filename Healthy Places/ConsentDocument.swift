@@ -101,14 +101,14 @@ public var ConsentDocument: ORKConsentDocument {
     let titles = ["Welcome", "Data Gathering", "Privacy", "Data Use", "Time Commitment", "Study Tasks", "Study Survey", "Withdrawing", "Potential Benefits", "Potential Harm", "Questions &amp; Contact Info"]
     let summaries = [overviewSummary, dataGatheringSummary, privacySummary, dataUseSummary, timeCommitmentSummary, studySurveySummary, studyTasksSummary, withdrawingSummary, benefitsSummary, harmSummary, questionsSummary]
     let contents = [overviewContent, dataGatheringContent, privacyContent, dataUseContent, timeCommitmentContent, studySurveyContent, studyTasksContent, withdrawingContent, benefitsContent, harmContent, questionsContent]
-    var reviewString = "<html><head><title>Healthy Places</title></head><body>"
+    var reviewString = "<html><head><title>Healthy Places</title></head><body><div class='content'>"
     for (i, _) in titles.enumerated() { // (i, _) because only using i
         reviewString += ("<h3>" + titles[i]    + "</h3>")
         reviewString += ("<p>"  + summaries[i] + "</p>")
         //reviewString += ("<br>")
         reviewString += ("<p>"  + contents[i]  + "</p>")
     }
-    reviewString += "</body></html>"
+    reviewString += "</div></body></html>"
     
     consentDocument.htmlReviewContent = reviewString
     
