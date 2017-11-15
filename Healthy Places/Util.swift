@@ -363,8 +363,10 @@ extension UIViewController: ORKTaskViewControllerDelegate, LocationDelegate {
                     
                     break
                 
-                
-                default:
+              
+                case "baselineSurvey": fallthrough
+                case "greenspaceSurvey": fallthrough
+                case "dailySurvey":
                     
                     // Update tasksCompletedFile
                     /* tasksCompleted File Structure:
@@ -380,8 +382,8 @@ extension UIViewController: ORKTaskViewControllerDelegate, LocationDelegate {
                         do {
                             let taskFile = try String(contentsOf: mainDir.appendingPathComponent(tasksCompletedFile))
                             var lines = taskFile.components(separatedBy: .newlines)
-                            for index in 0...lines.count {
-                                if lines[index] == result.identifier {
+                            for index in 0..<lines.count {
+                                if lines[index] == result.identifier && result.identifier != "consentSlides" {
                                     
                                     // set task status to completed
                                     lines[index + 1] = String(TaskStatus.finished.rawValue)
@@ -423,38 +425,40 @@ extension UIViewController: ORKTaskViewControllerDelegate, LocationDelegate {
                          "saturday": false
                      }
                     */
-                    fileAccessQueue.async {
-                        do {
-                            // get weekly tracker file
-                            var surveyTrackerDict = getWeeklyTracker()
-                            
-                            // get last Sunday's date
-                            let formatter = DateFormatter()
-                            formatter.dateFormat = "yyyy-mm-dd"
-                            let lastSunday = formatter.string(from: getSunday())
-                            
-                            // check if in this week (if not, set new date)
-                            if lastSunday != surveyTrackerDict!["startDate"] as? String {
-                                // set new date and reset days
-                                surveyTrackerDict!["startDate"] = lastSunday
-                                for (key, _) in surveyTrackerDict! {
-                                    if key != "startDate" {
-                                        surveyTrackerDict![key] = false
+                    if result.identifier == "dailySurvey" {
+                        fileAccessQueue.async {
+                            do {
+                                // get weekly tracker file
+                                var surveyTrackerDict = getWeeklyTracker()
+                                
+                                // get last Sunday's date
+                                let formatter = DateFormatter()
+                                formatter.dateFormat = "yyyy-mm-dd"
+                                let lastSunday = formatter.string(from: getSunday())
+                                
+                                // check if in this week (if not, set new date)
+                                if lastSunday != surveyTrackerDict!["startDate"] as? String {
+                                    // set new date and reset days
+                                    surveyTrackerDict!["startDate"] = lastSunday
+                                    for (key, _) in surveyTrackerDict! {
+                                        if key != "startDate" {
+                                            surveyTrackerDict![key] = false
+                                        }
                                     }
                                 }
+                                
+                                // set todays day as completed
+                                formatter.dateFormat = "EEEE"
+                                let todaysName = formatter.string(from: Date()).lowercased()
+                                surveyTrackerDict![todaysName] = true
+                                
+                                // write updated file
+                                let newSurveyTrackerData = try JSONSerialization.data(withJSONObject: surveyTrackerDict!, options: .prettyPrinted)
+                                let newSurveyTrackerString = String(data: newSurveyTrackerData, encoding: .utf8)
+                                write(string: newSurveyTrackerString!, toNew: dailySurveyTaken)
+                            } catch let error {
+                                print("Unresolved updating \(dailySurveyTaken), \(error)")
                             }
-                            
-                            // set todays day as completed
-                            formatter.dateFormat = "EEEE"
-                            let todaysName = formatter.string(from: Date()).lowercased()
-                            surveyTrackerDict![todaysName] = true
-                            
-                            // write updated file
-                            let newSurveyTrackerData = try JSONSerialization.data(withJSONObject: surveyTrackerDict!, options: .prettyPrinted)
-                            let newSurveyTrackerString = String(data: newSurveyTrackerData, encoding: .utf8)
-                            write(string: newSurveyTrackerString!, toNew: dailySurveyTaken)
-                        } catch let error {
-                            print("Unresolved updating \(dailySurveyTaken), \(error)")
                         }
                     }
                     
@@ -503,16 +507,15 @@ extension UIViewController: ORKTaskViewControllerDelegate, LocationDelegate {
                             displayUploadError(vc: self)
                         }
                     })
-                    
-                    break
+                
+            default: break
             }
             
             print("Ended \(result.identifier) task")
             
             break
             
-        default:
-            break
+        default: break
         }
         
         taskViewController.dismiss(animated: true, completion: nil)
