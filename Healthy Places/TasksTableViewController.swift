@@ -211,7 +211,10 @@ class TasksTableViewController: UITableViewController, ORKPasscodeDelegate {
                 let currentDate = dateFormatter.date(from: currentDateString)
                
                 // check values to determine current status
-                if lastTaskDate! < currentDate! || lastTaskStatus == .notStarted {
+                if identifier != "dailySurvey" && lastTaskStatus == .finished {
+                    // Task is not a repeatable task and it was already finished once
+                    currentStatus = .finished
+                } else if lastTaskDate! < currentDate! || lastTaskStatus == .notStarted {
                     // Task hasn't been run today
                     currentStatus = .notStarted
                 } else if lastTaskDate! == currentDate! && lastTaskStatus == .started {
