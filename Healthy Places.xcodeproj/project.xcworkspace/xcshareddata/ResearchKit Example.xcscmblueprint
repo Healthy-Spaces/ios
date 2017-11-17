@@ -1,0 +1,51 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "AC34FA29EE1E8F0442F7BC2E3E5B3E2E99665C15",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "AC34FA29EE1E8F0442F7BC2E3E5B3E2E99665C15" : 0,
+    "2AB82FAEF182B606BE5DBA6728A3A6DFA63EED7D" : 0,
+    "CEE2E2DA3B415DB70C257504A5BA6B611A730B63" : 0,
+    "9CF6181E3789E3853840089C16D4B9FDDB9B31E2" : 1,
+    "DEDD58F0BAF28034A74179391A23AC2E0219CDC3" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "EAF92253-1E30-49F0-9AE8-B5CAFBED1BEC",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "AC34FA29EE1E8F0442F7BC2E3E5B3E2E99665C15" : "ResearchKit%20Example\/",
+    "2AB82FAEF182B606BE5DBA6728A3A6DFA63EED7D" : "ResearchKit%20Example\/AppCore\/",
+    "CEE2E2DA3B415DB70C257504A5BA6B611A730B63" : "ResearchKit%20Example\/Bridge-iOS-SDK\/",
+    "9CF6181E3789E3853840089C16D4B9FDDB9B31E2" : "ResearchKit%20Example\/ResearchKit\/",
+    "DEDD58F0BAF28034A74179391A23AC2E0219CDC3" : "ResearchKit%20Example\/Bridge-iOS-SDK\/Submodules\/RNCryptor\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "ResearchKit Example",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "ResearchKit Example.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/ResearchKit\/AppCore.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "2AB82FAEF182B606BE5DBA6728A3A6DFA63EED7D"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/ResearchKit\/ResearchKit.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "9CF6181E3789E3853840089C16D4B9FDDB9B31E2"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "github.com:slichlyter12\/ResearchKit-Example.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "AC34FA29EE1E8F0442F7BC2E3E5B3E2E99665C15"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/Sage-Bionetworks\/Bridge-iOS-SDK.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "CEE2E2DA3B415DB70C257504A5BA6B611A730B63"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/RNCryptor\/RNCryptor.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "DEDD58F0BAF28034A74179391A23AC2E0219CDC3"
+    }
+  ]
+}

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>SchemeUserState</key>
+	<dict>
+		<key>Healthy Places.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>2</integer>
+		</dict>
+	</dict>
+	<key>SuppressBuildableAutocreation</key>
+	<dict>
+		<key>4310F0AE1E415D53002422F7</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>4339E5871EDE08A800C861E2</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>4339E5951EDE094C00C861E2</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>436BCA571EDE0B7000E579F9</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>43D1947D1D18B25300F248C6</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+	</dict>
+</dict>
+</plist>
