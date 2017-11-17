@@ -118,7 +118,7 @@
 		431907EC1D89D3AE00545412 /* DemographicTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DemographicTableViewCell.swift; sourceTree = "<group>"; };
 		431ED6611F9FE9C30002B0C6 /* PieChartDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PieChartDataSource.swift; sourceTree = "<group>"; };
 		431ED6631F9FEB960002B0C6 /* PieChartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PieChartViewController.swift; sourceTree = "<group>"; };
-		4323A3F41D70D8460027482B /* Healthy Places.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Healthy Places.entitlements"; sourceTree = "<group>"; };
+		4323A3F41D70D8460027482B /* Healthy Spaces.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Healthy Spaces.entitlements"; sourceTree = "<group>"; };
 		4323A3F51D70D8460027482B /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = System/Library/Frameworks/HealthKit.framework; sourceTree = SDKROOT; };
 		432714F71D8747E5002CD54A /* how.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = how.html; sourceTree = "<group>"; };
 		432714FD1D874806002CD54A /* who.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = who.html; sourceTree = "<group>"; };
@@ -136,14 +136,14 @@
 		435F70631D2ED4C60098BA31 /* ConsentDocumentContent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConsentDocumentContent.swift; sourceTree = "<group>"; };
 		435F70651D2ED9BC0098BA31 /* LastImageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LastImageViewController.swift; sourceTree = "<group>"; };
 		436A74A11D9E063C00B26A5B /* BaselineSurveyTask.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaselineSurveyTask.swift; sourceTree = "<group>"; };
-		436BCA581EDE0B7000E579F9 /* Healthy Places Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Healthy Places Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		436BCA581EDE0B7000E579F9 /* Healthy Spaces Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Healthy Spaces Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		436BCA5A1EDE0B7000E579F9 /* Healthy_Places_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Healthy_Places_Tests.swift; sourceTree = "<group>"; };
 		436BCA5C1EDE0B7000E579F9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		437E2BAF1D2C4BED001C7DB3 /* Location.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
 		437FEB431D19BC68001DCB29 /* TasksTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TasksTableViewController.swift; sourceTree = "<group>"; };
 		437FEB491D19C5D8001DCB29 /* ImageCaptureTask.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageCaptureTask.swift; sourceTree = "<group>"; };
 		437FEB4B1D19CCCF001DCB29 /* SurveyTask.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SurveyTask.swift; sourceTree = "<group>"; };
-		438723621D19E42900AFE2C2 /* Healthy Places-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Healthy Places-Bridging-Header.h"; sourceTree = "<group>"; };
+		438723621D19E42900AFE2C2 /* Healthy Spaces-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Healthy Spaces-Bridging-Header.h"; sourceTree = "<group>"; };
 		438723681D19E63D00AFE2C2 /* ORKESerialization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORKESerialization.h; sourceTree = "<group>"; };
 		438723691D19E63D00AFE2C2 /* ORKESerialization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORKESerialization.m; sourceTree = "<group>"; };
 		439172B41D4A8CA400D079B1 /* OnBoarding.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = OnBoarding.storyboard; sourceTree = "<group>"; };
@@ -161,7 +161,7 @@
 		43C7F2BD1DE5F12900F76C49 /* GreenspaceSurvey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GreenspaceSurvey.swift; sourceTree = "<group>"; };
 		43C7F2C11DE5FC8800F76C49 /* DailySurvey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DailySurvey.swift; sourceTree = "<group>"; };
 		43C8FD671DB9746D008E0AAA /* ActivityRemindersTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityRemindersTableViewController.swift; sourceTree = "<group>"; };
-		43D1947E1D18B25300F248C6 /* Healthy Places.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Healthy Places.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		43D1947E1D18B25300F248C6 /* Healthy Spaces.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Healthy Spaces.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		43D194811D18B25300F248C6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		43D194861D18B25300F248C6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		43D194881D18B25300F248C6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -208,13 +208,13 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		436BCA591EDE0B7000E579F9 /* Healthy Places Tests */ = {
+		436BCA591EDE0B7000E579F9 /* Healthy Spaces Tests */ = {
 			isa = PBXGroup;
 			children = (
 				436BCA5A1EDE0B7000E579F9 /* Healthy_Places_Tests.swift */,
 				436BCA5C1EDE0B7000E579F9 /* Info.plist */,
 			);
-			path = "Healthy Places Tests";
+			path = "Healthy Spaces Tests";
 			sourceTree = "<group>";
 		};
 		4390F2521D1C817B00B0A270 /* Frameworks */ = {
@@ -279,7 +279,7 @@
 				434B78BE1EE74B52008F623C /* RNCryptor.swift */,
 				43D194881D18B25300F248C6 /* Assets.xcassets */,
 				43D1948D1D18B25300F248C6 /* Info.plist */,
-				438723621D19E42900AFE2C2 /* Healthy Places-Bridging-Header.h */,
+				438723621D19E42900AFE2C2 /* Healthy Spaces-Bridging-Header.h */,
 			);
 			name = Shared;
 			sourceTree = "<group>";
@@ -329,8 +329,8 @@
 			isa = PBXGroup;
 			children = (
 				434FD1301E94283600FDD149 /* ResearchKit.xcodeproj */,
-				43D194801D18B25300F248C6 /* Healthy Places */,
-				436BCA591EDE0B7000E579F9 /* Healthy Places Tests */,
+				43D194801D18B25300F248C6 /* Healthy Spaces */,
+				436BCA591EDE0B7000E579F9 /* Healthy Spaces Tests */,
 				43D1947F1D18B25300F248C6 /* Products */,
 				4390F2521D1C817B00B0A270 /* Frameworks */,
 			);
@@ -339,31 +339,31 @@
 		43D1947F1D18B25300F248C6 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				43D1947E1D18B25300F248C6 /* Healthy Places.app */,
-				436BCA581EDE0B7000E579F9 /* Healthy Places Tests.xctest */,
+				43D1947E1D18B25300F248C6 /* Healthy Spaces.app */,
+				436BCA581EDE0B7000E579F9 /* Healthy Spaces Tests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		43D194801D18B25300F248C6 /* Healthy Places */ = {
+		43D194801D18B25300F248C6 /* Healthy Spaces */ = {
 			isa = PBXGroup;
 			children = (
-				4323A3F41D70D8460027482B /* Healthy Places.entitlements */,
+				4323A3F41D70D8460027482B /* Healthy Spaces.entitlements */,
 				439172BE1D4A987500D079B1 /* Profile */,
 				439172BB1D4A978400D079B1 /* Tasks */,
 				439172BA1D4A976F00D079B1 /* OnBoarding */,
 				439172BC1D4A981800D079B1 /* Shared */,
 				439172BD1D4A983E00D079B1 /* Charts */,
 			);
-			path = "Healthy Places";
+			path = "Healthy Spaces";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		436BCA571EDE0B7000E579F9 /* Healthy Places Tests */ = {
+		436BCA571EDE0B7000E579F9 /* Healthy Spaces Tests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 436BCA5F1EDE0B7000E579F9 /* Build configuration list for PBXNativeTarget "Healthy Places Tests" */;
+			buildConfigurationList = 436BCA5F1EDE0B7000E579F9 /* Build configuration list for PBXNativeTarget "Healthy Spaces Tests" */;
 			buildPhases = (
 				436BCA541EDE0B7000E579F9 /* Sources */,
 				436BCA551EDE0B7000E579F9 /* Frameworks */,
@@ -374,14 +374,14 @@
 			dependencies = (
 				436BCA5E1EDE0B7000E579F9 /* PBXTargetDependency */,
 			);
-			name = "Healthy Places Tests";
+			name = "Healthy Spaces Tests";
 			productName = "Healthy Places Tests";
-			productReference = 436BCA581EDE0B7000E579F9 /* Healthy Places Tests.xctest */;
+			productReference = 436BCA581EDE0B7000E579F9 /* Healthy Spaces Tests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		43D1947D1D18B25300F248C6 /* Healthy Places */ = {
+		43D1947D1D18B25300F248C6 /* Healthy Spaces */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 43D194901D18B25300F248C6 /* Build configuration list for PBXNativeTarget "Healthy Places" */;
+			buildConfigurationList = 43D194901D18B25300F248C6 /* Build configuration list for PBXNativeTarget "Healthy Spaces" */;
 			buildPhases = (
 				43D1947A1D18B25300F248C6 /* Sources */,
 				43D1947B1D18B25300F248C6 /* Frameworks */,
@@ -393,9 +393,9 @@
 			dependencies = (
 				434FD1421E94289800FDD149 /* PBXTargetDependency */,
 			);
-			name = "Healthy Places";
+			name = "Healthy Spaces";
 			productName = "ResearchKit Example";
-			productReference = 43D1947E1D18B25300F248C6 /* Healthy Places.app */;
+			productReference = 43D1947E1D18B25300F248C6 /* Healthy Spaces.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -435,7 +435,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 43D194791D18B25300F248C6 /* Build configuration list for PBXProject "Healthy Places" */;
+			buildConfigurationList = 43D194791D18B25300F248C6 /* Build configuration list for PBXProject "Healthy Spaces" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -454,8 +454,8 @@
 			);
 			projectRoot = "";
 			targets = (
-				43D1947D1D18B25300F248C6 /* Healthy Places */,
-				436BCA571EDE0B7000E579F9 /* Healthy Places Tests */,
+				43D1947D1D18B25300F248C6 /* Healthy Spaces */,
+				436BCA571EDE0B7000E579F9 /* Healthy Spaces Tests */,
 			);
 		};
 /* End PBXProject section */
@@ -572,7 +572,7 @@
 		};
 		436BCA5E1EDE0B7000E579F9 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 43D1947D1D18B25300F248C6 /* Healthy Places */;
+			target = 43D1947D1D18B25300F248C6 /* Healthy Spaces */;
 			targetProxy = 436BCA5D1EDE0B7000E579F9 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -610,7 +610,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_SWIFT3_OBJC_INFERENCE = On;
 				SWIFT_VERSION = 4.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Healthy Places.app/Healthy Places";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Healthy Spaces.app/Healthy Spaces";
 			};
 			name = Debug;
 		};
@@ -627,7 +627,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_SWIFT3_OBJC_INFERENCE = On;
 				SWIFT_VERSION = 4.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Healthy Places.app/Healthy Places";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Healthy Spaces.app/Healthy Spaces";
 			};
 			name = Release;
 		};
@@ -740,18 +740,18 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_ENTITLEMENTS = "Healthy Places/Healthy Places.entitlements";
+				CODE_SIGN_ENTITLEMENTS = "Healthy Spaces/Healthy Spaces.entitlements";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = 63LJ9LBX46;
-				INFOPLIST_FILE = "$(SRCROOT)/Healthy Places/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/Healthy Spaces/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.perryhystad.Healthy-Places";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				SWIFT_OBJC_BRIDGING_HEADER = "Healthy Places/Healthy Places-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "Healthy Spaces/Healthy Spaces-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_SWIFT3_OBJC_INFERENCE = On;
 				SWIFT_VERSION = 4.0;
@@ -764,17 +764,17 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_ENTITLEMENTS = "Healthy Places/Healthy Places.entitlements";
+				CODE_SIGN_ENTITLEMENTS = "Healthy Spaces/Healthy Spaces.entitlements";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = 63LJ9LBX46;
-				INFOPLIST_FILE = "$(SRCROOT)/Healthy Places/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/Healthy Spaces/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.perryhystad.Healthy-Places";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				SWIFT_OBJC_BRIDGING_HEADER = "Healthy Places/Healthy Places-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "Healthy Spaces/Healthy Spaces-Bridging-Header.h";
 				SWIFT_SWIFT3_OBJC_INFERENCE = On;
 				SWIFT_VERSION = 4.0;
 			};
@@ -783,7 +783,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		436BCA5F1EDE0B7000E579F9 /* Build configuration list for PBXNativeTarget "Healthy Places Tests" */ = {
+		436BCA5F1EDE0B7000E579F9 /* Build configuration list for PBXNativeTarget "Healthy Spaces Tests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				436BCA601EDE0B7000E579F9 /* Debug */,
@@ -792,7 +792,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		43D194791D18B25300F248C6 /* Build configuration list for PBXProject "Healthy Places" */ = {
+		43D194791D18B25300F248C6 /* Build configuration list for PBXProject "Healthy Spaces" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				43D1948E1D18B25300F248C6 /* Debug */,
@@ -801,7 +801,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		43D194901D18B25300F248C6 /* Build configuration list for PBXNativeTarget "Healthy Places" */ = {
+		43D194901D18B25300F248C6 /* Build configuration list for PBXNativeTarget "Healthy Spaces" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				43D194911D18B25300F248C6 /* Debug */,

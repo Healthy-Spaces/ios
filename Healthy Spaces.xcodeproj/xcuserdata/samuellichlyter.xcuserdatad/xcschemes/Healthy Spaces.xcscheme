@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0900"
+   LastUpgradeVersion = "0910"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "43D1947D1D18B25300F248C6"
-               BuildableName = "Healthy Places.app"
-               BlueprintName = "Healthy Places"
-               ReferencedContainer = "container:Healthy Places.xcodeproj">
+               BuildableName = "Healthy Spaces.app"
+               BlueprintName = "Healthy Spaces"
+               ReferencedContainer = "container:Healthy Spaces.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -36,7 +36,7 @@
                BlueprintIdentifier = "4310F0AE1E415D53002422F7"
                BuildableName = "Healthy_Places.xctest"
                BlueprintName = "Healthy_Places"
-               ReferencedContainer = "container:Healthy Places.xcodeproj">
+               ReferencedContainer = "container:Healthy Spaces.xcodeproj">
             </BuildableReference>
          </TestableReference>
          <TestableReference
@@ -44,9 +44,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "436BCA571EDE0B7000E579F9"
-               BuildableName = "Healthy Places Tests.xctest"
-               BlueprintName = "Healthy Places Tests"
-               ReferencedContainer = "container:Healthy Places.xcodeproj">
+               BuildableName = "Healthy Spaces Tests.xctest"
+               BlueprintName = "Healthy Spaces Tests"
+               ReferencedContainer = "container:Healthy Spaces.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -54,9 +54,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "43D1947D1D18B25300F248C6"
-            BuildableName = "Healthy Places.app"
-            BlueprintName = "Healthy Places"
-            ReferencedContainer = "container:Healthy Places.xcodeproj">
+            BuildableName = "Healthy Spaces.app"
+            BlueprintName = "Healthy Spaces"
+            ReferencedContainer = "container:Healthy Spaces.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -78,9 +78,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "43D1947D1D18B25300F248C6"
-            BuildableName = "Healthy Places.app"
-            BlueprintName = "Healthy Places"
-            ReferencedContainer = "container:Healthy Places.xcodeproj">
+            BuildableName = "Healthy Spaces.app"
+            BlueprintName = "Healthy Spaces"
+            ReferencedContainer = "container:Healthy Spaces.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -97,9 +97,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "43D1947D1D18B25300F248C6"
-            BuildableName = "Healthy Places.app"
-            BlueprintName = "Healthy Places"
-            ReferencedContainer = "container:Healthy Places.xcodeproj">
+            BuildableName = "Healthy Spaces.app"
+            BlueprintName = "Healthy Spaces"
+            ReferencedContainer = "container:Healthy Spaces.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
