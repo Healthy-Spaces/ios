@@ -747,7 +747,7 @@
 				INFOPLIST_FILE = "$(SRCROOT)/Healthy Spaces/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.perryhystad.Healthy-Places";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.perryhystad.Healthy-Spaces";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -771,7 +771,7 @@
 				INFOPLIST_FILE = "$(SRCROOT)/Healthy Spaces/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.perryhystad.Healthy-Places";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.perryhystad.Healthy-Spaces";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Healthy Spaces/Healthy Spaces-Bridging-Header.h";

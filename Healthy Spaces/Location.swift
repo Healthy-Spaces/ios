@@ -23,16 +23,16 @@ class Location: NSObject, CLLocationManagerDelegate {
     func checkLocationAuth() -> Bool {
         let locationAuth = CLLocationManager.authorizationStatus()
         switch locationAuth {
-        case .denied, .restricted:
-            return false
-        case .notDetermined:
-            locationManager = CLLocationManager()
-            locationManager?.delegate = self
-            locationManager?.requestAlwaysAuthorization()
-            break
-        default:
-            print("Auth Status: \(locationAuth)")
-            break
+            case .denied, .restricted:
+                return false
+            case .notDetermined:
+                locationManager = CLLocationManager()
+                locationManager?.delegate = self
+                locationManager?.requestAlwaysAuthorization()
+                break
+            default:
+                print("Auth Status: \(locationAuth)")
+                break
         }
         
         if locationManager == nil {
