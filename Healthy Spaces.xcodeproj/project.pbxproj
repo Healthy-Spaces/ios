@@ -64,6 +64,8 @@
 		43FEE10E1D26E7740037E7D2 /* PermissionsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43FEE10C1D26E7740037E7D2 /* PermissionsTableViewController.swift */; };
 		43FEE1111D26E9560037E7D2 /* PermissionsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43FEE1101D26E9560037E7D2 /* PermissionsTableViewCell.swift */; };
 		43FEE1151D27206A0037E7D2 /* Permission.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43FEE1141D27206A0037E7D2 /* Permission.swift */; };
+		43FFDAF61FC4E6860070E71D /* PrivacyPolicyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43FFDAF51FC4E6860070E71D /* PrivacyPolicyViewController.swift */; };
+		43FFDAF81FC4E82D0070E71D /* privacyPolicy.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 43FFDAF71FC4E82D0070E71D /* privacyPolicy.pdf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -176,6 +178,8 @@
 		43FEE10C1D26E7740037E7D2 /* PermissionsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PermissionsTableViewController.swift; sourceTree = "<group>"; };
 		43FEE1101D26E9560037E7D2 /* PermissionsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PermissionsTableViewCell.swift; sourceTree = "<group>"; };
 		43FEE1141D27206A0037E7D2 /* Permission.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Permission.swift; sourceTree = "<group>"; };
+		43FFDAF51FC4E6860070E71D /* PrivacyPolicyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyPolicyViewController.swift; sourceTree = "<group>"; };
+		43FFDAF71FC4E82D0070E71D /* privacyPolicy.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = privacyPolicy.pdf; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -280,6 +284,7 @@
 				43D194881D18B25300F248C6 /* Assets.xcassets */,
 				43D1948D1D18B25300F248C6 /* Info.plist */,
 				438723621D19E42900AFE2C2 /* Healthy Spaces-Bridging-Header.h */,
+				43FFDAF71FC4E82D0070E71D /* privacyPolicy.pdf */,
 			);
 			name = Shared;
 			sourceTree = "<group>";
@@ -310,6 +315,7 @@
 				4346B2B41D303408009E33FC /* LogDataViewController.swift */,
 				435F70651D2ED9BC0098BA31 /* LastImageViewController.swift */,
 				43B6C5B51D1B286300E9C5E8 /* AddPasscodeTask.swift */,
+				43FFDAF51FC4E6860070E71D /* PrivacyPolicyViewController.swift */,
 			);
 			name = Profile;
 			sourceTree = "<group>";
@@ -491,6 +497,7 @@
 			files = (
 				43D1948C1D18B25300F248C6 /* LaunchScreen.storyboard in Resources */,
 				43453AF21D6BC48500BF5849 /* greenspace.json in Resources */,
+				43FFDAF81FC4E82D0070E71D /* privacyPolicy.pdf in Resources */,
 				43D194891D18B25300F248C6 /* Assets.xcassets in Resources */,
 				432714F81D8747E5002CD54A /* how.html in Resources */,
 				439D5DD41D678DC6008DCA7E /* main.css in Resources */,
@@ -539,6 +546,7 @@
 				437FEB441D19BC68001DCB29 /* TasksTableViewController.swift in Sources */,
 				431ED6641F9FEB960002B0C6 /* PieChartViewController.swift in Sources */,
 				434B78BF1EE74B52008F623C /* RNCryptor.swift in Sources */,
+				43FFDAF61FC4E6860070E71D /* PrivacyPolicyViewController.swift in Sources */,
 				437E2BB01D2C4BED001C7DB3 /* Location.swift in Sources */,
 				43FEE1151D27206A0037E7D2 /* Permission.swift in Sources */,
 				4346B2AF1D30251D009E33FC /* SurveyContent.swift in Sources */,

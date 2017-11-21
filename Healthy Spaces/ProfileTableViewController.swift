@@ -425,8 +425,7 @@ class ProfileTableViewController: UITableViewController, ORKPasscodeDelegate, Pr
         case 4:
             switch indexPath.row {
             case 0:
-                //TODO: Show Privacy Policy
-                print("Showing Privacy Policy")
+                performSegue(withIdentifier: "privacyPolicySegue", sender: self)
                 return
             case 1:
                 //TODO: Show Licenses
