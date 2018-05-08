@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import ResearchKit
 
 public var BaselineSurveyTask: ORKNavigableOrderedTask {
     var steps = [ORKStep]()

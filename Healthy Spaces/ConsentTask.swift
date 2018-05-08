@@ -6,6 +6,7 @@
 //  Copyright © 2016 Samuel Lichlyter. All rights reserved.
 //
 
+import Foundation
 import ResearchKit
 
 public var ConsentTask: ORKOrderedTask {

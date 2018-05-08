@@ -10,9 +10,9 @@ import UIKit
 
 class NetworkSession: URLSession {
     
-//    let requestURLString = "http://24.20.231.41/~samuellichlyter/healthyplaces/"                  // <-- localhost (Home)
+//    let requestURLString = "http://192.168.0.102/~samuellichlyter/healthyplaces/"                  // <-- localhost (Home)
 //    let requestURLString = "http://10.0.0.252/~samuellichlyter/healthyplaces/"                    // <-- localhost (A)
-//    let requestURLString = "http://10.248.180.15/~samuellichlyter/healthyplaces/"                 // <-- localhost (OSU)
+//    let requestURLString = "http://10.248.251.203/~samuellichlyter/healthyplaces/"                 // <-- localhost (OSU)
 //    let requestURLString = "http://192.168.0.108/"                                                // <-- VMWare Server (Home)
 //    let requestURLString = "http://10.0.0.78/"                                                    // <-- VMWare Server (A)
 //    let requestURLString = "http://10.248.180.119/"                                               // <-- VMWare Server (OSU)

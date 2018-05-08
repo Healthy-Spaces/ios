@@ -35,7 +35,6 @@
 		437FEB441D19BC68001DCB29 /* TasksTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 437FEB431D19BC68001DCB29 /* TasksTableViewController.swift */; };
 		437FEB4A1D19C5D8001DCB29 /* ImageCaptureTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 437FEB491D19C5D8001DCB29 /* ImageCaptureTask.swift */; };
 		437FEB4C1D19CCCF001DCB29 /* SurveyTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 437FEB4B1D19CCCF001DCB29 /* SurveyTask.swift */; };
-		4387236A1D19E63D00AFE2C2 /* ORKESerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 438723691D19E63D00AFE2C2 /* ORKESerialization.m */; };
 		439172B51D4A8CA400D079B1 /* OnBoarding.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 439172B41D4A8CA400D079B1 /* OnBoarding.storyboard */; };
 		439172B91D4A976700D079B1 /* OnBoardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 439172B81D4A976700D079B1 /* OnBoardingViewController.swift */; };
 		439D5DD21D678AA9008DCA7E /* about.html in Resources */ = {isa = PBXBuildFile; fileRef = 439D5DD11D678AA9008DCA7E /* about.html */; };
@@ -146,8 +145,6 @@
 		437FEB491D19C5D8001DCB29 /* ImageCaptureTask.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageCaptureTask.swift; sourceTree = "<group>"; };
 		437FEB4B1D19CCCF001DCB29 /* SurveyTask.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SurveyTask.swift; sourceTree = "<group>"; };
 		438723621D19E42900AFE2C2 /* Healthy Spaces-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Healthy Spaces-Bridging-Header.h"; sourceTree = "<group>"; };
-		438723681D19E63D00AFE2C2 /* ORKESerialization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORKESerialization.h; sourceTree = "<group>"; };
-		438723691D19E63D00AFE2C2 /* ORKESerialization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORKESerialization.m; sourceTree = "<group>"; };
 		439172B41D4A8CA400D079B1 /* OnBoarding.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = OnBoarding.storyboard; sourceTree = "<group>"; };
 		439172B81D4A976700D079B1 /* OnBoardingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnBoardingViewController.swift; sourceTree = "<group>"; };
 		439D5DD11D678AA9008DCA7E /* about.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = about.html; sourceTree = "<group>"; };
@@ -277,8 +274,6 @@
 				43D5873E1F9159FB005F1D31 /* password.swift */,
 				4346B2B21D302BED009E33FC /* Util.swift */,
 				435BF9701D1CA022001D4A9F /* Constants.swift */,
-				438723681D19E63D00AFE2C2 /* ORKESerialization.h */,
-				438723691D19E63D00AFE2C2 /* ORKESerialization.m */,
 				434B78C21EE74B7B008F623C /* RNCryptor.h */,
 				434B78BE1EE74B52008F623C /* RNCryptor.swift */,
 				43D194881D18B25300F248C6 /* Assets.xcassets */,
@@ -411,7 +406,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0830;
-				LastUpgradeCheck = 0900;
+				LastUpgradeCheck = 0930;
 				ORGANIZATIONNAME = "Samuel Lichlyter";
 				TargetAttributes = {
 					436BCA571EDE0B7000E579F9 = {
@@ -565,7 +560,6 @@
 				43FEE10E1D26E7740037E7D2 /* PermissionsTableViewController.swift in Sources */,
 				43BBB0FD1F75BD6200CDABC5 /* HanoiTask.swift in Sources */,
 				4310F0A81E4142FA002422F7 /* NetworkSession.swift in Sources */,
-				4387236A1D19E63D00AFE2C2 /* ORKESerialization.m in Sources */,
 				435F70641D2ED4C60098BA31 /* ConsentDocumentContent.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -652,6 +646,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -659,6 +654,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -707,6 +703,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -714,6 +711,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;

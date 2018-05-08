@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreGraphics
+import ResearchKit
 
 class GraphChartViewController: UIViewController {
 

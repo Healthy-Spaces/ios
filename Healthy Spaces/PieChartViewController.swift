@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreGraphics
+import ResearchKit
 
 class PieChartViewController: UIViewController {
     @IBOutlet weak var pieChartView: ORKPieChartView!

@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import ResearchKit
 
 public var DailySurvey: ORKNavigableOrderedTask {
     var steps = [ORKStep]()

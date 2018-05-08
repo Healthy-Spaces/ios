@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 import CoreGraphics
+import ResearchKit
 
 public func write(string: String, toNew file: String) {
     do {
@@ -33,7 +34,7 @@ public func append(data: Data, toOld file: String) {
 public func upload(data: NSMutableDictionary, completion: @escaping (_ result: String, _ code: Int) -> Void) {
     networkingQueue.async {
         do {
-            let jsonData = try ORKESerializer.jsonData(for: data)
+            let jsonData = try JSONSerialization.data(withJSONObject: data, options: .prettyPrinted)
             let uploadSession = NetworkSession()
             uploadSession.dataRequest(with: jsonData) { (result: String, code: Int) in
                 completion(result, code)
@@ -47,7 +48,7 @@ public func upload(data: NSMutableDictionary, completion: @escaping (_ result: S
 public func saveJSONData(data: NSMutableDictionary, completion: @escaping (_ success: Bool) -> Void) {
     fileAccessQueue.async {
         do {
-            let jsonData = try ORKESerializer.jsonData(for: data);
+            let jsonData = try JSONSerialization.data(withJSONObject: data, options: .prettyPrinted)
             append(data: jsonData, toOld: logDataFile)
         } catch let error as NSError {
             print("Unexpected Serialization Error in SaveJSONData: \(error), \(error.userInfo)")
@@ -67,8 +68,8 @@ public func getWeekdays() -> [String] {
 
 public func getWeeklyTracker() -> [String: Any]? {
     do {
-        let weeklyTrackterString = try String(contentsOf: mainDir.appendingPathComponent(dailySurveyTaken))
-        let weeklySurveyDict = convertToDictionary(text: weeklyTrackterString)
+        let weeklyTrackerString = try String(contentsOf: mainDir.appendingPathComponent(dailySurveyTaken))
+        let weeklySurveyDict = convertToDictionary(text: weeklyTrackerString)
         return weeklySurveyDict
     } catch let error as NSError {
         print("Unresolved getWeeklyTracker() Error: \(error), \(error.userInfo)")
@@ -284,6 +285,9 @@ extension UIViewController: ORKTaskViewControllerDelegate, LocationDelegate {
                             print("registration save success")
                         }
                     })
+                    
+                    // TODO: Check if allowed sharing, if only on device, do not upload
+                    print(json)
                     
                     // upload JSON
                     upload(data: json, completion: { (result, code) in

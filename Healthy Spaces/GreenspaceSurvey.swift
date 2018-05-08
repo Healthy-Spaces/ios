@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import ResearchKit
 
 public var GreenspaceSurvey: ORKNavigableOrderedTask {
     var steps = [ORKStep]()

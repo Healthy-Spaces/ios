@@ -8,6 +8,7 @@
 
 import Foundation
 import CoreLocation
+import HealthKit
 
 // MARK: - Strings
 let networkingQueueName = "com.samuellichlyter.networking"
