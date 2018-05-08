@@ -581,5 +581,5 @@ extension UIViewController: ORKTaskViewControllerDelegate, LocationDelegate {
         present(changedAuthAlert, animated: true, completion: nil)
     }
     
-    func reloadLocationData() {}
+    @objc func reloadLocationData() {}
 }
